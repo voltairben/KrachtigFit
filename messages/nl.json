@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "title": "KrachtigFit — Personal trainer in Roermond en online",
+    "description": "Sterker worden zonder je leven om te gooien. Krachttraining, voedingsbegeleiding en wekelijkse check-ins, ingepast in de agenda die je al hebt. Plan een gratis kennismaking."
+  },
+
+  "a11y": {
+    "skipToContent": "Naar hoofdinhoud",
+    "openMenu": "Menu openen",
+    "closeMenu": "Menu sluiten",
+    "switchLanguage": "Taal wisselen",
+    "currentLanguage": "Huidige taal"
+  },
+
+  "nav": {
+    "method": "Aanpak",
+    "programs": "Programma's",
+    "pricing": "Tarieven",
+    "faq": "Vragen",
+    "cta": "Gratis kennismaking"
+  },
+
+  "hero": {
+    "eyebrow": "Personal training · Roermond",
+    "headline": "Sterker worden zonder je leven om te gooien.",
+    "subhead": "Krachttraining, voedingsbegeleiding en wekelijkse check-ins — ingepast in de agenda die je al hebt. In Roermond of volledig online.",
+    "ctaPrimary": "Plan je gratis kennismaking",
+    "ctaSecondary": "Bekijk de aanpak",
+    "note": "Gratis, vrijblijvend, 30 minuten."
+  },
+
+  "proof": {
+    "eyebrow": "In het kort",
+    "clientsLabel": "klanten begeleid",
+    "yearsLabel": "jaar ervaring",
+    "since": "sinds {year}",
+    "successLabel": "haalde het doel dat vooraf is vastgelegd",
+    "methodNote": "Meetmethode toegelicht bij de tarieven."
+  },
+
+  "method": {
+    "eyebrow": "De aanpak",
+    "headline": "Drie dingen, elke week, consequent.",
+    "intro": "Geen crashdieet en geen twee uur per dag in de sportschool. De aanpak bestaat uit drie onderdelen die elkaar versterken — en die je vol kunt houden naast werk en gezin.",
+    "pillars": {
+      "training": {
+        "title": "Krachttraining die je tijd respecteert",
+        "body": "Drie sessies van 45 minuten per week. Thuis, in de sportschool of bij mij — we bouwen het programma om jouw situatie heen, niet andersom."
+      },
+      "nutrition": {
+        "title": "Voeding loggen zonder obsessie",
+        "body": "Je leert zien wat je eet in plaats van je eraan te onderwerpen. Geen verboden lijstjes. Wel inzicht, en daardoor keuzes die je zelf maakt."
+      },
+      "checkin": {
+        "title": "Wekelijks bijsturen",
+        "body": "Elke week vijftien minuten samen kijken naar wat werkte en wat niet. Een slechte week is data, geen falen. Daar sturen we op bij."
+      }
+    }
+  },
+
+  "programs": {
+    "eyebrow": "Programma's",
+    "headline": "Drie manieren om samen te werken.",
+    "intro": "Alle drie draaien op dezelfde aanpak. Het verschil zit in hoeveel je me in levenden lijve ziet.",
+    "online": {
+      "title": "Online",
+      "body": "Volledig op afstand. Een trainingsschema op maat, feedback op je voedingslog en elke week een videogesprek. Werkt overal, ook als je veel reist.",
+      "tags": ["Op afstand", "Wekelijkse check-in", "Maandelijks opzegbaar"]
+    },
+    "hybrid": {
+      "title": "Hybride",
+      "body": "Twee keer per maand samen trainen in Roermond, de rest online. Je krijgt de correcties die alleen in persoon kunnen, met de flexibiliteit van online begeleiding.",
+      "tags": ["2× per maand live", "Roermond", "Online tussendoor"]
+    },
+    "personal": {
+      "title": "1-op-1",
+      "body": "Wekelijks samen trainen. De snelste route als je van nul begint, met een blessure werkt of gewoon wilt dat iemand meekijkt bij elke herhaling.",
+      "tags": ["Wekelijks live", "60 minuten", "Roermond"]
+    },
+    "cta": "Bekijk tarieven"
+  },
+
+  "pricing": {
+    "eyebrow": "Tarieven",
+    "headline": "Wat het kost, gewoon op de site.",
+    "intro": "Geen intakegesprek nodig om te horen wat iets kost. Alle bedragen zijn inclusief btw, per maand, maandelijks opzegbaar.",
+    "perMonth": "per maand",
+    "vatIncluded": "incl. {rate}% btw",
+    "mostChosen": "Meest gekozen",
+    "cta": "Plan een kennismaking",
+    "withdrawal": "{days} dagen wettelijke bedenktijd",
+    "withdrawalNote": "Je hebt na het sluiten van de overeenkomst {days} dagen bedenktijd. Zeg je binnen die periode op, dan betaal je alleen naar rato voor wat je al hebt afgenomen.",
+    "notSure": "Weet je niet welk programma past? Plan een gratis kennismaking — dan zeg ik het je eerlijk, ook als dat betekent dat je bij mij niet op je plek bent."
+  },
+
+  "reviews": {
+    "eyebrow": "Ervaringen",
+    "headline": "Wat klanten zeggen.",
+    "empty": "Er staan hier nog geen ervaringen. Zodra klanten toestemming hebben gegeven om hun verhaal te delen, lees je ze hier — met naam en datum erbij.",
+    "verifiedLabel": "Geverifieerde Google-reviews",
+    "viewOnGoogle": "Bekijk alle reviews op Google"
+  },
+
+  "faq": {
+    "eyebrow": "Vragen",
+    "headline": "Wat mensen meestal willen weten.",
+    "contactLine": "Staat je vraag er niet bij? Mail me op",
+    "items": {
+      "gym": {
+        "q": "Heb ik een sportschoolabonnement nodig?",
+        "a": "Nee. Ik schrijf programma's voor zowel thuis als de sportschool. Veel online klanten trainen thuis met een set dumbbells en een weerstandsband. Heb je wel een abonnement, dan gebruiken we dat."
+      },
+      "firstWeek": {
+        "q": "Wat gebeurt er in de eerste week?",
+        "a": "Na de kennismaking krijg je binnen 48 uur je startplan: de eerste week trainingen, een korte uitleg over voeding loggen, en een afspraak voor de eerste check-in. Eén stap tegelijk."
+      },
+      "beginner": {
+        "q": "Is dit geschikt als ik nog nooit heb getraind?",
+        "a": "Ja. De meeste mensen die bij me starten hebben weinig of geen ervaring met krachttraining. We beginnen waar jij staat en bouwen op in jouw tempo."
+      },
+      "time": {
+        "q": "Hoeveel tijd kost het per week?",
+        "a": "Ongeveer drie tot vier uur. Drie trainingen van 45 minuten, vijf tot tien minuten per dag voor je voedingslog, en een kwartier voor de wekelijkse check-in."
+      },
+      "travel": {
+        "q": "Werkt dit als ik veel reis?",
+        "a": "Ja. Online en hybride zijn hier op gebouwd. Trainingen passen zich aan een hotelgym of een hotelkamer aan, voeding loggen kan overal, en de check-in gaat via video of bericht."
+      },
+      "notSure": {
+        "q": "Wat als ik nog twijfel?",
+        "a": "Dan plan je een kennismaking en beslis je daarna. Die is gratis en vrijblijvend. Blijkt dat ik niet de juiste persoon voor je ben, dan zeg ik dat — en wijs ik je door."
+      },
+      "cancel": {
+        "q": "Kan ik tussentijds stoppen?",
+        "a": "Ja. Je hebt {days} dagen wettelijke bedenktijd na het sluiten van de overeenkomst, en daarna is het maandelijks opzegbaar. Geen jaarcontract."
+      }
+    }
+  },
+
+  "wizard": {
+    "eyebrow": "Kennismaking",
+    "headline": "Vier vragen, dan bel ik je.",
+    "intro": "Zodat het gesprek nergens over gaat behalve over jou. Kost een minuut.",
+    "stepOf": "Stap {current} van {total}",
+    "back": "Terug",
+    "next": "Volgende",
+    "submit": "Verstuur",
+    "submitting": "Versturen…",
+
+    "goal": {
+      "label": "Waar wil je naartoe?",
+      "options": {
+        "fat": "Afvallen",
+        "strength": "Sterker worden",
+        "pain": "Van klachten af",
+        "habits": "Gewoontes die blijven"
+      }
+    },
+    "obstacle": {
+      "label": "Wat houdt je nu tegen?",
+      "options": {
+        "time": "Ik heb er geen tijd voor",
+        "knowledge": "Ik weet niet waar ik moet beginnen",
+        "consistency": "Ik begin wel, maar hou het niet vol",
+        "injury": "Ik heb klachten of een blessure"
+      }
+    },
+    "situation": {
+      "label": "Hoe zou je willen trainen?",
+      "options": {
+        "online": "Online, op mijn eigen moment",
+        "hybrid": "Deels samen, deels online",
+        "personal": "Het liefst elke week samen",
+        "unsure": "Weet ik nog niet"
+      }
+    },
+    "availability": {
+      "label": "Hoeveel tijd heb je per week realistisch?",
+      "options": {
+        "low": "Minder dan 2 uur",
+        "mid": "2 tot 4 uur",
+        "high": "Meer dan 4 uur"
+      }
+    },
+
+    "details": {
+      "label": "Waar kan ik je bereiken?",
+      "name": "Naam",
+      "email": "E-mailadres",
+      "phone": "Telefoonnummer",
+      "phoneOptional": "optioneel",
+      "message": "Iets wat ik moet weten?",
+      "messageOptional": "optioneel"
+    },
+
+    "consent": {
+      "contact": "Ik ga ermee akkoord dat KrachtigFit contact met me opneemt over deze aanvraag.",
+      "marketing": "Stuur me daarnaast af en toe trainings- en voedingstips. (Niet nodig om te reageren.)",
+      "privacy": "Lees hoe ik met je gegevens omga in het privacybeleid.",
+      "privacyLinkText": "privacybeleid"
+    },
+
+    "success": {
+      "title": "Verstuurd.",
+      "body": "Ik reageer binnen één werkdag. Liever nu meteen contact? Stuur een WhatsApp-bericht."
+    },
+    "error": {
+      "generic": "Er ging iets mis bij het versturen. Probeer het opnieuw of stuur een WhatsApp-bericht.",
+      "required": "Dit veld is verplicht.",
+      "email": "Vul een geldig e-mailadres in.",
+      "consent": "Zonder deze toestemming kan ik niet reageren."
+    },
+
+    "whatsapp": "Liever appen?",
+    "whatsappCta": "Stuur een bericht",
+    "whatsappPrefill": "Hoi Sander, ik zag je site en wil graag meer weten over personal training."
+  },
+
+  "footer": {
+    "tagline": "Personal training in Roermond en online. Krachttraining, voeding en wekelijkse begeleiding voor mensen met een volle agenda.",
+    "navHeading": "Pagina's",
+    "legalHeading": "Juridisch",
+    "contactHeading": "Contact",
+    "privacy": "Privacybeleid",
+    "terms": "Algemene voorwaarden",
+    "cookies": "Cookiebeleid",
+    "kvk": "KvK",
+    "btw": "BTW-ID",
+    "rights": "Alle rechten voorbehouden.",
+    "instagram": "Instagram"
+  },
+
+  "notFound": {
+    "title": "Deze pagina bestaat niet.",
+    "body": "Misschien is de link verouderd. Ga terug naar de homepage.",
+    "cta": "Naar de homepage"
+  }
+}

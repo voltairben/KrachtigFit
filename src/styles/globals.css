@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens
+
+   Each group answers a specific defect in the prototype:
+   - colour     -> gold applied to ~15 roles; 2 surfaces where 5 are needed;
+                   a 60px shadow on #0a0a0a that was invisible
+   - type       -> uppercase on every heading; weights requested but never
+                   loaded; h1/h2 collapsing to 35px/32px on mobile; pure-vw
+                   clamp() that ignored user zoom
+   - spacing    -> ~25 ad-hoc rem values, no grid
+   - motion     -> every transition "0.25s ease", the browser default
+   ========================================================================== */
+
+@theme {
+  /* --- Canvas ------------------------------------------------------------
+     The high-contrast device is full-bleed blocks alternating ink/paper.
+     Elevation on ink is carried by surface lightness, never by shadow. */
+  --color-ink: #0b0b0c;
+  --color-surface-1: #131315;
+  --color-surface-2: #1c1c1f;
+  --color-surface-3: #26262a;
+
+  --color-paper: #f4f2ed; /* warm off-white, not pure #fff */
+  --color-paper-2: #eae7e0;
+
+  /* --- Accent ------------------------------------------------------------
+     Vermillion. Measured: 5.95:1 as text on ink, and 5.95:1 for ink text on
+     an accent fill — so one button treatment works on both canvases.
+
+     HARD CONSTRAINT: 2.95:1 against paper. Never use as text or as a border
+     that carries meaning on the light canvas. On paper it appears only as a
+     fill with ink text on top. Encoded in the button variants, not left to
+     judgement. */
+  --color-accent: #ff4d2e;
+  --color-accent-press: #e63f22;
+
+  /* --- Text --------------------------------------------------------------
+     Measured against their own canvas. No value below 5:1 ships. */
+  --color-on-ink: #f4f2ed; /* 17.59:1 */
+  --color-on-ink-2: #a3a3a8; /*  7.83:1 */
+  --color-on-ink-3: #82828a; /*  5.16:1 */
+
+  --color-on-paper: #0b0b0c; /* 17.59:1 */
+  --color-on-paper-2: #46464c; /*  8.38:1 */
+  --color-on-paper-3: #5e5e66; /*  5.74:1 */
+
+  --color-border-ink: rgb(244 242 237 / 0.14);
+  --color-border-paper: rgb(11 11 12 / 0.14);
+
+  --color-focus: #ff4d2e;
+
+  /* --- Type --------------------------------------------------------------
+     One variable superfamily. Archivo carries both a weight and a width axis,
+     so Expanded/800 handles display and Normal/400-600 handles UI from the
+     same payload. This is what removes the prototype's missing-weight bug:
+     there is no weight to fail to load. */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  /* Every clamp() pairs rem with vw so it still responds to user font
+     scaling. Pure-vw clamps fail WCAG 1.4.4. */
+
+  /* Display — Archivo Expanded, sentence case. Uppercase is for eyebrows,
+     labels and buttons only. */
+  --text-display-2xl: clamp(3rem, 2rem + 5vw, 7.5rem);
+  --text-display-2xl--line-height: 0.92;
+  --text-display-2xl--letter-spacing: -0.03em;
+
+  --text-display-xl: clamp(2.5rem, 1.75rem + 3.75vw, 5rem);
+  --text-display-xl--line-height: 0.95;
+  --text-display-xl--letter-spacing: -0.025em;
+
+  --text-display-lg: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  --text-display-lg--line-height: 1;
+  --text-display-lg--letter-spacing: -0.02em;
+
+  --text-display-md: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+  --text-display-md--line-height: 1.1;
+  --text-display-md--letter-spacing: -0.015em;
+
+  /* At 320px: display-2xl 48px vs display-lg 32px — a 1.5x gap. The
+     prototype floored h1 at 35px against h2 at 32px, which is no hierarchy
+     at all on the most common viewport. */
+
+  --text-body-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --text-body-lg--line-height: 1.55;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+
+  --text-body-sm: 0.9375rem;
+  --text-body-sm--line-height: 1.6;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.5;
+
+  /* Uppercase needs tracking opened up; lowercase display needs it closed. */
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.16em;
+
+  /* --- Radii -------------------------------------------------------------
+     Hard-edged by default. The bold-graphic direction wants a visible
+     modular grid, not softened cards. */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+
+  /* --- Motion ------------------------------------------------------------
+     Named curves so nothing falls back to the browser default `ease`.
+     Mirrored in TypeScript at src/components/motion/tokens.ts — the two
+     must stay in sync. */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 650ms;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Anchor offset lives on the target, and is driven by the real header
+       height rather than a hardcoded value. The prototype hardcoded 8.5rem
+       to clear a draft banner, so every anchor would land wrong the moment
+       the banner was removed. */
+    --header-height: 4.5rem;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-on-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* No overflow-x: hidden. The prototype used it to mask a decorative
+       element overflowing the viewport; the fix is to not overflow. */
+  }
+
+  /* Sections declare their canvas; text colours follow automatically. */
+  [data-canvas="ink"] {
+    background-color: var(--color-ink);
+    color: var(--color-on-ink);
+  }
+
+  [data-canvas="paper"] {
+    background-color: var(--color-paper);
+    color: var(--color-on-paper);
+  }
+
+  :target,
+  [id] {
+    scroll-margin-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Accent focus ring is invisible on paper (2.95:1). Swap to ink there. */
+  [data-canvas="paper"] :focus-visible {
+    outline-color: var(--color-on-paper);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@utility eyebrow {
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Archivo's width axis. Display type only — never body copy. */
+@utility font-expanded {
+  font-variation-settings: "wdth" 112;
+}
+
+@utility font-normal-width {
+  font-variation-settings: "wdth" 100;
+}
+
+/* Tabular figures for stats and prices, so counting numbers don't jitter. */
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Disclosure (FAQ)
+
+   Native <details> rather than a JS accordion, for three reasons:
+
+     - It opens without JavaScript. The prototype collapsed five of its six
+       FAQ panels with CSS and provided no non-JS way to open them, so that
+       copy was simply unreachable.
+     - The browser handles the accessibility tree itself: closed content is
+       genuinely hidden from screen readers. The prototype's
+       grid-template-rows trick hid panels visually only, so a screen reader
+       read all six answers end to end.
+     - Zero client JS.
+
+   ::details-content animation degrades to an instant open where unsupported,
+   which is a cosmetic loss, not a functional one.
+   ========================================================================== */
+
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+details::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size var(--duration-base) var(--ease-out-quart),
+    content-visibility var(--duration-base) allow-discrete;
+}
+
+details[open]::details-content {
+  block-size: auto;
+}
+
+details > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ==========================================================================
+   Motion preferences
+
+   Deliberately narrower than the prototype's `animation: none !important`.
+   That rule was the right instinct applied too broadly — it would freeze any
+   JS-driven reveal permanently at opacity 0, hiding content outright.
+
+   Here: CSS motion is neutralised, but nothing is made invisible, and opacity
+   is never touched. Transform-based motion is dropped in JS instead, via
+   useReducedMotion() in src/components/motion/. Content always ends visible.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hover affordances must not latch on touch devices. The prototype had no
+   hover guard, so tapping a card left it stuck in its hover state. */
+@media (hover: none) {
+  [data-hover-lift] {
+    transform: none !important;
+  }
+}
