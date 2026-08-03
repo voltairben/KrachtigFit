@@ -31,7 +31,13 @@ export function Hero() {
       className="relative flex min-h-[100svh] flex-col justify-between pt-32 pb-10 sm:pt-36"
     >
       <Container className="flex flex-1 flex-col justify-center">
-        <Reveal>
+        {/*
+          Everything in the hero animates on mount, not on scroll. It is above
+          the fold by definition, so making the most important text on the site
+          wait for an IntersectionObserver callback adds a dependency with no
+          upside — and a failure mode where the hero renders blank.
+        */}
+        <Reveal immediate>
           <p className="eyebrow text-accent">{t("eyebrow")}</p>
         </Reveal>
 
@@ -45,16 +51,18 @@ export function Hero() {
             all-caps sentence — measurably slower to read, and worse again
             for dyslexic and low-vision readers.
           */}
-          <SplitText delay={0.1}>{t("headline")}</SplitText>
+          <SplitText immediate delay={0.1}>
+            {t("headline")}
+          </SplitText>
         </h1>
 
-        <Reveal delay={0.35}>
+        <Reveal immediate delay={0.35}>
           <p className="mt-8 max-w-[52ch] text-body-lg text-on-ink-2">
             {t("subhead")}
           </p>
         </Reveal>
 
-        <Reveal delay={0.45}>
+        <Reveal immediate delay={0.45}>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
             <Button asChild size="lg">
               <Link href="/kennismaking">
@@ -78,7 +86,7 @@ export function Hero() {
       */}
       {hasClientProof && (
         <Container>
-          <Reveal delay={0.6}>
+          <Reveal immediate delay={0.6}>
             <div className="mt-16 flex items-baseline gap-4 border-t border-border-ink pt-6">
               <span className="font-expanded tabular text-display-md font-extrabold text-accent">
                 {clients.value}

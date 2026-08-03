@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { Fragment } from "react";
 import { duration, easeOutExpo, viewportOnce } from "./tokens";
 
 /**
@@ -30,6 +31,15 @@ type SplitTextProps = {
   /** Seconds before the first word. */
   delay?: number;
   as?: "h1" | "h2" | "p" | "span" | "div";
+  /**
+   * Animate on mount instead of on scroll-into-view.
+   *
+   * Use for anything above the fold. Scroll-triggered reveals depend on an
+   * IntersectionObserver callback, which is one more thing that has to fire
+   * correctly before the most important text on the page becomes visible —
+   * an unnecessary dependency for content that is on screen at load.
+   */
+  immediate?: boolean;
 };
 
 export function SplitText({
@@ -38,6 +48,7 @@ export function SplitText({
   stagger = 0.045,
   delay = 0,
   as: Tag = "span",
+  immediate = false,
 }: SplitTextProps) {
   const shouldReduceMotion = useReducedMotion();
   const words = children.split(" ");
@@ -46,8 +57,8 @@ export function SplitText({
     <Tag className={className}>
       <span className="sr-only">{children}</span>
       {words.map((word, i) => (
+        <Fragment key={`${word}-${i}`}>
         <span
-          key={`${word}-${i}`}
           aria-hidden="true"
           // The mask. Extra vertical padding with matching negative margin
           // stops overflow:hidden from clipping ascenders and descenders
@@ -72,8 +83,12 @@ export function SplitText({
               // leave it at opacity 0.
               y: shouldReduceMotion ? "0%" : "110%",
             }}
-            whileInView={{ opacity: 1, y: "0%" }}
-            viewport={viewportOnce}
+            {...(immediate
+              ? { animate: { opacity: 1, y: "0%" } }
+              : {
+                  whileInView: { opacity: 1, y: "0%" },
+                  viewport: viewportOnce,
+                })}
             transition={{
               duration: shouldReduceMotion ? duration.base : duration.slower,
               ease: easeOutExpo,
@@ -83,6 +98,14 @@ export function SplitText({
             {word}
           </motion.span>
         </span>
+        {/*
+          A real space text node between words. The masks are inline-block, so
+          without this the words butt together — "Sterkerworden". It also lets
+          the headline wrap naturally at any viewport, which per-word masking
+          is chosen for in the first place.
+        */}
+        {i < words.length - 1 ? " " : null}
+        </Fragment>
       ))}
     </Tag>
   );

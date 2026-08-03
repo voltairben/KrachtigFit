@@ -30,9 +30,16 @@ type RevealProps = {
   /** Seconds. Prefer RevealGroup over hand-tuned delays for lists. */
   delay?: number;
   className?: string;
+  /** Animate on mount rather than on scroll. Use above the fold. */
+  immediate?: boolean;
 };
 
-export function Reveal({ children, delay = 0, className }: RevealProps) {
+export function Reveal({
+  children,
+  delay = 0,
+  className,
+  immediate = false,
+}: RevealProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -40,8 +47,9 @@ export function Reveal({ children, delay = 0, className }: RevealProps) {
       data-reveal
       className={className}
       initial={{ opacity: 0, y: shouldReduceMotion ? 0 : revealOffset }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={viewportOnce}
+      {...(immediate
+        ? { animate: { opacity: 1, y: 0 } }
+        : { whileInView: { opacity: 1, y: 0 }, viewport: viewportOnce })}
       transition={{
         duration: shouldReduceMotion ? duration.base : duration.slow,
         ease: easeOutExpo,

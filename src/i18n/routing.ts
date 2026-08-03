@@ -16,6 +16,19 @@ export const routing = defineRouting({
   locales: ["nl", "en"],
   defaultLocale: "nl",
   localePrefix: "as-needed",
+
+  /**
+   * Do NOT auto-switch on the browser's Accept-Language header.
+   *
+   * With detection on, a visitor whose browser is set to English gets
+   * redirected from `/` to `/en` — so the Dutch homepage of a Roermond
+   * business is never what loads, including for crawlers, which typically
+   * request with en-US. The English page would end up treated as primary.
+   *
+   * Off, the URL alone decides the language: `/` is always Dutch, `/en` is
+   * always English, and the header toggle is the way to switch.
+   */
+  localeDetection: false,
   pathnames: {
     "/": "/",
     "/kennismaking": {

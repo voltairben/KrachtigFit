@@ -20,3 +20,6 @@ next-env.d.ts
 
 # vercel
 .vercel
+
+# screenshot output from scripts/shoot.mjs
+screenshots/
