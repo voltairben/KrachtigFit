@@ -31,7 +31,6 @@ type Todo = typeof TODO;
 export const EXAMPLE_FIELDS = [
   "legalName",
   "legal.btwId",
-  "legal.isServiceAreaBusiness",
   "proof.clientsCoached",
   "proof.yearsExperience",
   "pricing (all three tiers)",
@@ -94,11 +93,19 @@ export const siteConfig = {
       country: "NL",
     },
     /**
-     * True if Sander trains at clients' locations rather than a public studio.
-     * Drives Google Business Profile registration as a service-area business
-     * with a hidden address, and whether the street address is published.
+     * REAL — false. Putkamp 4 is the gym Sander delivers personal training
+     * from, i.e. a genuine premises clients visit, not an admin address.
+     *
+     * Consequence for Google Business Profile: register as a normal
+     * location-based listing with the address VISIBLE, not as a service-area
+     * business with a hidden address. A visible verified address at a real
+     * premises is worth considerably more in the local pack, and proximity is
+     * the single heaviest ranking factor there.
+     *
+     * It also makes the SportsActivityLocation schema type accurate rather
+     * than merely defensible.
      */
-    isServiceAreaBusiness: true as boolean | Todo,
+    isServiceAreaBusiness: false as boolean | Todo,
   },
 
   contact: {
@@ -172,16 +179,24 @@ export const siteConfig = {
    * accountant; it is an ~11pp margin swing on a price the customer sees.
    */
   /**
-   * REAL — 21% on all three lines, per Sander.
+   * 21% on all three lines, per Sander.
    *
-   * Consistent with a service-area business: the reduced 9% rate covers
-   * "gelegenheid geven tot sportbeoefening", which requires providing the
-   * accommodation. Training at a client's home, outdoors, or online does not
-   * qualify, so 21% throughout is the expected answer here.
+   * ⚠ WORTH RE-CHECKING WITH THE ACCOUNTANT. This was set before it was known
+   * that the in-person training happens at a gym (Putkamp 4), which makes the
+   * reduced rate a live question rather than an academic one.
    *
-   * Worth revisiting only if he later trains from a space he rents or owns —
-   * at that point the in-person line could drop to 9%, which is margin he is
-   * currently not taking.
+   * The 9% rate covers "gelegenheid geven tot sportbeoefening" — providing the
+   * opportunity to exercise, which turns on who supplies the accommodation:
+   *
+   *   - Client trains on their own gym membership and Sander only instructs
+   *     → 21%, coaching alone.
+   *   - Access to the facility forms part of what Sander sells
+   *     → arguably 9% on that portion.
+   *
+   * Online coaching is 21% either way. The difference on the in-person tiers
+   * is roughly 10 points of margin on a price the customer sees, since
+   * consumer prices display incl. BTW — so it is worth one question rather
+   * than an assumption.
    */
   vat: {
     online: 21 as VatRate,
