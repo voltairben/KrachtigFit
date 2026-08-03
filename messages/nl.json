@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "KrachtigFit — Personal trainer in Roermond en online",
+    "title": "KrachtigFit — Personal trainer in Herten en online",
     "description": "Sterker worden zonder je leven om te gooien. Krachttraining, voedingsbegeleiding en wekelijkse check-ins, ingepast in de agenda die je al hebt. Plan een gratis kennismaking."
   },
 
@@ -21,9 +21,9 @@
   },
 
   "hero": {
-    "eyebrow": "Personal training · Roermond",
+    "eyebrow": "Personal training · Herten",
     "headline": "Sterker worden zonder je leven om te gooien.",
-    "subhead": "Krachttraining, voedingsbegeleiding en wekelijkse check-ins — ingepast in de agenda die je al hebt. In Roermond of volledig online.",
+    "subhead": "Krachttraining, voedingsbegeleiding en wekelijkse check-ins — ingepast in de agenda die je al hebt. In Herten of volledig online.",
     "ctaPrimary": "Plan je gratis kennismaking",
     "ctaSecondary": "Bekijk de aanpak",
     "note": "Gratis, vrijblijvend, 30 minuten."
@@ -69,13 +69,13 @@
     },
     "hybrid": {
       "title": "Hybride",
-      "body": "Twee keer per maand samen trainen in Roermond, de rest online. Je krijgt de correcties die alleen in persoon kunnen, met de flexibiliteit van online begeleiding.",
-      "tags": ["2× per maand live", "Roermond", "Online tussendoor"]
+      "body": "Twee keer per maand samen trainen in Herten, de rest online. Je krijgt de correcties die alleen in persoon kunnen, met de flexibiliteit van online begeleiding.",
+      "tags": ["2× per maand live", "Herten", "Online tussendoor"]
     },
     "personal": {
       "title": "1-op-1",
       "body": "Wekelijks samen trainen. De snelste route als je van nul begint, met een blessure werkt of gewoon wilt dat iemand meekijkt bij elke herhaling.",
-      "tags": ["Wekelijks live", "60 minuten", "Roermond"]
+      "tags": ["Wekelijks live", "60 minuten", "Herten"]
     },
     "cta": "Bekijk tarieven"
   },
@@ -217,7 +217,7 @@
   },
 
   "footer": {
-    "tagline": "Personal training in Roermond en online. Krachttraining, voeding en wekelijkse begeleiding voor mensen met een volle agenda.",
+    "tagline": "Personal training in Herten en online. Krachttraining, voeding en wekelijkse begeleiding voor mensen met een volle agenda.",
     "navHeading": "Pagina's",
     "legalHeading": "Juridisch",
     "contactHeading": "Contact",

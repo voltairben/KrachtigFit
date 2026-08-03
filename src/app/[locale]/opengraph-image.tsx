@@ -65,7 +65,7 @@ export default async function Image({
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div style={{ display: "flex", width: 64, height: 6, background: "#FF4D2E" }} />
           <div style={{ display: "flex", fontSize: 30, color: "#A3A3A8" }}>
-            KrachtigFit — Roermond
+            KrachtigFit — Herten
           </div>
         </div>
       </div>

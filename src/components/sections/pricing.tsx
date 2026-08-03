@@ -10,7 +10,7 @@ import { siteConfig } from "@/site.config";
 import { cn } from "@/lib/utils";
 
 /**
- * Prices are published openly. No competitor in Roermond does — every local
+ * Prices are published openly. No competitor in the Roermond area does — every
  * player holds the number back until an intake call. Publishing it
  * differentiates and pre-qualifies, and premium operators elsewhere put price
  * on the page precisely because hiding it reads as evasive.

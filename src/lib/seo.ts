@@ -78,13 +78,20 @@ export function buildBusinessJsonLd(locale: Locale) {
         addressCountry: legal.address.country,
       },
     }),
+    /**
+     * Herten is the base; the rest are the surrounding towns worth ranking
+     * for. Roermond stays in the list — it is the larger neighbouring town
+     * and what people actually type, so dropping it would forfeit the main
+     * local search term.
+     */
     areaServed: [
-      "Roermond",
       "Herten",
+      "Roermond",
       "Swalmen",
       "Echt",
+      "Melick",
+      "Sint Odiliënberg",
       "Weert",
-      "Sittard-Geleen",
     ].map((n) => ({ "@type": "City", name: n })),
     ...(legal.kvk !== TODO && {
       identifier: [

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "KrachtigFit — Personal trainer in Roermond and online",
+    "title": "KrachtigFit — Personal trainer in Herten and online",
     "description": "Get stronger without upending your life. Strength training, nutrition guidance and weekly check-ins, built around the schedule you already have. Book a free intro call."
   },
 
@@ -21,9 +21,9 @@
   },
 
   "hero": {
-    "eyebrow": "Personal training · Roermond",
+    "eyebrow": "Personal training · Herten",
     "headline": "Get stronger without upending your life.",
-    "subhead": "Strength training, nutrition guidance and weekly check-ins — built around the schedule you already have. In Roermond or fully online.",
+    "subhead": "Strength training, nutrition guidance and weekly check-ins — built around the schedule you already have. In Herten or fully online.",
     "ctaPrimary": "Book your free intro call",
     "ctaSecondary": "See the method",
     "note": "Free, no obligation, 30 minutes."
@@ -69,13 +69,13 @@
     },
     "hybrid": {
       "title": "Hybrid",
-      "body": "Twice a month training together in Roermond, the rest online. You get the corrections that only happen in person, with the flexibility of remote coaching.",
-      "tags": ["2× a month in person", "Roermond", "Online in between"]
+      "body": "Twice a month training together in Herten, the rest online. You get the corrections that only happen in person, with the flexibility of remote coaching.",
+      "tags": ["2× a month in person", "Herten", "Online in between"]
     },
     "personal": {
       "title": "One-to-one",
       "body": "Training together every week. The fastest route if you're starting from zero, working around an injury, or you simply want eyes on every rep.",
-      "tags": ["Weekly in person", "60 minutes", "Roermond"]
+      "tags": ["Weekly in person", "60 minutes", "Herten"]
     },
     "cta": "See pricing"
   },
@@ -217,7 +217,7 @@
   },
 
   "footer": {
-    "tagline": "Personal training in Roermond and online. Strength, nutrition and weekly guidance for people with full calendars.",
+    "tagline": "Personal training in Herten and online. Strength, nutrition and weekly guidance for people with full calendars.",
     "navHeading": "Pages",
     "legalHeading": "Legal",
     "contactHeading": "Contact",

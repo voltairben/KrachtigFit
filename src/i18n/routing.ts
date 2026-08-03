@@ -2,8 +2,8 @@ import { defineRouting } from "next-intl/routing";
 import { createNavigation } from "next-intl/navigation";
 
 /**
- * Dutch is the default and sits at the bare root — this is a Roermond-local
- * business, so `/` must be the Dutch page. English is prefixed at `/en`.
+ * Dutch is the default and sits at the bare root — this is a local business in
+ * Herten, so `/` must be the Dutch page. English is prefixed at `/en`.
  *
  * `localePrefix: "as-needed"` produces exactly that: `/` and `/en`, with no
  * `/nl` duplicate competing for the same content.
@@ -21,7 +21,7 @@ export const routing = defineRouting({
    * Do NOT auto-switch on the browser's Accept-Language header.
    *
    * With detection on, a visitor whose browser is set to English gets
-   * redirected from `/` to `/en` — so the Dutch homepage of a Roermond
+   * redirected from `/` to `/en` — so the Dutch homepage of a Dutch local
    * business is never what loads, including for crawlers, which typically
    * request with en-US. The English page would end up treated as primary.
    *

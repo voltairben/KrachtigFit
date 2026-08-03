@@ -109,10 +109,8 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                {/*
-                  E.164 in href, readable in the label. The prototype rendered
-                  "+31 06 4197 3164" — the leading 0 is dropped after +31.
-                */}
+                {/* Strict E.164 in the href so it dials; display string is
+                    presentation only. See siteConfig.contact. */}
                 <a href={`tel:${contact.phone}`} className="hover:text-accent">
                   {contact.phoneDisplay}
                 </a>

@@ -31,8 +31,6 @@ type Todo = typeof TODO;
 export const EXAMPLE_FIELDS = [
   "legalName",
   "legal.btwId",
-  "legal.address.street",
-  "legal.address.postalCode",
   "legal.isServiceAreaBusiness",
   "proof.clientsCoached",
   "proof.yearsExperience",
@@ -78,11 +76,6 @@ export const siteConfig = {
    * "Permanent toegankelijk" is not satisfied by a contact page alone.
    */
   legal: {
-    /**
-     * EXAMPLE VALUES — deliberately all-zeros and "Voorbeeldstraat" so they
-     * read as obviously fake to a Dutch visitor rather than passing for real
-     * registration details.
-     */
     /** REAL — verified Chamber of Commerce registration number. */
     kvk: "84937343" as string,
     /**
@@ -93,10 +86,11 @@ export const siteConfig = {
      * off the Belastingdienst letter. Format: NL + 9 digits + B + 2 digits.
      */
     btwId: "NL000000000B00" as string,
+    /** REAL — registered establishment address. */
     address: {
-      street: "Voorbeeldstraat 1" as string,
-      postalCode: "6041 AA" as string,
-      city: "Roermond",
+      street: "Putkamp 4" as string,
+      postalCode: "6049 AK" as string,
+      city: "Herten",
       country: "NL",
     },
     /**
@@ -109,9 +103,16 @@ export const siteConfig = {
 
   contact: {
     email: "sander@krachtigfit.nl",
-    /** E.164. The prototype rendered "+31 06 …" — the 0 is dropped after +31. */
+    /**
+     * `phone` is what the tel: link dials, so it stays strict E.164 — country
+     * code then the number with the national trunk prefix removed. Keeping the
+     * 0 in a tel: href can fail to connect on some handsets and carriers.
+     *
+     * `phoneDisplay` is only ever rendered as text, so it can follow whatever
+     * convention is preferred without affecting dialling.
+     */
     phone: "+31641973164",
-    phoneDisplay: "+31 6 41 97 31 64",
+    phoneDisplay: "+31 0641973164",
     whatsapp: "31641973164",
   },
 
