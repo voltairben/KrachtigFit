@@ -31,7 +31,6 @@ type Todo = typeof TODO;
 export const EXAMPLE_FIELDS = [
   "legalName",
   "legal.btwId",
-  "proof.clientsCoached",
   "proof.yearsExperience",
   "pricing (all three tiers)",
 ] as const;
@@ -148,15 +147,10 @@ export const siteConfig = {
    * verifiable count — counts carry no evidential burden.
    */
   proof: {
-    /**
-     * EXAMPLE VALUES. Note the shape the evidence field forces: a count with a
-     * source and a start date, not a bare number. Counts carry no evidential
-     * burden — a percentage does.
-     */
+    /** REAL — confirmed by Sander as the current client count. */
     clientsCoached: {
-      value: "150+",
-      evidence:
-        "EXAMPLE — replace with a real figure. Source: coaching log / invoice records, cumulative since first client.",
+      value: "400+",
+      evidence: "Confirmed by Sander Fermont, 2026-08-04.",
     } as Claim | { value: Todo; evidence: Todo },
     yearsExperience: {
       value: "6",
