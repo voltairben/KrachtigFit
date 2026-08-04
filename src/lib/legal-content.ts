@@ -55,6 +55,7 @@ export function privacyPolicy(locale: Locale): LegalDoc {
             "Vercel — hosting van de website. Verwerkt technische logs.",
             "Resend — verzending van het formulierbericht naar mijn mailbox, met dataverwerking in de EU.",
             "Cloudflare Turnstile — spamcontrole op het formulier. Turnstile plaatst geen cookies en profileert je niet.",
+            "Common Ninja en Instagram/Meta — alleen als je zelf op de knop klikt om de Instagram-feed op de site te laden. Zonder die klik wordt er niets van je gegevens naar deze partijen gestuurd.",
             "Verder deel ik je gegevens niet met derden, en verkoop ik ze nooit.",
           ],
         },
@@ -118,6 +119,7 @@ export function privacyPolicy(locale: Locale): LegalDoc {
           "Vercel — website hosting. Processes technical logs.",
           "Resend — delivers the form submission to my mailbox, with EU data processing.",
           "Cloudflare Turnstile — spam protection on the form. Turnstile sets no cookies and does not profile you.",
+          "Common Ninja and Instagram/Meta — only if you click the button to load the Instagram feed on the site. Without that click, nothing is sent to these parties.",
           "Your data is not shared with anyone else, and never sold.",
         ],
       },
@@ -249,12 +251,12 @@ export function cookiePolicy(locale: Locale): LegalDoc {
     return {
       title: "Cookiebeleid",
       intro:
-        "Kort: deze website plaatst geen cookies die toestemming vereisen.",
+        "Kort: deze website plaatst geen cookies zonder dat je daar zelf voor kiest.",
       sections: [
         {
-          heading: "Geen tracking",
+          heading: "Geen automatische tracking",
           body: [
-            "Er draaien geen analytics-, advertentie- of social-mediascripts op deze site. Er is dus ook geen cookiebanner, want er valt niets te weigeren.",
+            "Er draaien standaard geen analytics-, advertentie- of social-mediascripts op deze site. Er is dus ook geen cookiebanner nodig voor wat automatisch laadt, want daar valt niets te weigeren.",
           ],
         },
         {
@@ -266,9 +268,16 @@ export function cookiePolicy(locale: Locale): LegalDoc {
           ],
         },
         {
-          heading: "Als dit verandert",
+          heading: "Instagram-feed op verzoek",
           body: [
-            "Zodra er wel meetsoftware of een externe agenda-integratie bijkomt, wordt dit beleid aangepast en wordt er toestemming gevraagd voordat zulke scripts laden.",
+            "Bij 'Ervaringen' kun je op een knop klikken om onze Instagram-feed te bekijken, geleverd door Common Ninja. Deze feed laadt niet automatisch — het script wordt pas opgehaald op het moment dat je zelf op de knop klikt.",
+            "Zodra je de feed laadt, kunnen Common Ninja en Instagram/Meta cookies of vergelijkbare technieken plaatsen waar wij geen controle over hebben. Liever niet? Bezoek onze Instagram-pagina dan rechtstreeks via de link op de site — dat laadt niets op deze pagina.",
+          ],
+        },
+        {
+          heading: "Als er meer bijkomt",
+          body: [
+            "Zodra er andere meetsoftware of een externe agenda-integratie bijkomt, wordt dit beleid aangepast en wordt ook daar pas toestemming voor gevraagd voordat zulke scripts laden.",
           ],
         },
       ],
@@ -277,12 +286,12 @@ export function cookiePolicy(locale: Locale): LegalDoc {
 
   return {
     title: "Cookie policy",
-    intro: "In short: this website sets no cookies that require consent.",
+    intro: "In short: this website sets no cookies without you choosing to.",
     sections: [
       {
-        heading: "No tracking",
+        heading: "No automatic tracking",
         body: [
-          "No analytics, advertising or social media scripts run on this site. There is therefore no cookie banner, because there is nothing to decline.",
+          "No analytics, advertising or social media scripts run on this site by default. No cookie banner is needed for what loads automatically, because there is nothing to decline.",
         ],
       },
       {
@@ -294,9 +303,16 @@ export function cookiePolicy(locale: Locale): LegalDoc {
         ],
       },
       {
-        heading: "If this changes",
+        heading: "Instagram feed, on request",
         body: [
-          "If measurement software or an external calendar integration is added later, this policy will be updated and consent will be requested before such scripts load.",
+          "Under 'Experiences' you can click a button to view our Instagram feed, provided by Common Ninja. This feed does not load automatically — the script is only fetched the moment you click the button yourself.",
+          "Once you load the feed, Common Ninja and Instagram/Meta may set cookies or similar technology that we have no control over. Would rather not? Visit our Instagram page directly via the link on the site instead — that loads nothing on this page.",
+        ],
+      },
+      {
+        heading: "If more is added",
+        body: [
+          "If other measurement software or an external calendar integration is added later, this policy will be updated and consent will likewise be requested before such scripts load.",
         ],
       },
     ],

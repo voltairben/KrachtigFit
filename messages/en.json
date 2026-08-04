@@ -109,6 +109,15 @@
     "viewOnGoogle": "See all reviews on Google"
   },
 
+  "instagram": {
+    "eyebrow": "Instagram",
+    "headline": "Follow along on Instagram",
+    "intro": "Workouts, tips, and a look behind the scenes.",
+    "loadCta": "Show the Instagram feed",
+    "loadNote": "This feed is loaded via an external service. Click to load it.",
+    "follow": "Follow on Instagram"
+  },
+
   "faq": {
     "eyebrow": "Questions",
     "headline": "What people usually want to know.",

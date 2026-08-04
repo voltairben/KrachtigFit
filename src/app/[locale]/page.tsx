@@ -7,6 +7,7 @@ import { Method } from "@/components/sections/method";
 import { Programs } from "@/components/sections/programs";
 import { Pricing } from "@/components/sections/pricing";
 import { Reviews } from "@/components/sections/reviews";
+import { InstagramSection } from "@/components/sections/instagram";
 import { Faq } from "@/components/sections/faq";
 
 /**
@@ -36,6 +37,7 @@ export default async function HomePage({
       <Programs />
       <Pricing />
       <Reviews />
+      <InstagramSection />
       <Faq />
     </>
   );

@@ -51,15 +51,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         {/*
           KF mark + wordmark, side by side. The mark is a crop straight from
           the client's real logo artwork (public/kf-mark.png) rather than a
-          redrawn icon, cut out with a real alpha channel — not a flat
-          ink-coloured matte — so it sits on any background with no visible
-          edge, whether the header is transparent (top of page), blurred
-          (scrolled), or the asset ends up reused somewhere that isn't the ink
-          canvas. A plain luminance threshold could not cleanly separate the
-          letters from the backdrop, because the letters' own shadow bevels
-          overlap the same luminance range as the background bloom — the
-          alpha ramp is instead centred on the actual edge-transition band,
-          which keeps the letterforms' internal shading intact.
+          redrawn icon, with its own flat ink-coloured backing that matches
+          --color-ink exactly — so it sits on the header with no visible seam
+          whether the header is transparent (top of page) or blurred (scrolled).
           Explicit width/height keep this CLS-free and eligible for priority
           loading, since it renders in the very first viewport on every page.
         */}

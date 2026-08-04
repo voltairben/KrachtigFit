@@ -109,6 +109,15 @@
     "viewOnGoogle": "Bekijk alle reviews op Google"
   },
 
+  "instagram": {
+    "eyebrow": "Instagram",
+    "headline": "Volg mee op Instagram",
+    "intro": "Trainingen, tips en een kijkje achter de schermen.",
+    "loadCta": "Bekijk de Instagram-feed",
+    "loadNote": "Deze feed wordt geladen via een externe dienst. Klik om te laden.",
+    "follow": "Volg op Instagram"
+  },
+
   "faq": {
     "eyebrow": "Vragen",
     "headline": "Wat mensen meestal willen weten.",
