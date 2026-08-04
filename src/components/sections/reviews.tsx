@@ -16,25 +16,10 @@ import { siteConfig } from "@/site.config";
  * genuine without taking reasonable steps to verify them. ACM's ceiling is
  * €900k per violation.
  *
- * A Juicer-based Google Reviews embed was tried and removed here. It showed
- * real reviews, but Juicer's script always mounts its feed to the end of
- * `document.body` regardless of where the script tag or any pre-supplied
- * container sits — confirmed by direct testing, not assumed — so it could
- * never render inline in this section, only reachable via an auto-scroll to
- * the bottom of the page. Common Ninja was checked as a replacement: unlike
- * Juicer it does respect a given container's position, but the specific
- * Instagram widget already live on this site (see the Instagram section)
- * loads its SDK successfully yet renders no content — the mount point is
- * claimed but stays empty, which points at a data-connection or
- * publish-status issue on the Common Ninja dashboard side, not a placement
- * problem. Needs checking there before a Common Ninja reviews widget is
- * wired up here the same way.
- *
  * So the component exists and is styled, and renders an honest empty state
  * until either a Google Business Profile URL is set (verified reviews, linked
- * to source) or a review widget is found that both shows content and
- * actually renders where it's placed. There is no code path that renders a
- * testimonial this file invented.
+ * to source) or real consented testimonials are added. There is no code path
+ * that renders a testimonial this file invented.
  */
 export function Reviews() {
   const t = useTranslations("reviews");
