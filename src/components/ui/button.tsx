@@ -10,12 +10,12 @@ import { pressSpring } from "@/components/motion/tokens";
 /**
  * Two things the prototype's buttons got wrong, fixed here:
  *
- *  1. Contrast. Vermillion is 5.95:1 against ink text, and that same pairing
- *     is legible on either canvas — so `primary` needs no per-canvas variant.
- *     But vermillion against paper is only 2.95:1, so the accent may never be
- *     used as *text* on the light canvas. `secondary` sidesteps this by
- *     inheriting `currentColor` from the [data-canvas] ancestor, which means
- *     it is correct on both canvases without a prop.
+ *  1. Contrast. The gold accent is 8.57:1 against ink text, and that same
+ *     pairing is legible on either canvas — so `primary` needs no per-canvas
+ *     variant. But the gold against paper is only 2.05:1, so the accent may
+ *     never be used as *text* on the light canvas. `secondary` sidesteps this
+ *     by inheriting `currentColor` from the [data-canvas] ancestor, which
+ *     means it is correct on both canvases without a prop.
  *
  *  2. Press feedback. The prototype had a hover lift and no :active state, so
  *     taps registered nothing at all — and the hover lift itself latched on

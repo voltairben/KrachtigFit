@@ -3,6 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -46,11 +47,27 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       )}
     >
       <Container className="flex h-[4.5rem] items-center justify-between gap-6">
-        <Link
-          href="/"
-          className="font-expanded text-body-lg font-extrabold tracking-tight"
-        >
-          Krachtig<span className="text-accent">Fit</span>
+        {/*
+          KF mark + wordmark, side by side. The mark is a crop straight from
+          the client's real logo artwork (public/kf-mark.png) rather than a
+          redrawn icon, with its own flat ink-coloured backing that matches
+          --color-ink exactly — so it sits on the header with no visible seam
+          whether the header is transparent (top of page) or blurred (scrolled).
+          Explicit width/height keep this CLS-free and eligible for priority
+          loading, since it renders in the very first viewport on every page.
+        */}
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/kf-mark.png"
+            alt=""
+            width={600}
+            height={348}
+            priority
+            className="h-8 w-auto sm:h-9"
+          />
+          <span className="font-expanded text-body-lg font-extrabold tracking-tight">
+            Krachtig<span className="text-accent">Fit</span>
+          </span>
         </Link>
 
         <nav

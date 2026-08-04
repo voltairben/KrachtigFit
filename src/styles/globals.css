@@ -26,15 +26,20 @@
   --color-paper-2: #eae7e0;
 
   /* --- Accent ------------------------------------------------------------
-     Vermillion. Measured: 5.95:1 as text on ink, and 5.95:1 for ink text on
-     an accent fill — so one button treatment works on both canvases.
+     Metallic gold, sampled directly from the client's logo (the KF monogram
+     and wordmark) rather than picked by eye — pixel-averaged from the
+     gradient's midtone and shadow bands.
 
-     HARD CONSTRAINT: 2.95:1 against paper. Never use as text or as a border
-     that carries meaning on the light canvas. On paper it appears only as a
-     fill with ink text on top. Encoded in the button variants, not left to
-     judgement. */
-  --color-accent: #ff4d2e;
-  --color-accent-press: #e63f22;
+     Measured: 8.57:1 as text/fill on ink, comfortably AAA. Press/hover uses
+     the logo's darker bronze band, which is still 4.72:1 — a real, usable
+     darker state, not just a CSS filter.
+
+     HARD CONSTRAINT, same as before: only 2.05:1 against paper. Never use as
+     text or as a meaningful border on the light canvas — on paper it appears
+     only as a fill with ink text on top. Encoded in the button variants, not
+     left to judgement. */
+  --color-accent: #c1a879;
+  --color-accent-press: #9c7542;
 
   /* --- Text --------------------------------------------------------------
      Measured against their own canvas. No value below 5:1 ships. */
@@ -49,7 +54,7 @@
   --color-border-ink: rgb(244 242 237 / 0.14);
   --color-border-paper: rgb(11 11 12 / 0.14);
 
-  --color-focus: #ff4d2e;
+  --color-focus: #c1a879;
 
   /* --- Type --------------------------------------------------------------
      One variable superfamily. Archivo carries both a weight and a width axis,
