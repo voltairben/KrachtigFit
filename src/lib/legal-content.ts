@@ -56,7 +56,6 @@ export function privacyPolicy(locale: Locale): LegalDoc {
             "Resend — verzending van het formulierbericht naar mijn mailbox, met dataverwerking in de EU.",
             "Cloudflare Turnstile — spamcontrole op het formulier. Turnstile plaatst geen cookies en profileert je niet.",
             "Common Ninja en Instagram/Meta — alleen als je zelf op de knop klikt om de Instagram-feed op de site te laden. Zonder die klik wordt er niets van je gegevens naar deze partijen gestuurd.",
-            "Juicer.io — alleen als je zelf op de knop klikt om de klantreviews op de site te laden. Zonder die klik wordt er niets van je gegevens naar Juicer gestuurd.",
             "Verder deel ik je gegevens niet met derden, en verkoop ik ze nooit.",
           ],
         },
@@ -121,7 +120,6 @@ export function privacyPolicy(locale: Locale): LegalDoc {
           "Resend — delivers the form submission to my mailbox, with EU data processing.",
           "Cloudflare Turnstile — spam protection on the form. Turnstile sets no cookies and does not profile you.",
           "Common Ninja and Instagram/Meta — only if you click the button to load the Instagram feed on the site. Without that click, nothing is sent to these parties.",
-          "Juicer.io — only if you click the button to load customer reviews on the site. Without that click, nothing is sent to Juicer.",
           "Your data is not shared with anyone else, and never sold.",
         ],
       },
@@ -270,13 +268,6 @@ export function cookiePolicy(locale: Locale): LegalDoc {
           ],
         },
         {
-          heading: "Klantreviews op verzoek",
-          body: [
-            "Bij 'Ervaringen' kun je op een knop klikken om onze Google-reviews te bekijken, geleverd door Juicer.io. Deze reviews laden niet automatisch — het script wordt pas opgehaald op het moment dat je zelf op de knop klikt.",
-            "Juicer plaatst zelf geen cookies, maar laadt na jouw klik wel reviewafbeeldingen op vanaf de servers van Juicer en registreert daarbij een paginaweergave. Daarmee ontvangt Juicer je IP-adres op het moment van laden.",
-          ],
-        },
-        {
           heading: "Instagram-feed op verzoek",
           body: [
             "Bij 'Ervaringen' kun je op een knop klikken om onze Instagram-feed te bekijken, geleverd door Common Ninja. Deze feed laadt niet automatisch — het script wordt pas opgehaald op het moment dat je zelf op de knop klikt.",
@@ -309,13 +300,6 @@ export function cookiePolicy(locale: Locale): LegalDoc {
           "Fonts are served from this website itself. No request goes to an external font server.",
           "The contact form uses Cloudflare Turnstile for spam protection. Turnstile sets no cookies and does not track you across sites.",
           "The hosting provider keeps technical server logs for security and debugging. Those logs are not linked to a profile.",
-        ],
-      },
-      {
-        heading: "Customer reviews, on request",
-        body: [
-          "Under 'Experiences' you can click a button to view our Google reviews, provided by Juicer.io. These reviews do not load automatically — the script is only fetched the moment you click the button yourself.",
-          "Juicer itself sets no cookies, but after your click it does load review images from Juicer's own servers and logs a page view in doing so. That means Juicer receives your IP address at the moment of loading.",
         ],
       },
       {

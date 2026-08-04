@@ -104,10 +104,7 @@
   "reviews": {
     "eyebrow": "Experiences",
     "headline": "What clients say.",
-    "loadCta": "Show customer reviews",
-    "loadNote": "These reviews are loaded via an external service. Click to load them.",
-    "loadingNote": "Loading reviews…",
-    "revealedNote": "The reviews are further down this page.",
+    "empty": "There are no experiences here yet. Once clients have given permission to share their story, you'll read them here — with their name and the date attached.",
     "verifiedLabel": "Verified Google reviews",
     "viewOnGoogle": "See all reviews on Google"
   },

@@ -104,10 +104,7 @@
   "reviews": {
     "eyebrow": "Ervaringen",
     "headline": "Wat klanten zeggen.",
-    "loadCta": "Bekijk klantreviews",
-    "loadNote": "Deze reviews worden geladen via een externe dienst. Klik om te laden.",
-    "loadingNote": "Reviews laden…",
-    "revealedNote": "De reviews staan verderop op deze pagina.",
+    "empty": "Er staan hier nog geen ervaringen. Zodra klanten toestemming hebben gegeven om hun verhaal te delen, lees je ze hier — met naam en datum erbij.",
     "verifiedLabel": "Geverifieerde Google-reviews",
     "viewOnGoogle": "Bekijk alle reviews op Google"
   },
