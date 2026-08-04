@@ -68,6 +68,15 @@ export const siteConfig = {
     jobTitle: { nl: "Personal trainer", en: "Personal trainer" },
     /** Certifications — CIOS / Fit!vak / EREPS registration numbers if held. */
     credentials: [] as string[],
+    /**
+     * Not a launch blocker — this is ordinary content, not a legal value, so
+     * it doesn't belong in EXAMPLE_FIELDS. Null renders an honest "coming
+     * soon" placeholder in the About section (same pattern as
+     * googleBusinessProfileUrl below) rather than a dead play button — the
+     * prototype's "Watch My Story" badge did nothing when clicked, which is
+     * worse than not offering a video at all.
+     */
+    introVideoUrl: null as string | null,
   },
 
   /**

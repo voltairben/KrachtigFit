@@ -13,11 +13,19 @@
   },
 
   "nav": {
+    "about": "Over mij",
     "method": "Aanpak",
     "programs": "Programma's",
     "pricing": "Tarieven",
     "faq": "Vragen",
     "cta": "Gratis kennismaking"
+  },
+
+  "about": {
+    "eyebrow": "Over mij",
+    "headline": "Hoi, ik ben Sander.",
+    "intro": "Ik ben de trainer achter KrachtigFit. Geen ingewikkelde schema's en geen schuldgevoel over een mindere week — wel een aanpak die past bij een normaal leven met werk, gezin en alles daartussenin.",
+    "videoComingSoon": "Video volgt binnenkort"
   },
 
   "hero": {

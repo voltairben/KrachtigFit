@@ -13,11 +13,19 @@
   },
 
   "nav": {
+    "about": "About",
     "method": "Method",
     "programs": "Programs",
     "pricing": "Pricing",
     "faq": "FAQ",
     "cta": "Free intro call"
+  },
+
+  "about": {
+    "eyebrow": "About me",
+    "headline": "Hi, I'm Sander.",
+    "intro": "I'm the trainer behind KrachtigFit. No complicated schedules and no guilt over an off week — just an approach that fits a normal life with work, family, and everything in between.",
+    "videoComingSoon": "Video coming soon"
   },
 
   "hero": {

@@ -13,6 +13,7 @@ import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 const SECTIONS = [
+  { id: "about", key: "about" },
   { id: "method", key: "method" },
   { id: "programs", key: "programs" },
   { id: "pricing", key: "pricing" },

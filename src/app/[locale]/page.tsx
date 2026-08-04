@@ -2,6 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 
 import { Hero } from "@/components/sections/hero";
+import { About } from "@/components/sections/about";
 import { Method } from "@/components/sections/method";
 import { Programs } from "@/components/sections/programs";
 import { Pricing } from "@/components/sections/pricing";
@@ -14,11 +15,10 @@ import { Faq } from "@/components/sections/faq";
  * the ask, and the primary CTA points at a real qualification flow rather than
  * at a PDF download mislabelled "Book Free Assessment".
  *
- * Canvases alternate ink → paper → ink → paper, which is the high-contrast
- * device carrying the art direction.
- *
- * Still to wire: Pricing (blocked on VAT rates per product line) and the
- * closing CTA.
+ * About sits directly after Hero, sharing its ink canvas, so the personal
+ * introduction is still the first thing a visitor scrolls into — before
+ * canvases start alternating ink → paper → ink → paper for the rest of the
+ * page, which is the high-contrast device carrying the art direction.
  */
 export default async function HomePage({
   params,
@@ -31,6 +31,7 @@ export default async function HomePage({
   return (
     <>
       <Hero />
+      <About />
       <Method />
       <Programs />
       <Pricing />
