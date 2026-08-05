@@ -22,8 +22,8 @@
   --color-surface-2: #1c1c1f;
   --color-surface-3: #26262a;
 
-  --color-paper: #f4f2ed; /* warm off-white, not pure #fff */
-  --color-paper-2: #eae7e0;
+  --color-paper: #f7e7ce; /* champagne, not pure #fff */
+  --color-paper-2: #edddc3;
 
   /* --- Accent ------------------------------------------------------------
      Metallic gold, sampled directly from the client's logo (the KF monogram
@@ -34,10 +34,11 @@
      the logo's darker bronze band, which is still 4.72:1 — a real, usable
      darker state, not just a CSS filter.
 
-     HARD CONSTRAINT, same as before: only 2.05:1 against paper. Never use as
-     text or as a meaningful border on the light canvas — on paper it appears
-     only as a fill with ink text on top. Encoded in the button variants, not
-     left to judgement. */
+     HARD CONSTRAINT, same as before: only 1.89:1 against paper (champagne
+     sits closer to the accent's own gold than the old off-white did). Never
+     use as text or as a meaningful border on the light canvas — on paper it
+     appears only as a fill with ink text on top. Encoded in the button
+     variants, not left to judgement. */
   --color-accent: #c1a879;
   --color-accent-press: #9c7542;
 
@@ -47,9 +48,9 @@
   --color-on-ink-2: #a3a3a8; /*  7.83:1 */
   --color-on-ink-3: #82828a; /*  5.16:1 */
 
-  --color-on-paper: #0b0b0c; /* 17.59:1 */
-  --color-on-paper-2: #46464c; /*  8.38:1 */
-  --color-on-paper-3: #5e5e66; /*  5.74:1 */
+  --color-on-paper: #0b0b0c; /* 16.19:1 */
+  --color-on-paper-2: #46464c; /*  7.71:1 */
+  --color-on-paper-3: #5e5e66; /*  5.29:1 */
 
   --color-border-ink: rgb(244 242 237 / 0.14);
   --color-border-paper: rgb(11 11 12 / 0.14);
