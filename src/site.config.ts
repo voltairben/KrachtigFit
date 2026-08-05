@@ -29,9 +29,7 @@ type Todo = typeof TODO;
  * Delete an entry in the same commit that replaces its value.
  */
 export const EXAMPLE_FIELDS = [
-  "legalName",
   "legal.btwId",
-  "proof.yearsExperience",
   "pricing (all three tiers)",
 ] as const;
 
@@ -52,14 +50,15 @@ type VatRate = 9 | 21 | Todo;
 export const siteConfig = {
   name: "KrachtigFit",
   /**
-   * EXAMPLE — registered legal/trade name as filed with the KvK.
+   * REAL — registered legal/trade name as filed with the KvK, confirmed by
+   * Sander, 2026-08-05.
    *
    * Widened to `string` rather than left as a literal so the `=== TODO`
    * guards downstream stay live code. With `as const` a filled-in literal
    * makes those comparisons statically false, and TypeScript rightly flags
    * them as dead — but they must keep working when a value is missing.
    */
-  legalName: "KrachtigFit — S. Fermont" as string,
+  legalName: "KrachtigFit" as string,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://krachtigfit.nl",
 
   trainer: {
@@ -152,10 +151,10 @@ export const siteConfig = {
       value: "400+",
       evidence: "Confirmed by Sander Fermont, 2026-08-04.",
     } as Claim | { value: Todo; evidence: Todo },
+    /** REAL — confirmed by Sander, 2026-08-05. */
     yearsExperience: {
       value: "6",
-      evidence:
-        "EXAMPLE — replace with a real figure. Source: date of KvK registration / first paying client.",
+      evidence: "Confirmed by Sander Fermont, 2026-08-05.",
     } as Claim | { value: Todo; evidence: Todo },
     /**
      * Leave null unless a documented cohort exists. Compliant shape:
