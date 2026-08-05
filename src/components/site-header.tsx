@@ -1,7 +1,7 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -16,9 +16,11 @@ const SECTIONS = [
   { id: "about", key: "about" },
   { id: "method", key: "method" },
   { id: "programs", key: "programs" },
-  { id: "pricing", key: "pricing" },
   { id: "faq", key: "faq" },
 ] as const;
+
+const THEME_STORAGE_KEY = "kf-theme";
+type Theme = "dark" | "light";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
   const t = useTranslations("nav");
@@ -43,7 +45,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         "fixed inset-x-0 top-0 z-50 transition-colors",
         "duration-[var(--duration-base)] ease-[var(--ease-out-quart)]",
         scrolled
-          ? "border-b border-border-ink bg-ink/85 backdrop-blur-lg"
+          ? "border-b border-border-ink bg-canvas-ink/85 backdrop-blur-lg"
           : "border-b border-transparent bg-transparent",
       )}
     >
@@ -67,7 +69,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             className="h-8 w-auto sm:h-9"
           />
           <span className="font-expanded text-body-lg font-extrabold tracking-tight">
-            Krachtig<span className="text-accent">Fit</span>
+            Krachtig<span className="text-accent-fg">Fit</span>
           </span>
         </Link>
 
@@ -87,6 +89,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <LocaleSwitcher current={locale} pathname={pathname} />
 
           <Button asChild size="sm" className="hidden sm:inline-flex">
@@ -114,7 +117,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/80 backdrop-blur-sm" />
               <Dialog.Content
                 data-canvas="ink"
-                className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-border-ink bg-ink p-6"
+                className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-border-ink bg-canvas-ink p-6"
               >
                 <div className="flex items-center justify-between">
                   <Dialog.Title className="eyebrow text-on-ink-3">
@@ -154,6 +157,83 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         </div>
       </Container>
     </header>
+  );
+}
+
+/**
+ * Same bordered-group shape as LocaleSwitcher below — two segments, active
+ * one filled with accent, inactive text-on-ink-3 with a hover state — so the
+ * two toggles read as one visual language in the header. Icons rather than
+ * text labels (sun/moon, not "LIGHT"/"DARK") since that pair is unambiguous
+ * at a glance and keeps the group the same compact width as NL/EN.
+ *
+ * The actual theme switch is one line — document.documentElement's
+ * data-theme attribute drives every colour on the page via the CSS in
+ * globals.css — this component only needs to reflect and persist that
+ * choice. It doesn't own the source of truth: the inline bootstrap script in
+ * the root layout applies the stored/system theme before first paint, and
+ * this reads whatever that script already set rather than deciding again,
+ * so the two can't disagree.
+ *
+ * Starts "dark" for the initial (server) render — the server has no way to
+ * know a visitor's stored preference — and corrects itself from the DOM in
+ * an effect. That first-paint mismatch is invisible: actual page colour
+ * comes from the data-theme attribute the bootstrap script already set via
+ * CSS, never from this component's state, so there is nothing to flash.
+ */
+function ThemeToggle() {
+  const tA11y = useTranslations("a11y");
+  const [theme, setTheme] = useState<Theme>("dark");
+
+  useEffect(() => {
+    const current = document.documentElement.getAttribute("data-theme");
+    setTheme(current === "light" ? "light" : "dark");
+  }, []);
+
+  function choose(next: Theme) {
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, next);
+    } catch {
+      // Private-browsing / storage-disabled: the choice still applies to
+      // this page view, it just won't persist to the next one.
+    }
+  }
+
+  const options: { value: Theme; label: string; Icon: typeof Sun }[] = [
+    { value: "light", label: tA11y("lightMode"), Icon: Sun },
+    { value: "dark", label: tA11y("darkMode"), Icon: Moon },
+  ];
+
+  return (
+    <div
+      className="flex items-center rounded-sm border border-border-ink"
+      role="group"
+      aria-label={tA11y("switchTheme")}
+    >
+      {options.map(({ value, label, Icon }) => {
+        const isActive = value === theme;
+        return (
+          <button
+            key={value}
+            type="button"
+            aria-pressed={isActive}
+            aria-label={label}
+            title={label}
+            onClick={() => choose(value)}
+            className={cn(
+              "grid size-8 place-items-center transition-colors",
+              isActive
+                ? "bg-accent text-ink"
+                : "text-on-ink-3 hover:text-on-ink",
+            )}
+          >
+            <Icon className="size-3.5" aria-hidden="true" />
+          </button>
+        );
+      })}
+    </div>
   );
 }
 

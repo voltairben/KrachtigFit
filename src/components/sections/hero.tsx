@@ -38,7 +38,7 @@ export function Hero() {
           upside — and a failure mode where the hero renders blank.
         */}
         <Reveal immediate>
-          <p className="eyebrow text-accent">{t("eyebrow")}</p>
+          <p className="eyebrow text-accent-fg">{t("eyebrow")}</p>
         </Reveal>
 
         <h1
@@ -88,7 +88,7 @@ export function Hero() {
         <Container>
           <Reveal immediate delay={0.6}>
             <div className="mt-16 flex items-baseline gap-4 border-t border-border-ink pt-6">
-              <span className="font-expanded tabular text-display-md font-extrabold text-accent">
+              <span className="font-expanded tabular text-display-md font-extrabold text-accent-fg">
                 {clients.value}
               </span>
               <span className="text-body-sm text-on-ink-2">

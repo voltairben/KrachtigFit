@@ -30,7 +30,7 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
             <p className="font-expanded text-display-md font-extrabold tracking-tight">
-              Krachtig<span className="text-accent">Fit</span>
+              Krachtig<span className="text-accent-fg">Fit</span>
             </p>
             <p className="mt-4 max-w-[38ch] text-body-sm text-on-ink-2">
               {t("tagline")}
@@ -46,22 +46,22 @@ export function SiteFooter() {
             </h2>
             <ul className="mt-4 space-y-3 text-body-sm">
               <li>
-                <Link href="/kennismaking" className="hover:text-accent">
+                <Link href="/kennismaking" className="hover:text-accent-fg">
                   {tNav("cta")}
                 </Link>
               </li>
               <li>
-                <a href="#method" className="hover:text-accent">
+                <a href="#method" className="hover:text-accent-fg">
                   {tNav("method")}
                 </a>
               </li>
               <li>
-                <a href="#pricing" className="hover:text-accent">
-                  {tNav("pricing")}
+                <a href="#programs" className="hover:text-accent-fg">
+                  {tNav("programs")}
                 </a>
               </li>
               <li>
-                <a href="#faq" className="hover:text-accent">
+                <a href="#faq" className="hover:text-accent-fg">
                   {tNav("faq")}
                 </a>
               </li>
@@ -77,20 +77,20 @@ export function SiteFooter() {
             </h2>
             <ul className="mt-4 space-y-3 text-body-sm">
               <li>
-                <Link href="/privacybeleid" className="hover:text-accent">
+                <Link href="/privacybeleid" className="hover:text-accent-fg">
                   {t("privacy")}
                 </Link>
               </li>
               <li>
                 <Link
                   href="/algemene-voorwaarden"
-                  className="hover:text-accent"
+                  className="hover:text-accent-fg"
                 >
                   {t("terms")}
                 </Link>
               </li>
               <li>
-                <Link href="/cookiebeleid" className="hover:text-accent">
+                <Link href="/cookiebeleid" className="hover:text-accent-fg">
                   {t("cookies")}
                 </Link>
               </li>
@@ -103,7 +103,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href={`mailto:${contact.email}`}
-                  className="hover:text-accent"
+                  className="hover:text-accent-fg"
                 >
                   {contact.email}
                 </a>
@@ -111,7 +111,7 @@ export function SiteFooter() {
               <li>
                 {/* Strict E.164 in the href so it dials; display string is
                     presentation only. See siteConfig.contact. */}
-                <a href={`tel:${contact.phone}`} className="hover:text-accent">
+                <a href={`tel:${contact.phone}`} className="hover:text-accent-fg">
                   {contact.phoneDisplay}
                 </a>
               </li>
@@ -120,7 +120,7 @@ export function SiteFooter() {
                   href={siteConfig.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 hover:text-accent"
+                  className="inline-flex items-center gap-2 hover:text-accent-fg"
                 >
                   <Instagram className="size-4" aria-hidden="true" />
                   {t("instagram")}

@@ -9,14 +9,16 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "switchLanguage": "Switch language",
-    "currentLanguage": "Current language"
+    "currentLanguage": "Current language",
+    "switchTheme": "Switch theme",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
   },
 
   "nav": {
     "about": "About",
     "method": "Method",
     "programs": "Programs",
-    "pricing": "Pricing",
     "faq": "FAQ",
     "cta": "Free intro call"
   },
@@ -68,37 +70,25 @@
 
   "programs": {
     "eyebrow": "Programs",
-    "headline": "Three ways to work together.",
-    "intro": "All three run on the same method. The difference is how often you see me in person.",
-    "online": {
-      "title": "Online",
-      "body": "Fully remote. A training plan built for you, feedback on your food log, and a weekly video call. Works anywhere, including if you travel a lot.",
-      "tags": ["Remote", "Weekly check-in", "Cancel monthly"]
-    },
-    "hybrid": {
-      "title": "Hybrid",
-      "body": "Twice a month training together in Herten, the rest online. You get the corrections that only happen in person, with the flexibility of remote coaching.",
-      "tags": ["2× a month in person", "Herten", "Online in between"]
-    },
-    "personal": {
-      "title": "One-to-one",
-      "body": "Training together every week. The fastest route if you're starting from zero, working around an injury, or you simply want eyes on every rep.",
-      "tags": ["Weekly in person", "60 minutes", "Herten"]
-    },
-    "cta": "See pricing"
-  },
-
-  "pricing": {
-    "eyebrow": "Pricing",
-    "headline": "What it costs, published on the site.",
-    "intro": "No intro call required just to hear a number. All prices include VAT, per month, cancel monthly.",
-    "perMonth": "per month",
-    "vatIncluded": "incl. {rate}% VAT",
+    "headline": "What you get, per programme.",
+    "intro": "No lengthy comparison needed. Below you'll see at a glance what each programme includes — we'll cover the rate together during your free intro call.",
     "mostChosen": "Most chosen",
     "cta": "Book an intro call",
     "withdrawal": "{days}-day statutory cooling-off period",
     "withdrawalNote": "You have {days} days to withdraw after the agreement is concluded. Cancel within that period and you pay only pro rata for what you've used.",
-    "notSure": "Not sure which programme fits? Book a free intro call and I'll tell you honestly — including if I'm not the right fit for you."
+    "notSure": "Not sure which programme fits? Book a free intro call and I'll tell you honestly — including if I'm not the right fit for you.",
+    "online": {
+      "title": "Online",
+      "tags": ["Remote", "Weekly check-in", "Cancel monthly"]
+    },
+    "hybrid": {
+      "title": "Hybrid",
+      "tags": ["2× a month in person", "Herten", "Online in between"]
+    },
+    "personal": {
+      "title": "One-to-one",
+      "tags": ["Weekly in person", "60 minutes", "Herten"]
+    }
   },
 
   "reviews": {
@@ -125,7 +115,7 @@
     "items": {
       "gym": {
         "q": "Do I need a gym membership?",
-        "a": "No. I write programmes for both home and gym. Many online clients train at home with a set of dumbbells and a resistance band. If you do have a membership, we'll use it."
+        "a": "Depending on your goals, a gym membership is not always necessary. It can definitely help accelerate progress and give you access to more equipment, but many results can also be achieved with smart home workouts or bodyweight training. We'll tailor the approach to what works best for you."
       },
       "firstWeek": {
         "q": "What happens in the first week?",
@@ -137,7 +127,7 @@
       },
       "time": {
         "q": "How much time does it take per week?",
-        "a": "Roughly three to four hours. Three 45-minute sessions, five to ten minutes a day for your food log, and fifteen minutes for the weekly check-in."
+        "a": "This depends on your specific goals. If your main focus is losing weight, a few minutes a day can already make a meaningful difference. If building muscle is also part of the plan, expect training sessions of roughly 30–60 minutes. We'll design a schedule that fits realistically into your life."
       },
       "travel": {
         "q": "Does this work if I travel a lot?",
@@ -146,10 +136,6 @@
       "notSure": {
         "q": "What if I'm still unsure?",
         "a": "Book an intro call and decide afterwards. It's free and there's no obligation. If I'm not the right person for you, I'll say so — and point you somewhere better."
-      },
-      "cancel": {
-        "q": "Can I stop partway through?",
-        "a": "Yes. You have a {days}-day statutory cooling-off period after the agreement is concluded, and after that it's cancellable monthly. No annual contract."
       }
     }
   },

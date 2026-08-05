@@ -41,7 +41,7 @@ export default async function Image({
             fontSize: 26,
             letterSpacing: 4,
             textTransform: "uppercase",
-            color: "#C1A879",
+            color: "#B08D5C",
             fontWeight: 700,
           }}
         >
@@ -63,7 +63,7 @@ export default async function Image({
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div style={{ display: "flex", width: 64, height: 6, background: "#C1A879" }} />
+          <div style={{ display: "flex", width: 64, height: 6, background: "#B08D5C" }} />
           <div style={{ display: "flex", fontSize: 30, color: "#A3A3A8" }}>
             KrachtigFit — Herten
           </div>

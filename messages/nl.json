@@ -9,14 +9,16 @@
     "openMenu": "Menu openen",
     "closeMenu": "Menu sluiten",
     "switchLanguage": "Taal wisselen",
-    "currentLanguage": "Huidige taal"
+    "currentLanguage": "Huidige taal",
+    "switchTheme": "Thema wisselen",
+    "lightMode": "Lichte modus",
+    "darkMode": "Donkere modus"
   },
 
   "nav": {
     "about": "Over mij",
     "method": "Aanpak",
     "programs": "Programma's",
-    "pricing": "Tarieven",
     "faq": "Vragen",
     "cta": "Gratis kennismaking"
   },
@@ -68,37 +70,25 @@
 
   "programs": {
     "eyebrow": "Programma's",
-    "headline": "Drie manieren om samen te werken.",
-    "intro": "Alle drie draaien op dezelfde aanpak. Het verschil zit in hoeveel je me in levenden lijve ziet.",
-    "online": {
-      "title": "Online",
-      "body": "Volledig op afstand. Een trainingsschema op maat, feedback op je voedingslog en elke week een videogesprek. Werkt overal, ook als je veel reist.",
-      "tags": ["Op afstand", "Wekelijkse check-in", "Maandelijks opzegbaar"]
-    },
-    "hybrid": {
-      "title": "Hybride",
-      "body": "Twee keer per maand samen trainen in Herten, de rest online. Je krijgt de correcties die alleen in persoon kunnen, met de flexibiliteit van online begeleiding.",
-      "tags": ["2× per maand live", "Herten", "Online tussendoor"]
-    },
-    "personal": {
-      "title": "1-op-1",
-      "body": "Wekelijks samen trainen. De snelste route als je van nul begint, met een blessure werkt of gewoon wilt dat iemand meekijkt bij elke herhaling.",
-      "tags": ["Wekelijks live", "60 minuten", "Herten"]
-    },
-    "cta": "Bekijk tarieven"
-  },
-
-  "pricing": {
-    "eyebrow": "Tarieven",
-    "headline": "Wat het kost, gewoon op de site.",
-    "intro": "Geen intakegesprek nodig om te horen wat iets kost. Alle bedragen zijn inclusief btw, per maand, maandelijks opzegbaar.",
-    "perMonth": "per maand",
-    "vatIncluded": "incl. {rate}% btw",
+    "headline": "Wat je krijgt, per programma.",
+    "intro": "Geen lange vergelijking nodig. Hieronder zie je in één oogopslag wat elk programma inhoudt — het tarief bespreken we samen tijdens de gratis kennismaking.",
     "mostChosen": "Meest gekozen",
     "cta": "Plan een kennismaking",
     "withdrawal": "{days} dagen wettelijke bedenktijd",
     "withdrawalNote": "Je hebt na het sluiten van de overeenkomst {days} dagen bedenktijd. Zeg je binnen die periode op, dan betaal je alleen naar rato voor wat je al hebt afgenomen.",
-    "notSure": "Weet je niet welk programma past? Plan een gratis kennismaking — dan zeg ik het je eerlijk, ook als dat betekent dat je bij mij niet op je plek bent."
+    "notSure": "Weet je niet welk programma past? Plan een gratis kennismaking — dan zeg ik het je eerlijk, ook als dat betekent dat je bij mij niet op je plek bent.",
+    "online": {
+      "title": "Online",
+      "tags": ["Op afstand", "Wekelijkse check-in", "Maandelijks opzegbaar"]
+    },
+    "hybrid": {
+      "title": "Hybride",
+      "tags": ["2× per maand live", "Herten", "Online tussendoor"]
+    },
+    "personal": {
+      "title": "1-op-1",
+      "tags": ["Wekelijks live", "60 minuten", "Herten"]
+    }
   },
 
   "reviews": {
@@ -125,7 +115,7 @@
     "items": {
       "gym": {
         "q": "Heb ik een sportschoolabonnement nodig?",
-        "a": "Nee. Ik schrijf programma's voor zowel thuis als de sportschool. Veel online klanten trainen thuis met een set dumbbells en een weerstandsband. Heb je wel een abonnement, dan gebruiken we dat."
+        "a": "Dat hangt af van je doel. Een sportschoolabonnement kan zeker helpen — het versnelt je vooruitgang en geeft toegang tot meer materiaal — maar veel resultaat is ook te behalen met slimme thuisworkouts of training met je eigen lichaamsgewicht. We stemmen de aanpak af op wat voor jou het beste werkt."
       },
       "firstWeek": {
         "q": "Wat gebeurt er in de eerste week?",
@@ -137,7 +127,7 @@
       },
       "time": {
         "q": "Hoeveel tijd kost het per week?",
-        "a": "Ongeveer drie tot vier uur. Drie trainingen van 45 minuten, vijf tot tien minuten per dag voor je voedingslog, en een kwartier voor de wekelijkse check-in."
+        "a": "Dat hangt af van je specifieke doel. Ligt de nadruk op afvallen, dan maakt een paar minuten per dag al een merkbaar verschil. Wil je ook spiermassa opbouwen, reken dan op trainingen van ongeveer 30 tot 60 minuten. We stellen een schema op dat realistisch in je leven past."
       },
       "travel": {
         "q": "Werkt dit als ik veel reis?",
@@ -146,10 +136,6 @@
       "notSure": {
         "q": "Wat als ik nog twijfel?",
         "a": "Dan plan je een kennismaking en beslis je daarna. Die is gratis en vrijblijvend. Blijkt dat ik niet de juiste persoon voor je ben, dan zeg ik dat — en wijs ik je door."
-      },
-      "cancel": {
-        "q": "Kan ik tussentijds stoppen?",
-        "a": "Ja. Je hebt {days} dagen wettelijke bedenktijd na het sluiten van de overeenkomst, en daarna is het maandelijks opzegbaar. Geen jaarcontract."
       }
     }
   },

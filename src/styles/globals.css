@@ -16,31 +16,82 @@
 @theme {
   /* --- Canvas ------------------------------------------------------------
      The high-contrast device is full-bleed blocks alternating ink/paper.
-     Elevation on ink is carried by surface lightness, never by shadow. */
+     Elevation on ink is carried by surface lightness, never by shadow.
+
+     --color-ink is a fixed near-black SWATCH, not "the ink canvas colour" —
+     it's reused wherever something needs to read as dark regardless of
+     canvas or theme (primary-button text on a gold fill, the "most chosen"
+     badge, ::selection). --color-canvas-ink is the separate, theme-aware
+     token that the ink canvas's own background actually uses. Collapsing
+     these into one variable was tried first and rejected: overriding
+     --color-ink for light mode would have also lightened button text sitting
+     on the still-gold accent fill, breaking that pairing's contrast. */
   --color-ink: #0b0b0c;
+  --color-canvas-ink: #0b0b0c; /* dark theme: same as --color-ink */
   --color-surface-1: #131315;
   --color-surface-2: #1c1c1f;
   --color-surface-3: #26262a;
 
-  --color-paper: #f7e7ce; /* champagne, not pure #fff */
+  --color-paper: #f7e7ce; /* champagne. Still used by Instagram only — Method
+     and Programs moved to their own canvases below so the two sections either
+     side of Reviews stop sharing a colour with it (see --color-linen and
+     --color-gold). */
   --color-paper-2: #edddc3;
 
+  /* --- Method's canvas -----------------------------------------------------
+     Off-white, not gold-tinted — the deliberate "neutral" half of the
+     Method/Programs pair below. Same value the site's paper canvas used
+     before champagne existed, reused here for the same reason it worked the
+     first time: verified 17.59:1 / 8.38:1 / 5.74:1 against the standard
+     on-paper text tokens, which is why Method keeps reading text-on-paper-*
+     directly rather than getting its own on-linen-* set — the numbers are
+     already better than paper's own. */
+  --color-linen: #f4f2ed;
+  --color-linen-2: #eae7e0;
+
+  /* --- Programs' canvas ------------------------------------------------
+     The "rich" half of the pair — a genuinely gold, not pastel, surface.
+     Sampled the same way as --color-accent below: pixel-averaged from the
+     KF logo, this time from its lightest band specifically, because holding
+     the SAME luminance as champagne (so on-paper-2/3 would just work
+     unmodified) turned out to wash the saturation out almost entirely — see
+     the RGB-spread comparison in the commit that introduced this. Landing
+     one step darker than paper keeps it visibly gold instead of pastel, at
+     the cost of needing its own on-gold-3 (below) since on-paper-3 no
+     longer clears 5:1 against it. */
+  --color-gold: #e8cc96;
+  --color-gold-2: #dec38f;
+
   /* --- Accent ------------------------------------------------------------
-     Metallic gold, sampled directly from the client's logo (the KF monogram
-     and wordmark) rather than picked by eye — pixel-averaged from the
-     gradient's midtone and shadow bands.
+     Sampled directly from the actual logo file (KrachtigFit_logo_KF_...
+     .jpeg), not picked by eye: every pixel across the KF monogram and the
+     wordmark was read, filtered down to the ones that are plausibly gold
+     (warm hue, not blown-out highlight, not a shadow crevice near the
+     transparent background), and averaged — 20,168 pixels going into this
+     number. Press/hover is the same set's darker quartile, scaled to a
+     factor that keeps it readable against the fixed --color-ink button text
+     rather than using the rawest shadow pixels, which measured too dark for
+     that pairing.
 
-     Measured: 8.57:1 as text/fill on ink, comfortably AAA. Press/hover uses
-     the logo's darker bronze band, which is still 4.72:1 — a real, usable
-     darker state, not just a CSS filter.
+     Measured: 6.38:1 as text/fill on ink. Press/hover is 4.77:1 against
+     --color-ink button text — just under this file's usual 5:1 floor, same
+     as the previous accent's press state was, and accepted for the same
+     reason: real and usable for a state that only ever shows on :hover.
 
-     HARD CONSTRAINT, same as before: only 1.89:1 against paper (champagne
-     sits closer to the accent's own gold than the old off-white did). Never
-     use as text or as a meaningful border on the light canvas — on paper it
-     appears only as a fill with ink text on top. Encoded in the button
-     variants, not left to judgement. */
-  --color-accent: #c1a879;
-  --color-accent-press: #9c7542;
+     HARD CONSTRAINT, same as before: only 2.54:1 against paper. Never use as
+     text or as a meaningful border on a light canvas — on paper, linen or
+     gold it appears only as a fill with ink text on top (or, on the Programs
+     canvas specifically, is skipped in favour of on-paper for icons — see
+     programs.tsx). Encoded in the button variants, not left to judgement.
+
+     --color-accent stays THIS value in every theme — it's the fixed brand
+     fill for buttons, badges and ::selection, always paired with the fixed
+     --color-ink text above, so that pairing must never move. Text that reads
+     directly off a canvas (eyebrows, stat numbers, the wordmark) uses the
+     separate --color-accent-fg token below instead, which IS theme-aware. */
+  --color-accent: #b08d5c;
+  --color-accent-press: #96784e;
+  --color-accent-fg: #b08d5c; /* dark theme: same as --color-accent, 6.38:1 on canvas-ink */
 
   /* --- Text --------------------------------------------------------------
      Measured against their own canvas. No value below 5:1 ships. */
@@ -52,10 +103,15 @@
   --color-on-paper-2: #46464c; /*  7.71:1 */
   --color-on-paper-3: #5e5e66; /*  5.29:1 */
 
+  /* Programs' canvas reuses text-on-paper and text-on-paper-2 as-is (6.03:1
+     and 12.66:1 against --color-gold — both clear 5:1 with margin to spare)
+     but needs this one bespoke tertiary tone: on-paper-3 only measures
+     4.13:1 there, just under the floor. Warmer than a neutral grey on
+     purpose, to sit on a warm gold field rather than reading muddy. */
+  --color-on-gold-3: #504a3f; /* 5.65:1 on --color-gold, 5.14:1 on --color-gold-2 */
+
   --color-border-ink: rgb(244 242 237 / 0.14);
   --color-border-paper: rgb(11 11 12 / 0.14);
-
-  --color-focus: #c1a879;
 
   /* --- Type --------------------------------------------------------------
      One variable superfamily. Archivo carries both a weight and a width axis,
@@ -128,6 +184,53 @@
 }
 
 /* ==========================================================================
+   Theme: light
+
+   Dark is the brand default and is untouched by this block — every value
+   above still applies until this attribute is present. Toggled by
+   SiteHeader's ThemeToggle, persisted to localStorage, bootstrapped by an
+   inline script in the root layout so it lands before first paint.
+
+   This does NOT invert ink and paper (swap which hex each resolves to).
+   That would just relabel which sections are dark, not remove dark from the
+   page — the alternation is roughly half the page by design, so an invert
+   would still read as a "dark site" with the bands shuffled. Instead
+   --color-canvas-ink itself becomes a light neutral distinct from paper's
+   champagne, so light mode reads as two light tones alternating — the same
+   rhythm, genuinely lightened — while paper is untouched (it was already
+   light, nothing to change).
+
+   --color-accent-fg gets a darker bronze rather than staying the brand gold:
+   gold-as-text needs a dark canvas to hit 5:1 (see the @theme comment above),
+   and in light mode the ink canvas no longer is one. #73512c was chosen
+   because it clears 5:1 against BOTH light surfaces at once — light
+   canvas-ink and paper — so every section that reads this token is correct
+   without needing to know which canvas it's on. It's a real sample too, not
+   a synthetic darken() of the accent: the same logo file's shadow band, just
+   a different lightness slice of it than the base --color-accent used.
+
+   --color-linen and --color-gold (Method's and Programs' canvases) are also
+   absent here on purpose — both stay constant across the theme toggle,
+   exactly like --color-paper does, since only the ink canvas and the accent
+   text pairing are theme-aware. --color-ink and --color-accent (the
+   button/badge/::selection pairing) are absent for the reason given in their
+   own @theme comments: they must stay constant across themes too. */
+:root[data-theme="light"] {
+  --color-canvas-ink: #faf9f6;
+  --color-surface-1: #f2f0ea;
+  --color-surface-2: #eae7df;
+  --color-surface-3: #e1ddd2;
+
+  --color-accent-fg: #73512c; /* 6.78:1 on canvas-ink, 5.87:1 on paper */
+
+  --color-on-ink: #0b0b0c; /* 18.69:1 */
+  --color-on-ink-2: #46464c; /*  8.90:1 */
+  --color-on-ink-3: #5e5e66; /*  6.10:1 */
+
+  --color-border-ink: rgb(11 11 12 / 0.14);
+}
+
+/* ==========================================================================
    Base
    ========================================================================== */
 
@@ -142,7 +245,7 @@
   }
 
   body {
-    background-color: var(--color-ink);
+    background-color: var(--color-canvas-ink);
     color: var(--color-on-ink);
     font-family: var(--font-sans);
     font-size: var(--text-body);
@@ -155,7 +258,7 @@
 
   /* Sections declare their canvas; text colours follow automatically. */
   [data-canvas="ink"] {
-    background-color: var(--color-ink);
+    background-color: var(--color-canvas-ink);
     color: var(--color-on-ink);
   }
 
@@ -170,12 +273,17 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-focus);
+    outline: 2px solid var(--color-accent-fg);
     outline-offset: 3px;
     border-radius: var(--radius-sm);
   }
 
-  /* Accent focus ring is invisible on paper (2.95:1). Swap to ink there. */
+  /* Accent-fg focus ring is invisible on paper (2.54:1 in dark theme; light
+     theme's accent-fg actually clears paper too, but this override is cheap
+     insurance that doesn't need to know which theme is active). Swap to
+     on-paper there. Method and Programs both keep data-canvas="paper" (only
+     their background-color is overridden — see method.tsx / programs.tsx),
+     so this selector already covers them too. */
   [data-canvas="paper"] :focus-visible {
     outline-color: var(--color-on-paper);
   }

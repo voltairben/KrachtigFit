@@ -13,7 +13,6 @@ const ITEMS = [
   "time",
   "travel",
   "notSure",
-  "cancel",
 ] as const;
 
 /**
@@ -29,9 +28,18 @@ const ITEMS = [
  * paper to stop two full-bleed black sections sitting back to back with only
  * a hairline border between them — Faq flips the opposite way so the
  * alternation continues correctly afterward: …Reviews ink → Instagram paper
- * → Faq ink → Footer. The Plus toggle icon keeps text-accent unchanged; on
- * ink that is 8.57:1, comfortably better than the 2.05:1 it measured on
- * paper.
+ * → Faq ink → Footer.
+ *
+ * The Plus toggle icon keeps the constant --color-accent (dark theme: 6.38:1
+ * on ink, comfortably better than the 2.54:1 it measured on paper; light
+ * theme: roughly that same shortfall against the now-light ink canvas).
+ * Left as the established "decorative icon" exception — aria-hidden, not
+ * read as text — the same one Method's step numbers rely on, rather than
+ * switching it to the theme-aware --color-accent-fg used for the readable
+ * eyebrow/heading text on this page. Programs' own Check/ShieldCheck icons
+ * used to be in this same category but no longer are — its background is
+ * now gold rather than paper, close enough to accent's own hue that the
+ * icons switched to text-on-paper instead (see programs.tsx).
  */
 export function Faq() {
   const t = useTranslations("faq");
@@ -62,7 +70,7 @@ export function Faq() {
                 name="faq"
                 className="group border-b border-border-ink"
               >
-                <summary className="flex w-full items-center justify-between gap-6 py-6 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                <summary className="flex w-full items-center justify-between gap-6 py-6 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-fg">
                   <h3 className="font-expanded text-body-lg font-bold text-balance">
                     {t(`items.${key}.q`)}
                   </h3>
@@ -72,9 +80,7 @@ export function Faq() {
                   />
                 </summary>
                 <p className="max-w-[62ch] pb-6 text-body text-on-ink-2">
-                  {t(`items.${key}.a`, {
-                    days: siteConfig.withdrawalPeriodDays,
-                  })}
+                  {t(`items.${key}.a`)}
                 </p>
               </details>
             ))}

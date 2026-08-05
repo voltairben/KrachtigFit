@@ -12,7 +12,7 @@ export default function NotFound() {
       className="flex min-h-[70svh] items-center py-32"
     >
       <Container>
-        <p className="eyebrow text-accent">404</p>
+        <p className="eyebrow text-accent-fg">404</p>
         <h1 className="font-expanded mt-6 max-w-[16ch] text-display-xl font-extrabold text-balance">
           {t("title")}
         </h1>

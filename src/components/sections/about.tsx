@@ -9,7 +9,7 @@ import { siteConfig } from "@/site.config";
 /**
  * The personal introduction, placed directly after the hero so it is still
  * the first thing a visitor scrolls into — Sander introducing himself before
- * anything else about the method or pricing.
+ * anything else about the method or the programs.
  *
  * Shares the hero's ink canvas rather than alternating, so the two read as
  * one opening block: value proposition, then the person behind it.
@@ -35,7 +35,7 @@ export function About() {
       <Container>
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="eyebrow text-accent">{t("eyebrow")}</p>
+            <p className="eyebrow text-accent-fg">{t("eyebrow")}</p>
             <h2
               id="about-heading"
               className="font-expanded mt-6 text-display-lg font-extrabold text-balance"

@@ -93,7 +93,16 @@ export default async function LocaleLayout({
   const jsonLd = buildBusinessJsonLd(locale);
 
   return (
-    <html lang={locale} className={archivo.variable}>
+    <html
+      lang={locale}
+      className={archivo.variable}
+      // The bootstrap script below sets data-theme on this element before
+      // hydration runs, which will never match the server-rendered markup
+      // (the server has no way to know the visitor's stored preference).
+      // That's expected, not a bug — suppress the one warning React would
+      // otherwise raise about it.
+      suppressHydrationWarning
+    >
       <head>
         {/*
           Reveal animations set `initial` opacity 0, which is serialised into
@@ -110,12 +119,32 @@ export default async function LocaleLayout({
             }}
           />
         </noscript>
+        {/*
+          Sets data-theme on <html> before first paint, so a returning
+          visitor with "light" saved never sees a flash of the dark default.
+          Synchronous and blocking on purpose — deferred or async would let
+          the browser paint the wrong theme first. Reads localStorage
+          directly rather than through next-intl/React state because this
+          runs before either exists; ThemeToggle reads the attribute this
+          script already applied instead of duplicating the decision.
+          No CSP is set on this app (see next.config.ts headers()), so an
+          inline script needs no nonce here.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('kf-theme');" +
+              "if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}" +
+              "document.documentElement.setAttribute('data-theme',t);" +
+              "}catch(e){}})();",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-ink text-on-ink antialiased">
+      <body className="bg-canvas-ink text-on-ink antialiased">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-accent focus:px-4 focus:py-3 focus:text-ink focus:font-semibold focus:uppercase focus:tracking-[0.08em] focus:rounded-sm"

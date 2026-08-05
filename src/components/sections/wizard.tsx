@@ -129,7 +129,7 @@ export function Wizard() {
       )}
 
       <div className="max-w-[52ch]">
-        <p className="eyebrow text-accent">{t("eyebrow")}</p>
+        <p className="eyebrow text-accent-fg">{t("eyebrow")}</p>
         <h1 className="font-expanded mt-6 text-display-lg font-extrabold text-balance">
           {t("headline")}
         </h1>
@@ -256,7 +256,7 @@ export function Wizard() {
           href={whatsappUrl(t("whatsappPrefill"))}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2 inline-flex items-center gap-2 text-body-sm font-semibold text-accent"
+          className="mt-2 inline-flex items-center gap-2 text-body-sm font-semibold text-accent-fg"
         >
           <MessageCircle className="size-4" aria-hidden="true" />
           {t("whatsappCta")}
@@ -302,7 +302,7 @@ function ChoiceStep({
               "transition-colors duration-[var(--duration-fast)]",
               "hover:border-accent/50",
               "has-[:checked]:border-accent has-[:checked]:bg-accent/10",
-              "has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent",
+              "has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent-fg",
             )}
           >
             <input
@@ -323,7 +323,7 @@ function ChoiceStep({
       </div>
 
       {error && (
-        <p role="alert" className="mt-4 text-body-sm text-accent">
+        <p role="alert" className="mt-4 text-body-sm text-accent-fg">
           {error}
         </p>
       )}
@@ -367,7 +367,7 @@ function DetailsStep({
             {...register("name")}
           />
           {errors.name && (
-            <p role="alert" className="mt-2 text-caption text-accent">
+            <p role="alert" className="mt-2 text-caption text-accent-fg">
               {t("error.required")}
             </p>
           )}
@@ -386,7 +386,7 @@ function DetailsStep({
             {...register("email")}
           />
           {errors.email && (
-            <p role="alert" className="mt-2 text-caption text-accent">
+            <p role="alert" className="mt-2 text-caption text-accent-fg">
               {t("error.email")}
             </p>
           )}
@@ -440,7 +440,7 @@ function DetailsStep({
           </span>
         </label>
         {errors.contactConsent && (
-          <p role="alert" className="text-caption text-accent">
+          <p role="alert" className="text-caption text-accent-fg">
             {t("error.consent")}
           </p>
         )}

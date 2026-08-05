@@ -40,13 +40,15 @@ import { siteConfig } from "@/site.config";
  * previously-adjacent, correctly-alternating sections always breaks the
  * chain on one side unless everything downstream shifts by one.
  *
- * Gold measures only 2.05:1 against paper — well short of 4.5:1 — so unlike
+ * Gold measures only 2.54:1 against paper — well short of 4.5:1 — so unlike
  * the ink version, the eyebrow and the "follow" link use on-paper tones
  * instead of the accent colour, matching how every other paper-canvas
  * section in this codebase already handles eyebrows and text links. Small
- * decorative icons (Check, ShieldCheck, Plus elsewhere) keep using accent on
- * paper as an established exception for non-text UI bits, but a label or a
- * link meant to be read is not that.
+ * decorative icons (Method's step numbers, Faq's Plus) keep using accent as
+ * an established exception for non-text UI bits, but a label or a link
+ * meant to be read is not that. (Programs' Check/ShieldCheck icons used to
+ * be in that same exception category too, but its canvas is gold now,
+ * close enough to accent's own hue that they switched to on-paper instead.)
  */
 export function InstagramSection() {
   const t = useTranslations("instagram");

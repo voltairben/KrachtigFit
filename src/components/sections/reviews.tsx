@@ -34,7 +34,7 @@ export function Reviews() {
     >
       <Container>
         <div className="max-w-[52ch]">
-          <p className="eyebrow text-accent">{t("eyebrow")}</p>
+          <p className="eyebrow text-accent-fg">{t("eyebrow")}</p>
           <h2
             id="reviews-heading"
             className="font-expanded mt-6 text-display-lg font-extrabold text-balance"
