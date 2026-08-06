@@ -80,6 +80,8 @@ export function Hero() {
           trigger="immediate"
           weight={800}
           lineHeight={0.92}
+          align="left"
+          textScale={0.085}
         />
 
         <Reveal immediate delay={0.35}>
