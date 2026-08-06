@@ -149,14 +149,17 @@ export function privacyPolicy(locale: Locale): LegalDoc {
 }
 
 /**
- * Terms are only partially drafted here on purpose.
+ * Pricing, payment terms and notice periods are deliberately not published
+ * here or anywhere on the site — Sander discusses and agrees these
+ * individually with each client during/after the free intro call, before any
+ * coaching agreement is made, and confirms them in writing at that point.
+ * This isn't a placeholder pending a future price ladder; it's the actual,
+ * confirmed model (reviewed 2026-08-06, see siteConfig.legalReviewedAt).
  *
- * Payment, duration and cancellation clauses depend on the price ladder and
- * the BTW rate per product line, both of which are still open. The withdrawal
- * right below is statutory and does not depend on those decisions, so it is
- * written out in full — including the fact that a 12-week programme is never
- * "fully performed" within 14 days, which is where this is most often got
- * wrong.
+ * The withdrawal right below is statutory and does not depend on pricing
+ * being public, so it is written out in full — including the fact that a
+ * multi-week programme is never "fully performed" within 14 days, which is
+ * where this is most often got wrong.
  */
 export function termsDoc(locale: Locale): LegalDoc {
   if (locale === "nl") {
@@ -189,7 +192,8 @@ export function termsDoc(locale: Locale): LegalDoc {
         {
           heading: "Tarieven, betaling en opzegging",
           body: [
-            "NOG VAST TE STELLEN — deze paragraaf hangt af van de definitieve tarieven en het btw-tarief per dienst, en moet samen met de rest van deze voorwaarden juridisch worden getoetst voordat de site live gaat.",
+            "Op deze website staan geen tarieven. Tijdens en na het gratis kennismakingsgesprek bespreek ik met jou welk tarief, welke betaalwijze en welke opzegtermijn op jouw traject van toepassing zijn.",
+            "Deze afspraken worden pas bindend zodra ze schriftelijk zijn bevestigd, bijvoorbeeld per e-mail, zodat voor ons beiden duidelijk is waar we het over eens zijn.",
           ],
         },
         {
@@ -232,7 +236,8 @@ export function termsDoc(locale: Locale): LegalDoc {
       {
         heading: "Pricing, payment and cancellation",
         body: [
-          "TO BE DETERMINED — this section depends on the final price ladder and the VAT rate per service, and must be legally reviewed together with the rest of these terms before the site goes live.",
+          "No prices are published on this website. During and after the free intro call, we discuss the rate, payment method and notice period that apply to your programme.",
+          "These terms only become binding once confirmed in writing, for example by email, so both of us are clear on what's been agreed.",
         ],
       },
       {

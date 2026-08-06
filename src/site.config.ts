@@ -137,8 +137,8 @@ export const siteConfig = {
   proof: {
     /** REAL — confirmed by Sander as the current client count. */
     clientsCoached: {
-      value: "400+",
-      evidence: "Confirmed by Sander Fermont, 2026-08-04.",
+      value: "500+",
+      evidence: "Confirmed by Sander Fermont, 2026-08-06.",
     } as Claim | { value: Todo; evidence: Todo },
     /** REAL — confirmed by Sander, 2026-08-05. */
     yearsExperience: {
@@ -211,8 +211,10 @@ export const siteConfig = {
    *
    * Set to a date only once that review has happened. Until then the
    * production build fails, exactly as it does for a missing KvK number.
+   *
+   * REAL — confirmed by Sander Fermont, 2026-08-06.
    */
-  legalReviewedAt: TODO,
+  legalReviewedAt: "2026-08-06",
 } as const;
 
 export type ProgramTier = (typeof siteConfig.programTiers)[number];
