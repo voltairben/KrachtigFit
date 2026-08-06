@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { Fragment } from "react";
 import { duration, easeOutExpo, viewportOnce } from "./tokens";
+import { useReducedMotion } from "./use-reduced-motion";
 
 /**
  * Word-by-word mask reveal for display headlines. The signature move of the
@@ -21,6 +22,11 @@ import { duration, easeOutExpo, viewportOnce } from "./tokens";
  * The obvious approach — aria-label on the wrapper — is invalid: aria-label
  * is prohibited on a <span> with no role, because a generic element has no
  * accessible name to override. Lighthouse flagged all six headings.
+ *
+ * useReducedMotion is imported from ./use-reduced-motion, not "motion/react"
+ * directly — the raw hook can resolve synchronously on the client while the
+ * server can't read it at all, which made the y-offset below disagree
+ * between server and first client render on every page. See that file.
  */
 
 type SplitTextProps = {

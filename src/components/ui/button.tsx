@@ -2,10 +2,11 @@
 
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { pressSpring } from "@/components/motion/tokens";
+import { useReducedMotion } from "@/components/motion/use-reduced-motion";
 
 /**
  * Two things the prototype's buttons got wrong, fixed here:
@@ -25,6 +26,14 @@ import { pressSpring } from "@/components/motion/tokens";
  *  2. Press feedback. The prototype had a hover lift and no :active state, so
  *     taps registered nothing at all — and the hover lift itself latched on
  *     touch devices, since there was no (hover: hover) guard.
+ *
+ * useReducedMotion is imported from @/components/motion/use-reduced-motion,
+ * not "motion/react" directly. The raw hook resolving differently between
+ * server and first client render was a real, confirmed, live hydration
+ * mismatch here specifically: toggling whileTap between undefined and a real
+ * object changes whether Framer Motion adds tabindex="0" to the rendered
+ * element, and every button on the site goes through this component. See
+ * that file for the fix.
  */
 const buttonVariants = cva(
   [

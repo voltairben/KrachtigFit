@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 import {
   duration,
@@ -8,12 +8,14 @@ import {
   revealOffset,
   viewportOnce,
 } from "./tokens";
+import { useReducedMotion } from "./use-reduced-motion";
 
 /**
  * Scroll reveal.
  *
- * Two failure modes are handled explicitly, because both were live in the
- * prototype's approach and both hide content outright:
+ * Three failure modes are handled explicitly, because all three were either
+ * live in the prototype's approach or found live in this one, and all three
+ * hide content outright or break the page for the affected visitor:
  *
  *  1. prefers-reduced-motion — the element still animates, but opacity only.
  *     It never simply stops animating, because a reveal that does not run is
@@ -23,6 +25,12 @@ import {
  *     opacity: 0, so without JS the content would never appear. The
  *     `data-reveal` attribute is the hook for the <noscript> override in
  *     src/app/[locale]/layout.tsx, which forces these back to visible.
+ *
+ *  3. Hydration mismatch — useReducedMotion() (imported from
+ *     ./use-reduced-motion, not "motion/react" directly) can resolve
+ *     synchronously on the client while the server can't read it at all,
+ *     which made `initial`'s y-offset disagree between server and first
+ *     client render on every page. See that file's comment for the fix.
  */
 
 type RevealProps = {

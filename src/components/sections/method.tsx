@@ -1,12 +1,13 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useRef } from "react";
 
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
+import { useReducedMotion } from "@/components/motion/use-reduced-motion";
 
 const PILLARS = ["training", "nutrition", "checkin"] as const;
 
@@ -69,6 +70,12 @@ export function Method() {
               </p>
             </Reveal>
 
+            {/*
+              useReducedMotion from @/components/motion/use-reduced-motion,
+              not "motion/react" directly: this div's presence depends on it
+              directly, which is exactly the shape of hydration mismatch that
+              hook exists to prevent — see its comment.
+            */}
             {!shouldReduceMotion && (
               <div
                 aria-hidden="true"

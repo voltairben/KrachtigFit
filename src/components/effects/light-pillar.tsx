@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState, type CSSProperties } from "react";
 import * as THREE from "three";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion } from "@/components/motion/use-reduced-motion";
 import "./light-pillar.css";
 
 /**
@@ -71,23 +71,14 @@ export function LightPillar({
   const timeRef = useRef(0);
   const rotationSpeedRef = useRef(rotationSpeed);
   const [webGLSupported, setWebGLSupported] = useState(true);
-  // useReducedMotion() can resolve synchronously on the client (matchMedia
-  // is available immediately), while the server has no way to read it and
-  // always renders the default. Branching the returned JSX directly on
-  // shouldReduceMotion made the very first client render disagree with the
-  // server-rendered HTML — a real hydration mismatch, caught by testing
-  // with prefers-reduced-motion emulated from a cold load, not by reasoning
-  // about the hook alone. `mounted` forces the first client render to match
-  // the server (mounted=false → same branch as SSR) and only allows the
-  // reduced-motion branch once a post-hydration effect confirms it — the
-  // same "mounted" gate used for exactly this reason wherever a component
-  // reads a client-only value, elsewhere in this codebase's ThemeToggle.
-  const [mounted, setMounted] = useState(false);
+  // Hydration-safe wrapper (@/components/motion/use-reduced-motion), not
+  // "motion/react" directly: the raw hook resolving differently between
+  // server and first client render was a real, confirmed hydration mismatch
+  // here, caught by testing with prefers-reduced-motion emulated from a cold
+  // load. This was originally a local `mounted` gate specific to this file;
+  // extracted to that shared hook once the same gap turned up in five other
+  // components that each read useReducedMotion() directly in render.
   const shouldReduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const canvas = document.createElement("canvas");
@@ -98,7 +89,7 @@ export function LightPillar({
   }, []);
 
   useEffect(() => {
-    if (!containerRef.current || !webGLSupported || (mounted && shouldReduceMotion)) return;
+    if (!containerRef.current || !webGLSupported || shouldReduceMotion) return;
 
     const container = containerRef.current;
     const width = container.clientWidth;
@@ -384,7 +375,7 @@ export function LightPillar({
       rafRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [webGLSupported, quality, mounted, shouldReduceMotion]);
+  }, [webGLSupported, quality, shouldReduceMotion]);
 
   useEffect(() => {
     rotationSpeedRef.current = rotationSpeed;
@@ -445,7 +436,7 @@ export function LightPillar({
     materialRef.current.uniforms.uPillarRotSin!.value = Math.sin(pillarRotRad);
   }, [pillarRotation]);
 
-  if (mounted && shouldReduceMotion) {
+  if (shouldReduceMotion) {
     return (
       <div
         aria-hidden="true"

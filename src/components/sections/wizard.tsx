@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import Script from "next/script";
 import { useState } from "react";
@@ -12,6 +12,7 @@ import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { duration, easeOutExpo } from "@/components/motion/tokens";
+import { useReducedMotion } from "@/components/motion/use-reduced-motion";
 import { submitContact } from "@/lib/actions/contact";
 import {
   AVAILABILITY,
