@@ -30,16 +30,13 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      {
-        // Self-hosted variable font: immutable, cache hard.
-        source: "/fonts/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
+      // No /fonts/:path* cache rule: Archivo is loaded via next/font/google,
+      // which self-hosts it through Next's own build pipeline (served from
+      // its optimized asset path, not a public/fonts/ directory this app
+      // never had) and already sets its own long-lived immutable cache
+      // headers on those files. A rule here matched nothing and cached
+      // nothing — removed rather than pointed at the real path, since
+      // next/font's own headers already do this correctly.
     ];
   },
 };

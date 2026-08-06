@@ -43,9 +43,7 @@
     "eyebrow": "In het kort",
     "clientsLabel": "klanten begeleid",
     "yearsLabel": "jaar ervaring",
-    "since": "sinds {year}",
-    "successLabel": "haalde het doel dat vooraf is vastgelegd",
-    "methodNote": "Meetmethode toegelicht bij de tarieven."
+    "successLabel": "haalde het doel dat vooraf is vastgelegd"
   },
 
   "method": {

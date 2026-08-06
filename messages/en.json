@@ -43,9 +43,7 @@
     "eyebrow": "In short",
     "clientsLabel": "clients coached",
     "yearsLabel": "years coaching",
-    "since": "since {year}",
-    "successLabel": "met the goal agreed at intake",
-    "methodNote": "Measurement method explained under pricing."
+    "successLabel": "met the goal agreed at intake"
   },
 
   "method": {
