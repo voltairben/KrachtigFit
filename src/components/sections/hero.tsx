@@ -4,14 +4,33 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
-import { SplitText } from "@/components/motion/split-text";
+import { MaskedHeading } from "@/components/effects/masked-heading";
 import { Link } from "@/i18n/routing";
 import { siteConfig, TODO } from "@/site.config";
 
 /**
- * Type is the primary visual. No photography exists yet, and the bold-graphic
- * direction was chosen precisely so the page does not depend on it — an
- * oversized headline and a hard rule system carry the composition instead.
+ * Type used to be the only visual here — no photography existed, and the
+ * bold-graphic direction was chosen precisely so the page didn't depend on
+ * it. That changed once real footage of the gym (Dumbbell_rack.mp4,
+ * Putkamp 4) became available: the headline now renders as MaskedHeading
+ * (components/effects/masked-heading.tsx), which clips that footage into
+ * the letterforms instead of a flat colour. The rest of the hero — eyebrow,
+ * subhead, CTAs — is still type-only.
+ *
+ * `trigger="immediate"` rather than the component's own "view" default:
+ * this section is always above the fold, and the rest of the hero
+ * deliberately never waits on an IntersectionObserver for that reason (see
+ * the note on Reveal below) — no upside to doing it differently just for
+ * the headline, and it removes a failure mode where the hero's biggest
+ * element renders blank until a callback fires.
+ *
+ * `max-w-[18ch]` is gone from the heading on purpose, not an oversight:
+ * MaskedHeading sizes its own font from the element's rendered width
+ * (`clientWidth * textScale`), so a `ch`-based max-width would make that
+ * width depend on the font-size the component is about to calculate FROM
+ * that same width — a circular layout that visibly jumps on first paint.
+ * Letting it size against the Container's fixed width avoids that; line
+ * wrapping is handled by the component's own fit-to-width behaviour instead.
  *
  * `min-h-[100svh]` rather than `100vh`: the prototype used `100vh`, which on
  * mobile Safari is measured against the viewport WITHOUT the address bar, so
@@ -41,20 +60,26 @@ export function Hero() {
           <p className="eyebrow text-accent-fg">{t("eyebrow")}</p>
         </Reveal>
 
-        <h1
+        {/*
+          Sentence case, not uppercase, in the translated copy itself — the
+          prototype set text-transform: uppercase on every heading level, so
+          its h1 was a 79-character all-caps sentence, measurably slower to
+          read and worse again for dyslexic and low-vision readers.
+        */}
+        <MaskedHeading
+          tag="h1"
           id="hero-heading"
-          className="font-expanded mt-6 max-w-[18ch] text-display-2xl font-extrabold text-balance"
-        >
-          {/*
-            Sentence case, not uppercase. The prototype set text-transform:
-            uppercase on every heading level, so its h1 was a 79-character
-            all-caps sentence — measurably slower to read, and worse again
-            for dyslexic and low-vision readers.
-          */}
-          <SplitText immediate delay={0.1}>
-            {t("headline")}
-          </SplitText>
-        </h1>
+          className="mt-6 font-expanded"
+          text={t("headline")}
+          mediaType="video"
+          src="/videos/dumbbell-rack.mp4"
+          fillScale={1.3}
+          parallax={34}
+          reveal="wipe"
+          trigger="immediate"
+          weight={800}
+          lineHeight={0.92}
+        />
 
         <Reveal immediate delay={0.35}>
           <p className="mt-8 max-w-[52ch] text-body-lg text-on-ink-2">
