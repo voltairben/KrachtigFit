@@ -10,17 +10,11 @@ import { siteConfig } from "@/site.config";
 import { cn } from "@/lib/utils";
 
 /**
- * No monetary amounts render here — see siteConfig.pricing / EXAMPLE_FIELDS
- * for why: the three price points are still prototype placeholders, not
- * Sander's real numbers. Every other launch blocker in that file states a
- * fact that's merely missing; a wrong price is worse than a missing one, so
- * this section ships as plan name + features + terms until real figures land.
- *
- * `siteConfig.pricing` (the data array) and `PricingTier` keep their own
- * names — they genuinely hold price data, just data this component doesn't
- * render yet. `priceInclVat` and `.vat` stay defined there and are simply
- * not read here — restoring the price line is then a one-line change in
- * this file, not a data-modelling change.
+ * No monetary amounts render here — by Sander's decision, not a placeholder
+ * waiting on real numbers. See siteConfig.programTiers: there is no price or
+ * VAT rate anywhere in that data at all anymore, so there's nothing here to
+ * accidentally wire up later. This section ships as plan name + features +
+ * terms, full stop.
  *
  * Named Programs rather than Pricing for the same reason: without a number
  * on the page, "Programs" is what the section actually is — plan names,
@@ -65,7 +59,7 @@ export function Programs() {
         </div>
 
         <RevealGroup className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {siteConfig.pricing.map((tier) => {
+          {siteConfig.programTiers.map((tier) => {
             const tags = t.raw(`${tier.id}.tags`) as string[];
 
             return (

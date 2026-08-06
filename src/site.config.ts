@@ -28,9 +28,7 @@ type Todo = typeof TODO;
  *
  * Delete an entry in the same commit that replaces its value.
  */
-export const EXAMPLE_FIELDS = [
-  "pricing (all three tiers)",
-] as const;
+export const EXAMPLE_FIELDS = [] as const;
 
 /**
  * A published factual claim. `evidence` is required by the type, and is never
@@ -43,8 +41,6 @@ type Claim = {
   /** What substantiates it: cohort, metric, window, source. */
   evidence: string;
 };
-
-type VatRate = 9 | 21 | Todo;
 
 export const siteConfig = {
   name: "KrachtigFit",
@@ -161,57 +157,25 @@ export const siteConfig = {
   },
 
   /**
-   * Consumer prices must display INCLUSIVE of BTW (ACM). The rate is therefore
-   * baked into the visible number and must be confirmed per product line before
-   * the pricing grid is designed.
+   * No pricing anywhere on the site, by Sander's decision — not "not yet",
+   * not "pending real numbers": he doesn't want a rate quoted or implied on
+   * the page at all. The rate is discussed on the free intro call instead.
    *
-   * 9%  — "gelegenheid geven tot sportbeoefening": instruction bundled with an
-   *       accommodation you provide.
-   * 21% — coaching not combined with providing an accommodation: online
-   *       coaching, and training at the client's home or outdoors.
+   * That also retires the BTW-rate question this used to carry (9% vs 21%
+   * "gelegenheid geven tot sportbeoefening" turning on who supplies the
+   * training accommodation) — it only mattered because a VAT-inclusive
+   * number would have been displayed. Nothing here is priced, so nothing
+   * here needs a rate.
    *
-   * These three products plausibly straddle both rates. Confirm with an
-   * accountant; it is an ~11pp margin swing on a price the customer sees.
+   * `featured` still drives the "most chosen" card emphasis through
+   * elevation and border, never through transform: scale(). The prototype
+   * scaled its featured card by 1.03, which resampled the text and rendered
+   * its 1px border at 1.03px.
    */
-  /**
-   * 21% on all three lines, per Sander.
-   *
-   * ⚠ WORTH RE-CHECKING WITH THE ACCOUNTANT. This was set before it was known
-   * that the in-person training happens at a gym (Putkamp 4), which makes the
-   * reduced rate a live question rather than an academic one.
-   *
-   * The 9% rate covers "gelegenheid geven tot sportbeoefening" — providing the
-   * opportunity to exercise, which turns on who supplies the accommodation:
-   *
-   *   - Client trains on their own gym membership and Sander only instructs
-   *     → 21%, coaching alone.
-   *   - Access to the facility forms part of what Sander sells
-   *     → arguably 9% on that portion.
-   *
-   * Online coaching is 21% either way. The difference on the in-person tiers
-   * is roughly 10 points of margin on a price the customer sees, since
-   * consumer prices display incl. BTW — so it is worth one question rather
-   * than an assumption.
-   */
-  vat: {
-    online: 21 as VatRate,
-    hybrid: 21 as VatRate,
-    personal: 21 as VatRate,
-  },
-
-  /**
-   * EXAMPLE PRICES, carried over from the prototype. Every figure is stated
-   * INCLUSIVE of BTW because that is what consumer pricing requires — the
-   * displayed number already contains the rate above.
-   *
-   * `featured` drives emphasis through elevation and border, never through
-   * transform: scale(). The prototype scaled its featured card by 1.03, which
-   * resampled the text and rendered its 1px border at 1.03px.
-   */
-  pricing: [
-    { id: "online", priceInclVat: 149, vat: 21, featured: false },
-    { id: "hybrid", priceInclVat: 299, vat: 21, featured: true },
-    { id: "personal", priceInclVat: 499, vat: 21, featured: false },
+  programTiers: [
+    { id: "online", featured: false },
+    { id: "hybrid", featured: true },
+    { id: "personal", featured: false },
   ] as const,
 
   /**
@@ -251,7 +215,7 @@ export const siteConfig = {
   legalReviewedAt: TODO,
 } as const;
 
-export type PricingTier = (typeof siteConfig.pricing)[number];
+export type ProgramTier = (typeof siteConfig.programTiers)[number];
 
 /* -------------------------------------------------------------------------- */
 
