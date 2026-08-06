@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { ArrowRight, Check, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
@@ -102,20 +102,12 @@ export function Programs() {
                     ))}
                   </ul>
 
-                  <p className="mt-8 flex items-center gap-2 border-t border-border-ink pt-6 text-caption text-on-ink-3">
-                    <ShieldCheck
-                      className="size-4 shrink-0 text-accent"
-                      aria-hidden="true"
-                    />
-                    {t("withdrawal", { days: siteConfig.withdrawalPeriodDays })}
-                  </p>
-
                   <Button
                     asChild
                     size="lg"
                     full
                     variant={tier.featured ? "primary" : "secondary"}
-                    className="mt-6"
+                    className="mt-8"
                   >
                     <Link href="/kennismaking">
                       {t("cta")}
