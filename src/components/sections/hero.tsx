@@ -73,6 +73,7 @@ export function Hero() {
           text={t("headline")}
           mediaType="video"
           src="/videos/dumbbell-rack.mp4"
+          poster="/videos/dumbbell-rack-poster.jpg"
           fillScale={1.3}
           parallax={34}
           reveal="wipe"
