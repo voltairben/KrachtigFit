@@ -1,10 +1,24 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Link } from "@/i18n/routing";
 
-export default function NotFound() {
-  const t = useTranslations("notFound");
+/**
+ * Server Component, not client: this used to import `useTranslations` from
+ * "next-intl" (the client hook) with no "use client" directive — a Server
+ * Component silently calling a client-only hook. That alone didn't explain
+ * why the branded page never appeared (see the catch-all route two
+ * directories up for the actual reason genuinely unmatched URLs never
+ * reached this file at all), but it needed fixing regardless: even once
+ * reachable, it would have failed to render. `getTranslations` (no explicit
+ * locale) reads the current request's locale from context the way
+ * [locale]/layout.tsx already established it — not-found.tsx boundaries
+ * don't reliably receive a `params` prop the way an ordinary page.tsx does,
+ * so this can't take the same `{ params }: { params: Promise<...> } `
+ * signature every other page in this app uses.
+ */
+export default async function NotFound() {
+  const t = await getTranslations("notFound");
 
   return (
     <section
