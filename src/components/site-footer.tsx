@@ -51,19 +51,28 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <a href="#method" className="hover:text-accent-fg">
+                <Link
+                  href={{ pathname: "/", hash: "method" }}
+                  className="hover:text-accent-fg"
+                >
                   {tNav("method")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#programs" className="hover:text-accent-fg">
+                <Link
+                  href={{ pathname: "/", hash: "programs" }}
+                  className="hover:text-accent-fg"
+                >
                   {tNav("programs")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#faq" className="hover:text-accent-fg">
+                <Link
+                  href={{ pathname: "/", hash: "faq" }}
+                  className="hover:text-accent-fg"
+                >
                   {tNav("faq")}
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

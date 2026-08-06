@@ -78,13 +78,13 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           className="hidden items-center gap-8 lg:flex"
         >
           {SECTIONS.map((s) => (
-            <a
+            <Link
               key={s.id}
-              href={`#${s.id}`}
+              href={{ pathname: "/", hash: s.id }}
               className="text-body-sm text-on-ink-2 transition-colors hover:text-on-ink"
             >
               {t(s.key)}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -136,12 +136,12 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                     // Closing on activation is the whole point — an anchor
                     // that scrolls behind an open panel is useless.
                     <Dialog.Close asChild key={s.id}>
-                      <a
-                        href={`#${s.id}`}
+                      <Link
+                        href={{ pathname: "/", hash: s.id }}
                         className="border-b border-border-ink py-4 font-expanded text-display-md font-extrabold"
                       >
                         {t(s.key)}
-                      </a>
+                      </Link>
                     </Dialog.Close>
                   ))}
                 </nav>
