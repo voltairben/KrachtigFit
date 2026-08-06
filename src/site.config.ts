@@ -29,7 +29,6 @@ type Todo = typeof TODO;
  * Delete an entry in the same commit that replaces its value.
  */
 export const EXAMPLE_FIELDS = [
-  "legal.btwId",
   "pricing (all three tiers)",
 ] as const;
 
@@ -84,14 +83,8 @@ export const siteConfig = {
   legal: {
     /** REAL — verified Chamber of Commerce registration number. */
     kvk: "84937343" as string,
-    /**
-     * EXAMPLE — still required by art. 3:15d BW.
-     *
-     * Cannot be derived from the KvK number. Since 2020 a Dutch sole trader's
-     * BTW-ID is randomly assigned, not built from the BSN, so it has to come
-     * off the Belastingdienst letter. Format: NL + 9 digits + B + 2 digits.
-     */
-    btwId: "NL000000000B00" as string,
+    /** REAL — verified BTW-ID, confirmed by Sander, 2026-08-06. */
+    btwId: "NL004036732B59" as string,
     /** REAL — registered establishment address. */
     address: {
       street: "Putkamp 4" as string,
