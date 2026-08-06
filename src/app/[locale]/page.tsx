@@ -17,17 +17,21 @@ import { Faq } from "@/components/sections/faq";
  *
  * About sits directly after Hero, sharing its ink canvas, so the personal
  * introduction is still the first thing a visitor scrolls into — before
- * canvases start alternating for the rest of the page, which is the
- * high-contrast device carrying the art direction.
+ * canvases strictly alternate ink/paper/ink/paper for the rest of the page,
+ * which is the high-contrast device carrying the art direction: Method
+ * paper, Programs ink, Reviews paper, Instagram ink, Faq paper, Footer ink.
  *
- * Method and Programs (renamed from Pricing) sit adjacent here and were both
- * "paper" at one point — the same "two same-canvas sections in a row" defect
- * the Instagram/Reviews fix (commit a01a800) addressed elsewhere on this
- * page. Resolved without touching Reviews/Instagram/Faq: rather than the
- * binary ink/paper swap those two sections use, Method and Programs each got
- * their own distinct background token (--color-linen, --color-gold — see
- * globals.css) layered on top of the same paper canvas, so this file's
- * section order and every other section's colour stayed untouched.
+ * That alternation broke twice in this file's history and got fixed two
+ * different ways. First: Instagram/Reviews landed on the same canvas after
+ * an edit, fixed by flipping every section from Instagram onward by one
+ * step (commit a01a800). Second: deleting the old Programs section left
+ * Method and the renamed Pricing→Programs both on paper, "fixed" by giving
+ * each its own bespoke background colour instead of touching the
+ * alternation — which worked, but turned one two-colour system into four
+ * close-but-different tones for no real reason. That detour is reverted:
+ * every section here just declares data-canvas="ink" or "paper" again, no
+ * per-section background override, and the assignments above are what
+ * actually keeps neighbours distinct.
  */
 export default async function HomePage({
   params,

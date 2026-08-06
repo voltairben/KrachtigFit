@@ -30,16 +30,15 @@ import { cn } from "@/lib/utils";
  * Programs section — one namespace, no more splitting one section's content
  * across "pricing" and "programs" keys.
  *
- * data-canvas="paper" is kept for its default text colour (on-paper /
- * on-paper-2 read correctly against the background below without needing
- * their own variants), but the background itself is overridden to
- * --color-gold via bg-gold rather than inheriting paper's champagne — see
- * that token's comment in globals.css for why this section and Method no
- * longer share a canvas colour. Icons that were text-accent on the old
- * paper background switch to text-on-paper here: this section's own
- * background is now close enough to the accent gold itself that an
- * accent-coloured checkmark would wash out against it (measured ~2:1,
- * barely readable as a shape) — dark ink reads cleanly on gold instead.
+ * data-canvas="ink", not paper: the page strictly alternates ink/paper
+ * section by section (Hero+About ink, Method paper, Programs ink, Reviews
+ * paper, Instagram ink, Faq paper, Footer ink) rather than any section
+ * getting a background of its own — a brief detour tried a dedicated gold
+ * canvas for this section specifically, reverted for fragmenting one
+ * two-colour system into several close-but-different golds. Card surfaces
+ * and icon colours below are the same ones every other ink-canvas section
+ * (Hero, About, Wizard) already uses — accent is safe as both an icon
+ * colour and a border here, unlike on paper (see globals.css).
  */
 export function Programs() {
   const t = useTranslations("programs");
@@ -47,13 +46,13 @@ export function Programs() {
   return (
     <section
       id="programs"
-      data-canvas="paper"
+      data-canvas="ink"
       aria-labelledby="programs-heading"
-      className="bg-gold py-24 lg:py-32"
+      className="py-24 lg:py-32"
     >
       <Container>
         <div className="max-w-[52ch]">
-          <p className="eyebrow text-on-gold-3">{t("eyebrow")}</p>
+          <p className="eyebrow text-accent-fg">{t("eyebrow")}</p>
           <h2
             id="programs-heading"
             className="font-expanded mt-6 text-display-lg font-extrabold text-balance"
@@ -61,7 +60,7 @@ export function Programs() {
             <SplitText>{t("headline")}</SplitText>
           </h2>
           <Reveal delay={0.2}>
-            <p className="mt-6 text-body-lg text-on-paper-2">{t("intro")}</p>
+            <p className="mt-6 text-body-lg text-on-ink-2">{t("intro")}</p>
           </Reveal>
         </div>
 
@@ -77,17 +76,9 @@ export function Programs() {
                     // Emphasis comes from surface and border weight. The
                     // prototype scaled the featured card 1.03x, which
                     // resampled its text and its 1px border alike.
-                    //
-                    // border-on-paper here, not border-accent: on the paper
-                    // canvas border-accent worked because accent stood out
-                    // against pale champagne. Against this section's own
-                    // gold background the two are close enough in hue
-                    // (measured ~1.8:1) that an accent border on a gold card
-                    // nearly disappears — dark ink reads as a clean frame
-                    // instead (~11.5:1).
                     tier.featured
-                      ? "border-2 border-on-paper bg-gold-2"
-                      : "border-border-paper bg-gold",
+                      ? "border-2 border-accent bg-surface-2"
+                      : "border-border-ink bg-surface-1",
                   )}
                 >
                   {tier.featured && (
@@ -104,13 +95,12 @@ export function Programs() {
                     {tags.map((tag) => (
                       <li
                         key={tag}
-                        className="flex items-start gap-3 text-body-sm text-on-paper-2"
+                        className="flex items-start gap-3 text-body-sm text-on-ink-2"
                       >
                         {/* Icon plus text — never colour alone, which is how
-                            the prototype signalled inclusion. text-on-paper,
-                            not text-accent: see the docblock above. */}
+                            the prototype signalled inclusion. */}
                         <Check
-                          className="mt-0.5 size-4 shrink-0 text-on-paper"
+                          className="mt-0.5 size-4 shrink-0 text-accent"
                           aria-hidden="true"
                         />
                         {tag}
@@ -118,9 +108,9 @@ export function Programs() {
                     ))}
                   </ul>
 
-                  <p className="mt-8 flex items-center gap-2 border-t border-border-paper pt-6 text-caption text-on-gold-3">
+                  <p className="mt-8 flex items-center gap-2 border-t border-border-ink pt-6 text-caption text-on-ink-3">
                     <ShieldCheck
-                      className="size-4 shrink-0 text-on-paper"
+                      className="size-4 shrink-0 text-accent"
                       aria-hidden="true"
                     />
                     {t("withdrawal", { days: siteConfig.withdrawalPeriodDays })}
@@ -146,8 +136,8 @@ export function Programs() {
 
         <Reveal delay={0.2}>
           <div className="mt-12 max-w-[64ch] space-y-4">
-            <p className="text-body text-on-paper-2">{t("notSure")}</p>
-            <p className="text-caption text-on-gold-3">
+            <p className="text-body text-on-ink-2">{t("notSure")}</p>
+            <p className="text-caption text-on-ink-3">
               {t("withdrawalNote", { days: siteConfig.withdrawalPeriodDays })}
             </p>
           </div>

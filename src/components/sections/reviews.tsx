@@ -20,6 +20,13 @@ import { siteConfig } from "@/site.config";
  * until either a Google Business Profile URL is set (verified reviews, linked
  * to source) or real consented testimonials are added. There is no code path
  * that renders a testimonial this file invented.
+ *
+ * data-canvas="paper": second stop in the page's ink/paper/ink/paper
+ * alternation (…Method paper, Programs ink, Reviews paper, Instagram ink…).
+ * The ExternalLink icon and the empty-state rule use text-on-paper /
+ * border-on-paper rather than accent — accent measures only 1.23:1 against
+ * this section's gold background, effectively invisible rather than merely
+ * low-contrast, so it's skipped here the same way Method and Faq skip it.
  */
 export function Reviews() {
   const t = useTranslations("reviews");
@@ -28,13 +35,13 @@ export function Reviews() {
   return (
     <section
       id="reviews"
-      data-canvas="ink"
+      data-canvas="paper"
       aria-labelledby="reviews-heading"
       className="py-24 lg:py-32"
     >
       <Container>
         <div className="max-w-[52ch]">
-          <p className="eyebrow text-accent-fg">{t("eyebrow")}</p>
+          <p className="eyebrow text-on-paper-3">{t("eyebrow")}</p>
           <h2
             id="reviews-heading"
             className="font-expanded mt-6 text-display-lg font-extrabold text-balance"
@@ -49,14 +56,14 @@ export function Reviews() {
               href={gbp}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-12 inline-flex items-center gap-2 border border-border-ink px-6 py-4 text-body-sm transition-colors hover:border-accent/50"
+              className="mt-12 inline-flex items-center gap-2 border border-border-paper px-6 py-4 text-body-sm transition-colors hover:border-on-paper/50"
             >
-              <span className="text-on-ink-2">{t("verifiedLabel")}</span>
+              <span className="text-on-paper-2">{t("verifiedLabel")}</span>
               <span className="font-semibold">{t("viewOnGoogle")}</span>
-              <ExternalLink className="size-4 text-accent" aria-hidden="true" />
+              <ExternalLink className="size-4 text-on-paper" aria-hidden="true" />
             </a>
           ) : (
-            <p className="mt-12 max-w-[56ch] border-l-2 border-accent pl-6 text-body-lg text-on-ink-2">
+            <p className="mt-12 max-w-[56ch] border-l-2 border-on-paper pl-6 text-body-lg text-on-paper-2">
               {t("empty")}
             </p>
           )}

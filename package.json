@@ -32,6 +32,7 @@
     "resend": "^4.0.0",
     "sonner": "^1.7.0",
     "tailwind-merge": "^2.6.0",
+    "three": "^0.180.0",
     "vaul": "^1.1.2",
     "zod": "^3.25.0"
   },
@@ -40,6 +41,7 @@
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.185.4",
     "eslint": "^9.17.0",
     "eslint-config-next": "^15.5.0",
     "puppeteer-core": "^25.4.0",

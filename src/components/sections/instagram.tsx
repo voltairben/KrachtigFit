@@ -30,25 +30,15 @@ import { siteConfig } from "@/site.config";
  * URL is set. Here, the "real thing" exists already, it's just deferred to
  * an explicit action instead of automatic load.
  *
- * Paper canvas, not ink. This section originally shared the ink canvas with
- * Reviews above it (divided by a border, same technique as the Hero/About
- * pairing) — but that put two full-bleed black sections back to back with
- * only a hairline border between them, which reads as one large slab rather
- * than the alternating rhythm the rest of the page uses. Paper here restores
- * the alternation (…Reviews ink → Instagram paper → Faq…), which is why Faq
- * flips to ink in this same change: inserting one new section between two
- * previously-adjacent, correctly-alternating sections always breaks the
- * chain on one side unless everything downstream shifts by one.
- *
- * Gold measures only 2.54:1 against paper — well short of 4.5:1 — so unlike
- * the ink version, the eyebrow and the "follow" link use on-paper tones
- * instead of the accent colour, matching how every other paper-canvas
- * section in this codebase already handles eyebrows and text links. Small
- * decorative icons (Method's step numbers, Faq's Plus) keep using accent as
- * an established exception for non-text UI bits, but a label or a link
- * meant to be read is not that. (Programs' Check/ShieldCheck icons used to
- * be in that same exception category too, but its canvas is gold now,
- * close enough to accent's own hue that they switched to on-paper instead.)
+ * Ink canvas: third stop in the page's ink/paper/ink/paper alternation
+ * (…Programs ink, Reviews paper, Instagram ink, Faq paper…). This section
+ * has flipped canvas twice now, for two different reasons — first from ink
+ * to paper to avoid sitting back-to-back with a same-canvas Reviews, then
+ * back to ink once the page's whole cascade was fixed properly instead of
+ * one section at a time. Whichever canvas it lands on, the eyebrow and the
+ * "follow" link read the colour that canvas makes safe: text-accent-fg here
+ * (6.38:1 on ink), text-on-paper-* when it was paper (accent only cleared
+ * 2.54:1 there, and considerably less against the current gold).
  */
 export function InstagramSection() {
   const t = useTranslations("instagram");
@@ -57,14 +47,14 @@ export function InstagramSection() {
   return (
     <section
       id="instagram"
-      data-canvas="paper"
+      data-canvas="ink"
       aria-labelledby="instagram-heading"
       className="py-24 lg:py-32"
     >
       <Container>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-[52ch]">
-            <p className="eyebrow text-on-paper-3">{t("eyebrow")}</p>
+            <p className="eyebrow text-accent-fg">{t("eyebrow")}</p>
             <h2
               id="instagram-heading"
               className="font-expanded mt-6 text-display-lg font-extrabold text-balance"
@@ -72,7 +62,7 @@ export function InstagramSection() {
               <SplitText>{t("headline")}</SplitText>
             </h2>
             <Reveal delay={0.2}>
-              <p className="mt-6 text-body-lg text-on-paper-2">
+              <p className="mt-6 text-body-lg text-on-ink-2">
                 {t("intro")}
               </p>
             </Reveal>
@@ -83,7 +73,7 @@ export function InstagramSection() {
               href={siteConfig.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center gap-2 text-body-sm font-semibold text-on-paper underline underline-offset-4"
+              className="inline-flex shrink-0 items-center gap-2 text-body-sm font-semibold text-accent-fg underline underline-offset-4"
             >
               <InstagramIcon className="size-4" aria-hidden="true" />
               {t("follow")}
@@ -102,16 +92,16 @@ export function InstagramSection() {
                 <div className="commonninja_component pid-33c34ac7-190e-49ed-9161-1c347e8227bd" />
               </>
             ) : (
-              <div className="flex min-h-[280px] flex-col items-center justify-center gap-4 border border-border-paper bg-paper-2 p-10 text-center">
+              <div className="flex min-h-[280px] flex-col items-center justify-center gap-4 border border-border-ink bg-surface-1 p-10 text-center">
                 <InstagramIcon
-                  className="size-8 text-on-paper-3"
+                  className="size-8 text-on-ink-3"
                   aria-hidden="true"
                   strokeWidth={1.5}
                 />
                 <Button onClick={() => setLoaded(true)} variant="secondary">
                   {t("loadCta")}
                 </Button>
-                <p className="max-w-[40ch] text-caption text-on-paper-3">
+                <p className="max-w-[40ch] text-caption text-on-ink-3">
                   {t("loadNote")}
                 </p>
               </div>

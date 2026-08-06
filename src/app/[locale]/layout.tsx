@@ -10,6 +10,7 @@ import { buildAlternates, buildBusinessJsonLd } from "@/lib/seo";
 import { siteConfig, isPlaceholderBuild } from "@/site.config";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { LightPillar } from "@/components/effects/light-pillar";
 import "@/styles/globals.css";
 
 /**
@@ -145,6 +146,118 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="bg-canvas-ink text-on-ink antialiased">
+        {/*
+          Sitewide ambient layer, not a per-section decoration: fixed to the
+          viewport so it's present behind every page as you scroll, rather
+          than sized to page height or scoped to one section. One
+          LightPillar instance, not several — a three-column version (one
+          instance per column, side by side) was tried to reach the page's
+          left and right edges, and rejected: each instance is its own
+          bounded WebGL canvas with a hard edge, so three of them tiled
+          next to each other always shows as three separate panels with
+          visible seams, never as one continuous piece, no matter how the
+          colours or edges are tuned. It also tripled the WebGL cost for
+          that non-fix. One instance, made wide, and animated to travel the
+          full width over time instead, is what actually reads as one
+          fluid piece — see the animate-[pillar-drift_…] class below.
+
+          Three real bugs/lessons from getting here, worth keeping so they
+          aren't repeated:
+
+          1. mixBlendMode does not reliably composite with a WebGL <canvas>
+             child — tested in both software- and hardware-accelerated
+             rendering. It silently fell back to opaque "normal", and
+             because the shader always writes alpha 1.0 (every pixel fully
+             opaque, "black" included — see light-pillar.tsx), that hid the
+             entire page behind it. Caught by screenshotting the Hero, not
+             by reasoning about the CSS spec. Plain CSS opacity on the
+             wrapper is what actually makes it translucent; mixBlendMode is
+             left at the harmless default "normal" rather than removed, in
+             case a future browser closes this gap.
+          2. useReducedMotion() can resolve synchronously on the client
+             while the server can't read it at all — branching the
+             component's returned JSX directly on it caused a real
+             hydration mismatch. Fixed in light-pillar.tsx with a
+             post-mount `mounted` gate, not fixed here, but worth knowing
+             this layer's reduced-motion path was hydration-tested.
+          3. A brighter, wider, faster, and (once drift shipped) actually
+             moving effect can sweep a bright patch over text that was
+             never near it before — caught on the Faq heading ("meestal"
+             read as barely-there) by watching a full drift cycle, not
+             from one screenshot. A static contrast check at a single
+             frame doesn't stand in for the whole animation; the numbers
+             below carry more headroom than whatever looked fine in one
+             frame.
+
+          topColor #f4f2ed (not a gold tone) is the exact value of
+          --color-on-ink, reused rather than a fresh white picked by eye —
+          needed specifically because the pillar's original gold top colour
+          was nearly identical to this site's paper-canvas gold, giving
+          almost no colour distinction on those sections. bottomColor stays
+          the brand's own bronze (--color-accent-press), so it reads as
+          "warm light fading to gold," not a plain white-to-gold gradient.
+
+          pillarWidth is wide (5.5) so the glow has real breadth at any
+          single instant, not just over the course of the drift.
+          rotationSpeed and noiseIntensity keep the shader's own internal
+          warp clearly visible within a few seconds rather than over tens
+          of seconds. quality="low" and opacity/glowAmount stay
+          conservative for the same reason as always: this never unmounts,
+          running continuously behind every page rather than being
+          scroll-triggered and finite like Reveal/SplitText, or scoped to
+          one element like Method's progress line. pointer-events-none +
+          aria-hidden + interactive=false: purely decorative, must never
+          intercept a click, be announced, or react to the cursor.
+
+          animate-[pillar-drift_…]: defined once as @keyframes
+          pillar-drift in globals.css, a slow translateX so the instance's
+          core actually crosses from left third to right third and back
+          over the cycle — genuine horizontal movement across the page,
+          which rotationSpeed alone can't produce, that parameter only
+          animates the shader's internal warp in place. No JS
+          reduced-motion check needed here: the blanket @media
+          (prefers-reduced-motion: reduce) rule in globals.css already
+          neutralises any CSS animation-duration sitewide, this one
+          included.
+
+          w-[200vw] left-[-50vw] on the animated div, not w-full: the first
+          version sized this element to exactly the viewport and then
+          translated it, which works for the CONTENT but not for the
+          element's own edge — at the extremes of the drift, that edge
+          swings into the visible viewport and shows up as a hard vertical
+          line where the canvas's rendered pixels simply stop. Overshooting
+          the element to twice the viewport width and centring it at rest
+          (left: -50vw) means even at the full ±32vw of travel the drift
+          keyframe uses, both edges stay off-screen the entire time — see
+          the arithmetic in pillar-drift's own comment in globals.css.
+          overflow-hidden on the fixed wrapper is a second line of defence
+          against the same problem, not the fix itself. This doubles the
+          pixel count the shader renders (200vw × viewport height instead
+          of 100vw × height) — quality="low" already renders at half pixel
+          ratio, which is doing more work now than it was before.
+        */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-10 overflow-hidden opacity-[0.28]"
+        >
+          <div className="relative left-[-50vw] h-full w-[200vw] animate-[pillar-drift_40s_ease-in-out_infinite]">
+            <LightPillar
+              topColor="#f4f2ed"
+              bottomColor="#96784e"
+              intensity={0.85}
+              rotationSpeed={0.45}
+              glowAmount={0.0075}
+              pillarWidth={5.5}
+              pillarHeight={0.5}
+              noiseIntensity={0.4}
+              pillarRotation={0}
+              interactive={false}
+              mixBlendMode="normal"
+              quality="low"
+            />
+          </div>
+        </div>
+
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-accent focus:px-4 focus:py-3 focus:text-ink focus:font-semibold focus:uppercase focus:tracking-[0.08em] focus:rounded-sm"

@@ -18,14 +18,17 @@ const PILLARS = ["training", "nutrition", "checkin"] as const;
  * triggers a re-render. This section is the main INP risk on the page and the
  * budget is 200ms at p75.
  *
- * data-canvas="paper" is kept for its default text colour (on-paper /
- * on-paper-2 / on-paper-3 all read correctly against the background below,
- * with more margin than they had against champagne), but the background
- * itself is overridden to --color-linen via bg-linen: Method sits directly
- * above Programs, which moved to a genuinely gold canvas, and the two can no
- * longer share paper's champagne without blending into one block. Linen is
- * the deliberately neutral half of that pair — see the token's comment in
- * globals.css.
+ * data-canvas="paper" — plain, no background override. paper IS gold now
+ * (--color-paper: #c19f64, see globals.css), so Method just takes it as-is;
+ * the page's ink/paper/ink/paper alternation handles keeping it visually
+ * distinct from its neighbours rather than this section needing its own
+ * background.
+ *
+ * The "01/02/03" step numbers use text-on-paper, not text-accent: accent
+ * measures only 1.23:1 against this gold, too close in lightness to read as
+ * a distinct number rather than a smudge. Every other paper-canvas section
+ * on this page (Reviews, Faq) makes the same substitution for the same
+ * reason — see their docblocks.
  */
 export function Method() {
   const t = useTranslations("method");
@@ -47,7 +50,7 @@ export function Method() {
       id="method"
       data-canvas="paper"
       aria-labelledby="method-heading"
-      className="bg-linen py-24 lg:py-32"
+      className="py-24 lg:py-32"
     >
       <Container>
         <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
@@ -85,12 +88,12 @@ export function Method() {
               // Reveal sits INSIDE the <li>, not around it. Wrapping the item
               // put a <div> directly inside the <ol>, which breaks list
               // semantics — a screen reader stops reporting "list, 3 items".
-              <li key={key} className="bg-linen py-10 lg:py-14">
+              <li key={key} className="bg-paper py-10 lg:py-14">
                 <Reveal delay={i * 0.08}>
                   <div className="flex items-start gap-6">
                     <span
                       aria-hidden="true"
-                      className="font-expanded tabular text-display-md font-extrabold text-accent"
+                      className="font-expanded tabular text-display-md font-extrabold text-on-paper"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>

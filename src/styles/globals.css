@@ -32,35 +32,18 @@
   --color-surface-2: #1c1c1f;
   --color-surface-3: #26262a;
 
-  --color-paper: #f7e7ce; /* champagne. Still used by Instagram only — Method
-     and Programs moved to their own canvases below so the two sections either
-     side of Reviews stop sharing a colour with it (see --color-linen and
-     --color-gold). */
-  --color-paper-2: #edddc3;
-
-  /* --- Method's canvas -----------------------------------------------------
-     Off-white, not gold-tinted — the deliberate "neutral" half of the
-     Method/Programs pair below. Same value the site's paper canvas used
-     before champagne existed, reused here for the same reason it worked the
-     first time: verified 17.59:1 / 8.38:1 / 5.74:1 against the standard
-     on-paper text tokens, which is why Method keeps reading text-on-paper-*
-     directly rather than getting its own on-linen-* set — the numbers are
-     already better than paper's own. */
-  --color-linen: #f4f2ed;
-  --color-linen-2: #eae7e0;
-
-  /* --- Programs' canvas ------------------------------------------------
-     The "rich" half of the pair — a genuinely gold, not pastel, surface.
-     Sampled the same way as --color-accent below: pixel-averaged from the
-     KF logo, this time from its lightest band specifically, because holding
-     the SAME luminance as champagne (so on-paper-2/3 would just work
-     unmodified) turned out to wash the saturation out almost entirely — see
-     the RGB-spread comparison in the commit that introduced this. Landing
-     one step darker than paper keeps it visibly gold instead of pastel, at
-     the cost of needing its own on-gold-3 (below) since on-paper-3 no
-     longer clears 5:1 against it. */
-  --color-gold: #e8cc96;
-  --color-gold-2: #dec38f;
+  /* Every section on the page is either ink or paper — no third background.
+     paper is gold, not champagne or off-white: #c19f64, specified directly
+     (not sampled or derived) rather than reusing --color-accent, because
+     accent and paper serve different jobs that happen to both be "gold" —
+     accent is a small, saturated UI fill (buttons, badges); paper is a
+     full-bleed reading background that needs to hold large blocks of body
+     text. A brief detour tried giving Method and Programs their own third
+     and fourth background tokens instead of fixing the alternation itself;
+     reverted — it fragmented one two-colour system into four close-but-
+     different golds/off-whites for no real gain, when the actual ask was
+     simpler: every section strictly alternates ink, paper, ink, paper. */
+  --color-paper: #c19f64;
 
   /* --- Accent ------------------------------------------------------------
      Sampled directly from the actual logo file (KrachtigFit_logo_KF_...
@@ -78,11 +61,15 @@
      as the previous accent's press state was, and accepted for the same
      reason: real and usable for a state that only ever shows on :hover.
 
-     HARD CONSTRAINT, same as before: only 2.54:1 against paper. Never use as
-     text or as a meaningful border on a light canvas — on paper, linen or
-     gold it appears only as a fill with ink text on top (or, on the Programs
-     canvas specifically, is skipped in favour of on-paper for icons — see
-     programs.tsx). Encoded in the button variants, not left to judgement.
+     HARD CONSTRAINT: only 1.23:1 against the new paper gold — close enough
+     in lightness that accent nearly disappears against it, well past "low
+     contrast" into "not visibly there." Never use as text OR as a decorative
+     icon on paper: the established "decorative icons get a pass on strict
+     contrast" exception (Method's numerals, Faq's Plus) stops applying at
+     this ratio and those icons use on-paper (dark ink) instead. On paper,
+     accent appears only as a fill with ink text on top — the featured-card
+     border and "most chosen" badge. Encoded in the button variants and each
+     paper-canvas section, not left to judgement.
 
      --color-accent stays THIS value in every theme — it's the fixed brand
      fill for buttons, badges and ::selection, always paired with the fixed
@@ -99,16 +86,13 @@
   --color-on-ink-2: #a3a3a8; /*  7.83:1 */
   --color-on-ink-3: #82828a; /*  5.16:1 */
 
-  --color-on-paper: #0b0b0c; /* 16.19:1 */
-  --color-on-paper-2: #46464c; /*  7.71:1 */
-  --color-on-paper-3: #5e5e66; /*  5.29:1 */
-
-  /* Programs' canvas reuses text-on-paper and text-on-paper-2 as-is (6.03:1
-     and 12.66:1 against --color-gold — both clear 5:1 with margin to spare)
-     but needs this one bespoke tertiary tone: on-paper-3 only measures
-     4.13:1 there, just under the floor. Warmer than a neutral grey on
-     purpose, to sit on a warm gold field rather than reading muddy. */
-  --color-on-gold-3: #504a3f; /* 5.65:1 on --color-gold, 5.14:1 on --color-gold-2 */
+  /* Recalculated for the new, considerably darker paper (#c19f64, luminance
+     0.37 vs champagne's 0.81) — the old on-paper-2/3 values measured 3.75:1
+     and 2.57:1 against it, both failures. on-paper itself (dark ink) still
+     clears easily either way, unchanged. */
+  --color-on-paper: #0b0b0c; /* 7.88:1 */
+  --color-on-paper-2: #2b2620; /* 6.00:1 */
+  --color-on-paper-3: #37302a; /* 5.20:1 */
 
   --color-border-ink: rgb(244 242 237 / 0.14);
   --color-border-paper: rgb(11 11 12 / 0.14);
@@ -195,26 +179,28 @@
    That would just relabel which sections are dark, not remove dark from the
    page — the alternation is roughly half the page by design, so an invert
    would still read as a "dark site" with the bands shuffled. Instead
-   --color-canvas-ink itself becomes a light neutral distinct from paper's
-   champagne, so light mode reads as two light tones alternating — the same
-   rhythm, genuinely lightened — while paper is untouched (it was already
-   light, nothing to change).
+   --color-canvas-ink itself becomes a light neutral, so light mode reads as
+   ink-canvas sections turning light while paper's gold stays exactly as it
+   is — paper was never meant to represent "dark" or "light" in the theme
+   sense, it's the brand's second colour, constant either way.
 
    --color-accent-fg gets a darker bronze rather than staying the brand gold:
    gold-as-text needs a dark canvas to hit 5:1 (see the @theme comment above),
-   and in light mode the ink canvas no longer is one. #73512c was chosen
-   because it clears 5:1 against BOTH light surfaces at once — light
-   canvas-ink and paper — so every section that reads this token is correct
-   without needing to know which canvas it's on. It's a real sample too, not
-   a synthetic darken() of the accent: the same logo file's shadow band, just
-   a different lightness slice of it than the base --color-accent used.
+   and in light mode the ink canvas no longer is one. #73512c clears 5:1
+   against light canvas-ink (6.78:1). It does NOT clear paper's gold
+   (2.86:1) — unlike before this token was picked, paper is no longer pale
+   enough for that to be free, but it doesn't need to be: accent-fg is only
+   ever read as text on the ink canvas by design (see programs.tsx, faq.tsx
+   etc. for why paper-canvas sections use on-paper-2/3 instead), and the
+   [data-canvas="paper"] :focus-visible override just below exists
+   specifically so this token's focus-ring use never depends on it either.
+   It's a real sample, not a synthetic darken() of the accent: the same logo
+   file's shadow band, a different lightness slice than --color-accent used.
 
-   --color-linen and --color-gold (Method's and Programs' canvases) are also
-   absent here on purpose — both stay constant across the theme toggle,
-   exactly like --color-paper does, since only the ink canvas and the accent
-   text pairing are theme-aware. --color-ink and --color-accent (the
-   button/badge/::selection pairing) are absent for the reason given in their
-   own @theme comments: they must stay constant across themes too. */
+   --color-ink and --color-accent (the button/badge/::selection pairing) are
+   absent from this block for the reason given in their own @theme comments:
+   they must stay constant across themes. --color-paper is absent for the
+   same reason — always the brand gold, regardless of theme. */
 :root[data-theme="light"] {
   --color-canvas-ink: #faf9f6;
   --color-surface-1: #f2f0ea;
@@ -278,12 +264,10 @@
     border-radius: var(--radius-sm);
   }
 
-  /* Accent-fg focus ring is invisible on paper (2.54:1 in dark theme; light
-     theme's accent-fg actually clears paper too, but this override is cheap
-     insurance that doesn't need to know which theme is active). Swap to
-     on-paper there. Method and Programs both keep data-canvas="paper" (only
-     their background-color is overridden — see method.tsx / programs.tsx),
-     so this selector already covers them too. */
+  /* Accent-fg focus ring is invisible on paper in either theme now (1.23:1
+     dark, 2.86:1 light) — paper's new gold is too close to accent-fg's own
+     lightness in both cases. Swap to on-paper there, which is what every
+     paper-canvas section's other text already reads. */
   [data-canvas="paper"] :focus-visible {
     outline-color: var(--color-on-paper);
   }
@@ -404,5 +388,43 @@ details > summary::-webkit-details-marker {
 @media (hover: none) {
   [data-hover-lift] {
     transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Ambient background drift
+
+   Slow horizontal wander for the single LightPillar instance in the root
+   layout, so it actually crosses the page over time instead of sitting in
+   one place. vw units, not %: percentages here would resolve against the
+   animated element's OWN width, and that element is deliberately sized to
+   2x the viewport (w-[200vw] in layout.tsx) so its edges stay off-screen
+   through the full sweep — a %-based translateX would need recalculating
+   every time that element's width changes, where an absolute vw value
+   doesn't. ±32vw is the actual distance the pillar's visible core travels
+   in the viewport; it was chosen (not the element's full off-screen
+   travel range) as wide enough that the core visibly reaches the left and
+   right thirds of the page over the cycle, without either edge of the
+   oversized element ever entering the viewport — see the arithmetic this
+   depends on in layout.tsx's usage comment. Lives here rather than in
+   light-pillar.css because it's a page-layout concern (where the instance
+   sits, not how the component itself renders).
+
+   No JS reduced-motion check needed: the blanket rule in the "Motion
+   preferences" block above already forces animation-duration to 0.01ms for
+   every element when prefers-reduced-motion is set, this animation
+   included. That's also why this can live in a plain server component
+   (LocaleLayout) that has no way to call useReducedMotion() itself.
+   ========================================================================== */
+
+@keyframes pillar-drift {
+  0% {
+    transform: translateX(-32vw);
+  }
+  50% {
+    transform: translateX(32vw);
+  }
+  100% {
+    transform: translateX(-32vw);
   }
 }
