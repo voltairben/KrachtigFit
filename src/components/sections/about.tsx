@@ -4,7 +4,7 @@ import { Video } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
-import { siteConfig } from "@/site.config";
+import { siteConfig, TODO } from "@/site.config";
 
 /**
  * The personal introduction, placed directly after the hero so it is still
@@ -23,7 +23,13 @@ import { siteConfig } from "@/site.config";
  */
 export function About() {
   const t = useTranslations("about");
+  const tp = useTranslations("proof");
   const videoUrl = siteConfig.trainer.introVideoUrl;
+
+  const clients = siteConfig.proof.clientsCoached;
+  const years = siteConfig.proof.yearsExperience;
+  const hasClientProof = clients.value !== TODO;
+  const hasYearsProof = years.value !== TODO;
 
   return (
     <section
@@ -47,6 +53,40 @@ export function About() {
                 {t("intro")}
               </p>
             </Reveal>
+
+            {/*
+              Moved here from Hero (was directly under the headline) so the
+              numbers back up Sander's own introduction instead of sitting
+              adjacent to the value-prop headline. Renders only the stats
+              that have a substantiated figure in site.config.ts — same
+              rule as before, just relocated.
+            */}
+            {(hasClientProof || hasYearsProof) && (
+              <Reveal delay={0.3}>
+                <div className="mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-4 border-t border-border-ink pt-6">
+                  {hasClientProof && (
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-expanded tabular text-display-md font-extrabold text-accent-fg">
+                        {clients.value}
+                      </span>
+                      <span className="text-body-sm text-on-ink-2">
+                        {tp("clientsLabel")}
+                      </span>
+                    </div>
+                  )}
+                  {hasYearsProof && (
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-expanded tabular text-display-md font-extrabold text-accent-fg">
+                        {years.value}
+                      </span>
+                      <span className="text-body-sm text-on-ink-2">
+                        {tp("yearsLabel")}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </Reveal>
+            )}
           </div>
 
           <Reveal delay={0.3} className="lg:col-span-7">

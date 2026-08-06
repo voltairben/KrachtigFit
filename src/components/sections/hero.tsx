@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
 import { MaskedHeading } from "@/components/effects/masked-heading";
 import { Link } from "@/i18n/routing";
-import { siteConfig, TODO } from "@/site.config";
 
 /**
  * Type used to be the only visual here — no photography existed, and the
@@ -42,6 +41,19 @@ import { siteConfig, TODO } from "@/site.config";
  * render visibly flat-cut instead of tapering into the glyph the way the
  * video does everywhere else.
  *
+ * `marginTop: "0.5em"` is inline for the same reason, not `mt-*`: every
+ * other section uses a fixed `mt-6` (24px) between its eyebrow and heading,
+ * which reads fine against `text-display-lg` (32–56px). This heading isn't
+ * on that scale — MaskedHeading sets its own font-size from the element's
+ * rendered width (`clientWidth * textScale`, see `sync()` in
+ * masked-heading.tsx), clamped 20–200px, and on real viewports lands well
+ * above display-lg's ceiling. A flat 24px next to that reads as barely any
+ * gap at all, which is what "too close to the headline" was — the eyebrow
+ * and heading were never given mismatched spacing on purpose, the fixed
+ * value just stopped scaling once one side of it got this large. `em`
+ * ties the gap back to whatever size the heading actually renders at, at
+ * roughly the same eyebrow-to-heading ratio the rest of the site reads at.
+ *
  * A Tailwind utility class (`pb-[0.25em]`) was tried first and silently
  * did nothing: Tailwind v4 wraps every utility in `@layer utilities`
  * (confirmed in the compiled output — `.pb-\[0\.25em\]` sits inside
@@ -67,10 +79,6 @@ import { siteConfig, TODO } from "@/site.config";
  */
 export function Hero() {
   const t = useTranslations("hero");
-  const tp = useTranslations("proof");
-
-  const clients = siteConfig.proof.clientsCoached;
-  const hasClientProof = clients.value !== TODO;
 
   return (
     <section
@@ -98,8 +106,8 @@ export function Hero() {
         <MaskedHeading
           tag="h1"
           id="hero-heading"
-          className="mt-6 font-expanded"
-          style={{ paddingBottom: "0.25em" }}
+          className="font-expanded"
+          style={{ marginTop: "0.5em", paddingBottom: "0.25em" }}
           text={t("headline")}
           mediaType="video"
           src="/videos/dumbbell-rack.mp4"
@@ -135,27 +143,6 @@ export function Hero() {
           <p className="mt-4 text-caption text-on-ink-3">{t("note")}</p>
         </Reveal>
       </Container>
-
-      {/*
-        Proof adjacent to the headline, visible without scrolling — the pattern
-        every high-converting reference in this category uses. Renders only if
-        a substantiated figure exists in site.config.ts; there is no code path
-        that prints an unevidenced number.
-      */}
-      {hasClientProof && (
-        <Container>
-          <Reveal immediate delay={0.6}>
-            <div className="mt-16 flex items-baseline gap-4 border-t border-border-ink pt-6">
-              <span className="font-expanded tabular text-display-md font-extrabold text-accent-fg">
-                {clients.value}
-              </span>
-              <span className="text-body-sm text-on-ink-2">
-                {tp("clientsLabel")}
-              </span>
-            </div>
-          </Reveal>
-        </Container>
-      )}
     </section>
   );
 }
