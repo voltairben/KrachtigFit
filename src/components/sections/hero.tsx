@@ -32,17 +32,34 @@ import { siteConfig, TODO } from "@/site.config";
  * Letting it size against the Container's fixed width avoids that; line
  * wrapping is handled by the component's own fit-to-width behaviour instead.
  *
- * `pb-[0.25em]` on the heading is load-bearing, not decorative spacing:
- * MaskedHeading's video layer is sized to exactly match the heading's own
- * box (height driven by `lineHeight={0.92}`, tight on purpose to match this
- * site's display type). Descenders — the tails on g/j/y — extend below that
- * box on the last line, and the video has no pixels to reveal past its own
- * edge there, so without this they render visibly flat-cut instead of
- * tapering into the glyph the way the video does everywhere else. The `em`
- * unit matters: font-size here is computed from container width at runtime
- * (see the `max-w-[18ch]` note above), so a fixed px padding would be either
- * too little or too much depending on viewport — `em` tracks whatever
- * font-size the heading actually lands on.
+ * The `style={{ paddingBottom: "0.25em" }}` below is load-bearing, not
+ * decorative spacing — and it MUST be a `style` prop, not a `pb-*`
+ * className. MaskedHeading's video layer is sized to exactly match the
+ * heading's own box (height driven by `lineHeight={0.92}`, tight on
+ * purpose to match this site's display type). Descenders — the tails on
+ * g/j/y — extend below that box on the last line, and the video has no
+ * pixels to reveal past its own edge there, so without extra room they
+ * render visibly flat-cut instead of tapering into the glyph the way the
+ * video does everywhere else.
+ *
+ * A Tailwind utility class (`pb-[0.25em]`) was tried first and silently
+ * did nothing: Tailwind v4 wraps every utility in `@layer utilities`
+ * (confirmed in the compiled output — `.pb-\[0\.25em\]` sits inside
+ * `@layer utilities{...}`), while masked-heading.css's own
+ * `.masked-heading{padding:0}` is plain, unlayered CSS. Per the CSS
+ * Cascade Layers spec, unlayered rules always beat layered ones regardless
+ * of specificity or source order — that comparison is resolved before
+ * source order is even considered, so the utility class could never have
+ * won this fight no matter which file loaded first. Confirmed empirically
+ * too: getComputedStyle(h1).paddingBottom read "0px" with the className
+ * version, despite the class being present in h1.classList. An inline
+ * style sidesteps cascade layers entirely rather than fighting them.
+ *
+ * The `em` unit matters as much as the mechanism: font-size here is
+ * computed from container width at runtime (see the `max-w-[18ch]` note
+ * above), so a fixed px padding would be either too little or too much
+ * depending on viewport — `em` tracks whatever font-size the heading
+ * actually lands on.
  *
  * `min-h-[100svh]` rather than `100vh`: the prototype used `100vh`, which on
  * mobile Safari is measured against the viewport WITHOUT the address bar, so
@@ -81,7 +98,8 @@ export function Hero() {
         <MaskedHeading
           tag="h1"
           id="hero-heading"
-          className="mt-6 pb-[0.25em] font-expanded"
+          className="mt-6 font-expanded"
+          style={{ paddingBottom: "0.25em" }}
           text={t("headline")}
           mediaType="video"
           src="/videos/dumbbell-rack.mp4"
