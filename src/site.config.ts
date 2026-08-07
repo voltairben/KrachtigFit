@@ -68,8 +68,11 @@ export const siteConfig = {
      * googleBusinessProfileUrl below) rather than a dead play button — the
      * prototype's "Watch My Story" badge did nothing when clicked, which is
      * worse than not offering a video at all.
+     *
+     * REAL — recorded with Sander 2026-08-07, edited from three source clips
+     * (interlaced 1080i AVCHD, deinterlaced and normalized on export).
      */
-    introVideoUrl: null as string | null,
+    introVideoUrl: "/videos/sander-intro.mp4" as string | null,
   },
 
   /**

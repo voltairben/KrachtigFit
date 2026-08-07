@@ -23,3 +23,7 @@ next-env.d.ts
 
 # screenshot output from scripts/shoot.mjs
 screenshots/
+
+# raw camera masters (AVCHD) — never the web-ready output, shouldn't be
+# committed; edited deliverables live in public/videos/ instead
+*.MTS

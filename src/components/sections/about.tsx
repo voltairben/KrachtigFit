@@ -93,6 +93,7 @@ export function About() {
             {videoUrl ? (
               <video
                 src={videoUrl}
+                poster="/videos/sander-intro-poster.jpg"
                 controls
                 className="aspect-video w-full border border-border-ink object-cover"
               />
