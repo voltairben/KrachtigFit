@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
@@ -76,6 +77,42 @@ import { Link } from "@/i18n/routing";
  * `min-h-[100svh]` rather than `100vh`: the prototype used `100vh`, which on
  * mobile Safari is measured against the viewport WITHOUT the address bar, so
  * the hero always overflowed by the bar's height on first paint.
+ *
+ * The background photo (public/images/sander-hero.jpg, `hidden lg:block`)
+ * sits behind the text as a faded texture, not a photograph competing with
+ * it. Two earlier attempts at this were rejected before landing here:
+ *
+ * - object-cover in a landscape-shaped box: the source is a 1536×2048
+ *   portrait, and object-cover maps the box's exact dimensions onto the
+ *   image with no crop margin left to control once that box isn't also
+ *   portrait-shaped — that's what pushed Sander out of frame before.
+ *   object-contain instead: the box's shape can vary across breakpoints
+ *   and this still never crops him, whatever size it ends up.
+ * - a flat colour overlay div, which just looked like a dark rectangle
+ *   laid over a photo. Fading is a mask-image gradient on the photo's own
+ *   alpha instead (both edges, not just one — see the wrapper below), so
+ *   it actually dissolves into the ink canvas rather than sitting under a
+ *   tinted pane.
+ *
+ * The crop itself (public/images/sander-hero.jpg, re-cut from the repo's
+ * SanderKF3.png source) also isn't the original tight one: that first
+ * pass had Sander's own elbow almost touching the left crop edge, which
+ * left a left/right fade nothing to dissolve through before hitting him.
+ * This crop keeps wide clear margin on both sides instead. It also had to
+ * re-solve the same problem the tight crop solved — a mirror in the
+ * background reflecting two bystanders on the gym floor — without
+ * reintroducing them: the crop's left edge (150px into the source) sits
+ * safely past where they appear (they end around x≈122) but before the
+ * mirror's own right edge, so it keeps Sander's own reflection and the
+ * equipment without the two other people.
+ *
+ * The text column's width is untouched by any of this — no wrapper div or
+ * max-w constraint added around MaskedHeading. It measures and positions
+ * its glyphs from its own box post-mount, and narrowing that box after
+ * mount already caused a visible collision between lines once, addressed
+ * in the max-w-[18ch] note above; this stays clear of that entirely by
+ * living in an absolutely-positioned sibling instead of sharing the
+ * heading's own box.
  */
 export function Hero() {
   const t = useTranslations("hero");
@@ -86,7 +123,64 @@ export function Hero() {
       aria-labelledby="hero-heading"
       className="relative flex min-h-[100svh] flex-col justify-between pt-32 pb-10 sm:pt-36"
     >
-      <Container className="flex flex-1 flex-col justify-center">
+      {/*
+        Decorative only — aria-hidden and empty alt, pointer-events-none so
+        it can never intercept a click, z-0 (paired with the Container's own
+        z-10 below) so it sits behind the text regardless of DOM order,
+        since an absolutely-positioned element stacks above a plain static
+        one by default no matter which comes first in markup.
+
+        Box width tracks the photo's own crop ratio (1100×1428, ~0.77)
+        rather than an arbitrary fraction: object-contain fits the whole
+        image inside whatever box it's given, so a box shaped very
+        differently from the photo letterboxes — empty, invisible space
+        top and bottom that made the panel read shorter than it actually
+        is. 680px at this box's full height leaves only a small
+        letterbox gap (~34px a side) instead of the ~111px a side the
+        narrower box left, without going all the way to the photo's
+        exact ratio and widening this enough to crowd the headline.
+
+        Two nested masks, one axis each, rather than one combined
+        gradient: stacking two `mask-image` layers on a single element
+        and intersecting them needs `mask-composite`, whose keyword
+        values differ between the standard property and -webkit- (Safari
+        uses Porter-Duff terms like destination-in, not intersect) —
+        fragile to get matching cross-browser. Nesting sidesteps that
+        entirely: the outer div's left/right fade already constrains what
+        exists to composite, so the inner div's top/bottom fade applies
+        on top of that and the two combine into one soft vignette with
+        nothing more than plain, unprefixed-logic gradients on each.
+      */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[46%] max-w-[680px] lg:block"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)",
+        }}
+      >
+        <div
+          className="relative h-full w-full"
+          style={{
+            maskImage:
+              "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
+          }}
+        >
+          <Image
+            src="/images/sander-hero.jpg"
+            alt=""
+            fill
+            className="object-contain opacity-40"
+            sizes="(min-width: 1024px) 46vw, 0px"
+          />
+        </div>
+      </div>
+
+      <Container className="relative z-10 flex flex-1 flex-col justify-center">
         {/*
           Everything in the hero animates on mount, not on scroll. It is above
           the fold by definition, so making the most important text on the site

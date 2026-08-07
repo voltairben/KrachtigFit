@@ -27,3 +27,11 @@ screenshots/
 # raw camera masters (AVCHD) — never the web-ready output, shouldn't be
 # committed; edited deliverables live in public/videos/ instead
 *.MTS
+
+# raw source photos dropped at the repo root for cropping — same reasoning
+# as the AVCHD rule above; edited deliverables live in public/images/
+# instead. Anchored to the root only (leading /) so it doesn't catch
+# legitimate images already inside public/.
+/*.png
+/*.jpg
+/*.jpeg
