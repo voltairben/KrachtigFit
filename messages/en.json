@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "KrachtigFit — Personal trainer in Herten and online",
-    "description": "Get stronger without upending your life. Strength training, nutrition guidance and weekly check-ins, built around the schedule you already have. Book a free intro call."
+    "description": "Stronger results without upending your life. Strength training, nutrition guidance and weekly check-ins, built around the schedule you already have. Book a free intro call."
   },
 
   "a11y": {
@@ -26,13 +26,13 @@
   "about": {
     "eyebrow": "About me",
     "headline": "Hi, I'm Sander.",
-    "intro": "I'm the trainer behind KrachtigFit. No complicated schedules and no guilt over an off week — just an approach that fits a normal life with work, family, and everything in between.",
+    "intro": "I'm the trainer behind KrachtigFit. No complicated schedules and no guilt over an off day — just an approach that fits a normal life with work, family, and everything in between.",
     "videoComingSoon": "Video coming soon"
   },
 
   "hero": {
     "eyebrow": "Personal training · Herten",
-    "headline": "Get stronger without upending your life.",
+    "headline": "Stronger results without upending your life.",
     "subhead": "Strength training, nutrition guidance and weekly check-ins — built around the schedule you already have. In Herten or fully online.",
     "ctaPrimary": "Book your free intro call",
     "ctaSecondary": "See the method",
@@ -53,7 +53,7 @@
     "pillars": {
       "training": {
         "title": "Strength training that respects your time",
-        "body": "Three 45-minute sessions a week. At home, at a gym, or with me — the programme is built around your situation, not the other way around."
+        "body": "Training sessions that fit your schedule. At home, at a gym, or with me — the programme is built around your situation, not the other way around."
       },
       "nutrition": {
         "title": "Food logging without the obsession",
@@ -61,7 +61,7 @@
       },
       "checkin": {
         "title": "Weekly course correction",
-        "body": "Fifteen minutes a week looking at what worked and what didn't. A bad week is data, not failure. We adjust and carry on."
+        "body": "A weekly check-in to look at how things went, and adjust course if needed."
       }
     }
   },
@@ -72,19 +72,18 @@
     "intro": "No lengthy comparison needed. Below you'll see at a glance what each programme includes — we'll cover the rate together during your free intro call.",
     "mostChosen": "Most chosen",
     "cta": "Book an intro call",
-    "withdrawalNote": "You have the right to withdraw after the agreement is concluded. Cancel within that period and you pay only pro rata for what you've used.",
     "notSure": "Not sure which programme fits? Book a free intro call and I'll tell you honestly — including if I'm not the right fit for you.",
     "online": {
-      "title": "Online",
-      "tags": ["Remote", "Weekly check-in", "Cancel monthly"]
+      "title": "Nutrition",
+      "tags": ["Remote", "Weekly check-in", "Available 24/7"]
     },
     "hybrid": {
-      "title": "Hybrid",
-      "tags": ["2× a month in person", "Herten", "Online in between"]
+      "title": "Nutrition & Training",
+      "tags": ["Personalised plan", "One-to-one training/measurements", "Herten"]
     },
     "personal": {
-      "title": "One-to-one",
-      "tags": ["Weekly in person", "60 minutes", "Herten"]
+      "title": "Training",
+      "tags": ["Weekly in person", "60 minutes of training", "Herten"]
     }
   },
 
@@ -188,7 +187,6 @@
       "name": "Name",
       "email": "Email address",
       "phone": "Phone number",
-      "phoneOptional": "optional",
       "message": "Anything I should know?",
       "messageOptional": "optional"
     },

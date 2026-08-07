@@ -395,8 +395,7 @@ function DetailsStep({
 
         <div>
           <label htmlFor="phone" className="text-body-sm text-on-ink-2">
-            {t("details.phone")}{" "}
-            <span className="text-on-ink-3">({t("details.phoneOptional")})</span>
+            {t("details.phone")}
           </label>
           <input
             id="phone"

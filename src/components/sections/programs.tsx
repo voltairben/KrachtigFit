@@ -121,10 +121,9 @@ export function Programs() {
         </RevealGroup>
 
         <Reveal delay={0.2}>
-          <div className="mt-12 max-w-[64ch] space-y-4">
-            <p className="text-body text-on-ink-2">{t("notSure")}</p>
-            <p className="text-caption text-on-ink-3">{t("withdrawalNote")}</p>
-          </div>
+          <p className="mt-12 max-w-[64ch] text-body text-on-ink-2">
+            {t("notSure")}
+          </p>
         </Reveal>
       </Container>
     </section>

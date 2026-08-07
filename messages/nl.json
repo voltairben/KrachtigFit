@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "KrachtigFit — Personal trainer in Herten en online",
-    "description": "Sterker worden zonder je leven om te gooien. Krachttraining, voedingsbegeleiding en wekelijkse check-ins, ingepast in de agenda die je al hebt. Plan een gratis kennismaking."
+    "description": "Krachtiger resultaat zonder je leven om te gooien. Krachttraining, voedingsbegeleiding en wekelijkse check-ins, ingepast in de agenda die je al hebt. Plan een gratis kennismaking."
   },
 
   "a11y": {
@@ -26,13 +26,13 @@
   "about": {
     "eyebrow": "Over mij",
     "headline": "Hoi, ik ben Sander.",
-    "intro": "Ik ben de trainer achter KrachtigFit. Geen ingewikkelde schema's en geen schuldgevoel over een mindere week — wel een aanpak die past bij een normaal leven met werk, gezin en alles daartussenin.",
+    "intro": "Ik ben de trainer achter KrachtigFit. Geen ingewikkelde schema's en geen schuldgevoel over een mindere dag — wel een aanpak die past bij een normaal leven met werk, gezin en alles daartussenin.",
     "videoComingSoon": "Video volgt binnenkort"
   },
 
   "hero": {
     "eyebrow": "Personal training · Herten",
-    "headline": "Sterker worden zonder je leven om te gooien.",
+    "headline": "Krachtiger resultaat zonder je leven om te gooien.",
     "subhead": "Krachttraining, voedingsbegeleiding en wekelijkse check-ins — ingepast in de agenda die je al hebt. In Herten of volledig online.",
     "ctaPrimary": "Plan je gratis kennismaking",
     "ctaSecondary": "Bekijk de aanpak",
@@ -53,7 +53,7 @@
     "pillars": {
       "training": {
         "title": "Krachttraining die je tijd respecteert",
-        "body": "Drie sessies van 45 minuten per week. Thuis, in de sportschool of bij mij — we bouwen het programma om jouw situatie heen, niet andersom."
+        "body": "Trainingen die passen bij jouw tijdschema. Thuis, in de sportschool of bij mij — we bouwen het programma om jouw situatie heen, niet andersom."
       },
       "nutrition": {
         "title": "Voeding loggen zonder obsessie",
@@ -61,7 +61,7 @@
       },
       "checkin": {
         "title": "Wekelijks bijsturen",
-        "body": "Elke week vijftien minuten samen kijken naar wat werkte en wat niet. Een slechte week is data, geen falen. Daar sturen we op bij."
+        "body": "Wekelijks een check-in moment om te kijken hoe het gegaan is en bij te sturen indien nodig."
       }
     }
   },
@@ -72,19 +72,18 @@
     "intro": "Geen lange vergelijking nodig. Hieronder zie je in één oogopslag wat elk programma inhoudt — het tarief bespreken we samen tijdens de gratis kennismaking.",
     "mostChosen": "Meest gekozen",
     "cta": "Plan een kennismaking",
-    "withdrawalNote": "Je hebt na het sluiten van de overeenkomst bedenktijd. Zeg je binnen die periode op, dan betaal je alleen naar rato voor wat je al hebt afgenomen.",
     "notSure": "Weet je niet welk programma past? Plan een gratis kennismaking — dan zeg ik het je eerlijk, ook als dat betekent dat je bij mij niet op je plek bent.",
     "online": {
-      "title": "Online",
-      "tags": ["Op afstand", "Wekelijkse check-in", "Maandelijks opzegbaar"]
+      "title": "Voeding",
+      "tags": ["Op afstand", "Wekelijkse check-in", "24/7 bereikbaar"]
     },
     "hybrid": {
-      "title": "Hybride",
-      "tags": ["2× per maand live", "Herten", "Online tussendoor"]
+      "title": "Voeding & Training",
+      "tags": ["Gepersonaliseerd plan", "1-op-1 training/meting", "Herten"]
     },
     "personal": {
-      "title": "1-op-1",
-      "tags": ["Wekelijks live", "60 minuten", "Herten"]
+      "title": "Training",
+      "tags": ["Wekelijks live", "60 minuten trainen", "Herten"]
     }
   },
 
@@ -188,7 +187,6 @@
       "name": "Naam",
       "email": "E-mailadres",
       "phone": "Telefoonnummer",
-      "phoneOptional": "optioneel",
       "message": "Iets wat ik moet weten?",
       "messageOptional": "optioneel"
     },
