@@ -312,6 +312,56 @@
 }
 
 /* ==========================================================================
+   Animated gradient border (components/ui/animated-gradient-border.tsx)
+
+   Registered so the browser actually interpolates --gradient-angle smoothly
+   inside the component's conic-gradient — an unregistered custom property
+   doesn't animate in most engines, it just jumps between values with no
+   transition. @property and @keyframes are kept unlayered (outside
+   @layer) for the widest browser support; only the plain classes that
+   consume them are layered, same as every other utility in this file.
+   ========================================================================== */
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes gradient-rotate {
+  from {
+    --gradient-angle: 0deg;
+  }
+  to {
+    --gradient-angle: 360deg;
+  }
+}
+
+@layer components {
+  .gradient-border-component {
+    position: relative;
+  }
+
+  /* auto-rotate: spins continuously. */
+  .gradient-border-auto {
+    animation: gradient-rotate var(--animation-duration, 5s) linear infinite;
+  }
+
+  /* rotate-on-hover: static until hovered, then spins. */
+  .gradient-border-hover:hover {
+    animation: gradient-rotate var(--animation-duration, 5s) linear infinite;
+  }
+
+  /* stop-rotate-on-hover: spins by default, pauses on hover. */
+  .gradient-border-stop-hover {
+    animation: gradient-rotate var(--animation-duration, 5s) linear infinite;
+  }
+  .gradient-border-stop-hover:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* ==========================================================================
    Disclosure (FAQ)
 
    Native <details> rather than a JS accordion, for three reasons:

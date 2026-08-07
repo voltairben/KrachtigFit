@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Video } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
+import { BorderRotate } from "@/components/ui/animated-gradient-border";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitText } from "@/components/motion/split-text";
 import { siteConfig, TODO } from "@/site.config";
@@ -91,12 +92,14 @@ export function About() {
 
           <Reveal delay={0.3} className="lg:col-span-7">
             {videoUrl ? (
-              <video
-                src={videoUrl}
-                poster="/videos/sander-intro-poster.jpg"
-                controls
-                className="aspect-video w-full border border-border-ink object-cover"
-              />
+              <BorderRotate className="aspect-video w-full" borderWidth={2}>
+                <video
+                  src={videoUrl}
+                  poster="/videos/sander-intro-poster.jpg"
+                  controls
+                  className="h-full w-full object-cover"
+                />
+              </BorderRotate>
             ) : (
               <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 border border-dashed border-border-ink bg-surface-1">
                 <Video
