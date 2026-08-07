@@ -130,15 +130,40 @@ export function Hero() {
         since an absolutely-positioned element stacks above a plain static
         one by default no matter which comes first in markup.
 
-        Box width tracks the photo's own crop ratio (1100×1428, ~0.77)
-        rather than an arbitrary fraction: object-contain fits the whole
-        image inside whatever box it's given, so a box shaped very
-        differently from the photo letterboxes — empty, invisible space
-        top and bottom that made the panel read shorter than it actually
-        is. 680px at this box's full height leaves only a small
-        letterbox gap (~34px a side) instead of the ~111px a side the
-        narrower box left, without going all the way to the photo's
-        exact ratio and widening this enough to crowd the headline.
+        Two divs, not one, handle sizing — this took three attempts to get
+        right, and each wrong one is worth recording since the failure
+        wasn't obvious from reading the CSS, only from measuring it live:
+
+        1. `inset-y-0` stretching the box to exactly the section's height
+           (the original version): width scaled with viewport width but
+           height was forced to the section's height regardless — two
+           dimensions independently driven by two unrelated viewport
+           metrics, so the box's shape (and how much of the photo showed
+           vs. letterboxed) swung with whatever a monitor's aspect ratio
+           happened to be. This was the actual "doesn't resize right on
+           different monitors" bug.
+        2. `aspect-[1100/1428]` plus `max-w-[min(46vw,680px)]` and
+           `max-h-full` on one element, expecting it to behave like
+           object-fit: contain for a plain div — it doesn't. With BOTH
+           axes constrained only by max-* (nothing definite), the box has
+           no content-based intrinsic size to derive from and collapses
+           to 0×0. Confirmed live: the photo disappeared entirely.
+        3. This version: an outer div gets a DEFINITE width
+           (`w-[min(46vw,680px)]`, not max-width) and the section's full
+           height (`inset-y-0`), with `overflow-hidden`. An inner div
+           (`w-full aspect-[1100/1428]`, vertically centered) derives its
+           height from that definite 100%-of-parent width — aspect-ratio
+           only ever fills in a dimension left `auto`, and here width is
+           the one definite input it has to work with. On ordinary
+           viewports the derived height fits inside the outer div and
+           nothing clips. On unusually short ones, the inner div overflows
+           its parent — verified this centre-crops cleanly (top and
+           bottom shaved off symmetrically) rather than distorting the
+           ratio, since the outer div's overflow-hidden only clips what's
+           already correctly sized, it never resizes anything.
+           Re-verified the full component afterward across five
+           resolutions, 1024×768 to 2560×1440: rendered ratio matches
+           1100/1428 exactly at every one.
 
         Two nested masks, one axis each, rather than one combined
         gradient: stacking two `mask-image` layers on a single element
@@ -153,30 +178,34 @@ export function Hero() {
       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[46%] max-w-[680px] lg:block"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)",
-        }}
+        className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[min(46vw,680px)] overflow-hidden lg:block"
       >
         <div
-          className="relative h-full w-full"
+          className="absolute top-1/2 left-0 w-full aspect-[1100/1428] -translate-y-1/2"
           style={{
             maskImage:
-              "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)",
             WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%)",
           }}
         >
-          <Image
-            src="/images/sander-hero.jpg"
-            alt=""
-            fill
-            className="object-contain opacity-40"
-            sizes="(min-width: 1024px) 46vw, 0px"
-          />
+          <div
+            className="relative h-full w-full"
+            style={{
+              maskImage:
+                "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)",
+            }}
+          >
+            <Image
+              src="/images/sander-hero.jpg"
+              alt=""
+              fill
+              className="object-contain opacity-40"
+              sizes="(min-width: 1024px) 46vw, 0px"
+            />
+          </div>
         </div>
       </div>
 
