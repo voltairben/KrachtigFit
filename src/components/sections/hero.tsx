@@ -202,6 +202,7 @@ export function Hero() {
               src="/images/sander-hero.jpg"
               alt=""
               fill
+              priority
               className="object-contain opacity-40"
               sizes="(min-width: 1024px) 46vw, 0px"
             />
