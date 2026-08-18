@@ -89,8 +89,27 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
-          <LocaleSwitcher current={locale} pathname={pathname} />
+          {/*
+            hidden below md — not sm, where the pre-existing CTA button
+            (below) already hides/shows; see the matching note in the
+            drawer for why theme/locale needed the wider breakpoint. Below
+            768px there simply isn't room for the KF mark + "KrachtigFit"
+            wordmark (unbreakable text, can't wrap or shrink below ~175px)
+            AND theme toggle AND locale switcher AND CTA AND the hamburger
+            button in one row without something giving: at 375px wide the
+            logo's text was measured rendering 116px into where the theme
+            toggle button sits. flex-shrink doesn't rescue this — the logo
+            `<a>` has no min-width floor of its own, so the flex algorithm
+            was shrinking it below its content's natural size instead of
+            holding the line, and the overflowing text rendered straight
+            through the theme toggle button next to it. Relocated into the
+            mobile drawer below (Dialog.Content) instead of just deleted —
+            same controls, not lost functionality.
+          */}
+          <div className="hidden items-center gap-3 md:flex">
+            <ThemeToggle />
+            <LocaleSwitcher current={locale} pathname={pathname} />
+          </div>
 
           <Button asChild size="sm" className="hidden sm:inline-flex">
             <Link href="/kennismaking">{t("cta")}</Link>
@@ -129,6 +148,30 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                   >
                     <X className="size-5" aria-hidden="true" />
                   </Dialog.Close>
+                </div>
+
+                {/*
+                  md:hidden, matching the header row's md:flex on the same
+                  controls: below 768px this is the ONLY place they exist.
+                  Not sm (640px) — that's where the CTA button already
+                  starts showing (pre-existing, sm:inline-flex) and where
+                  the header's own padding and logo mark size step up too,
+                  all at once. Putting the theme/locale controls at that
+                  same sm breakpoint (the first thing tried) still measured
+                  real overlap with the logo across roughly 640-685px, e.g.
+                  iPhone SE landscape at 667px — that breakpoint had no
+                  margin left once everything else landed on it
+                  simultaneously. md:flex/md:hidden here gives the controls
+                  their own breakpoint with actual room to spare, verified
+                  clean (no overlap) at every width from 320 to 1024,
+                  including right at both the sm and md boundaries
+                  themselves. From md up, the header already shows these
+                  inline, so repeating them here would just be visible
+                  clutter behind the hamburger for no reason.
+                */}
+                <div className="mt-6 flex items-center gap-3 md:hidden">
+                  <ThemeToggle />
+                  <LocaleSwitcher current={locale} pathname={pathname} />
                 </div>
 
                 <nav className="mt-10 flex flex-col gap-1">
