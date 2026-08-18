@@ -52,10 +52,10 @@ export function privacyPolicy(locale: Locale): LegalDoc {
         {
           heading: "Wie ontvangt je gegevens",
           body: [
-            "Vercel — hosting van de website. Verwerkt technische logs.",
-            "Resend — verzending van het formulierbericht naar mijn mailbox, met dataverwerking in de EU.",
-            "Cloudflare Turnstile — spamcontrole op het formulier. Turnstile plaatst geen cookies en profileert je niet.",
-            "Common Ninja en Instagram/Meta — alleen als je zelf op de knop klikt om de Instagram-feed op de site te laden. Zonder die klik wordt er niets van je gegevens naar deze partijen gestuurd.",
+            "Vercel: hosting van de website. Verwerkt technische logs.",
+            "Resend: verzending van het formulierbericht naar mijn mailbox, met dataverwerking in de EU.",
+            "Cloudflare Turnstile: spamcontrole op het formulier. Turnstile plaatst geen cookies en profileert je niet.",
+            "Common Ninja en Instagram/Meta: alleen als je zelf op de knop klikt om de Instagram-feed op de site te laden. Zonder die klik wordt er niets van je gegevens naar deze partijen gestuurd.",
             "Verder deel ik je gegevens niet met derden, en verkoop ik ze nooit.",
           ],
         },
@@ -116,10 +116,10 @@ export function privacyPolicy(locale: Locale): LegalDoc {
       {
         heading: "Who receives your data",
         body: [
-          "Vercel — website hosting. Processes technical logs.",
-          "Resend — delivers the form submission to my mailbox, with EU data processing.",
-          "Cloudflare Turnstile — spam protection on the form. Turnstile sets no cookies and does not profile you.",
-          "Common Ninja and Instagram/Meta — only if you click the button to load the Instagram feed on the site. Without that click, nothing is sent to these parties.",
+          "Vercel: website hosting. Processes technical logs.",
+          "Resend: delivers the form submission to my mailbox, with EU data processing.",
+          "Cloudflare Turnstile: spam protection on the form. Turnstile sets no cookies and does not profile you.",
+          "Common Ninja and Instagram/Meta: only if you click the button to load the Instagram feed on the site. Without that click, nothing is sent to these parties.",
           "Your data is not shared with anyone else, and never sold.",
         ],
       },
@@ -177,7 +177,7 @@ export function termsDoc(locale: Locale): LegalDoc {
           heading: `Bedenktijd van ${siteConfig.withdrawalPeriodDays} dagen`,
           body: [
             `Coaching die je via deze website afsluit is een overeenkomst op afstand. Je hebt daarom ${siteConfig.withdrawalPeriodDays} dagen bedenktijd, gerekend vanaf het moment dat de overeenkomst tot stand komt. Je hoeft geen reden op te geven.`,
-            "Wil je dat de begeleiding al binnen die periode start, dan vraag ik je dat uitdrukkelijk te bevestigen. Je bedenktijd vervalt pas als de dienst volledig is geleverd — bij een traject van meerdere weken is daar tijdens de bedenktijd nooit sprake van.",
+            "Wil je dat de begeleiding al binnen die periode start, dan vraag ik je dat uitdrukkelijk te bevestigen. Je bedenktijd vervalt pas als de dienst volledig is geleverd. Bij een traject van meerdere weken is daar tijdens de bedenktijd nooit sprake van.",
             "Herroep je tijdens de bedenktijd, dan betaal je uitsluitend naar rato voor het deel dat al is geleverd. Het restant krijg je binnen veertien dagen terug.",
             `Herroepen kan vormvrij, bijvoorbeeld met een mail aan ${contact.email}. Het wettelijke modelformulier voor herroeping is op verzoek beschikbaar.`,
           ],
@@ -185,7 +185,7 @@ export function termsDoc(locale: Locale): LegalDoc {
         {
           heading: "Wat ik lever, en wat niet",
           body: [
-            "Ik lever begeleiding: een trainingsprogramma, feedback op je voedingslog en periodieke check-ins. Ik span me in om je te helpen je doel te halen, maar een bepaald resultaat kan ik niet garanderen — dat hangt ook af van factoren buiten mijn invloed.",
+            "Ik lever begeleiding: een trainingsprogramma, feedback op je voedingslog en periodieke check-ins. Ik span me in om je te helpen je doel te halen, maar een bepaald resultaat kan ik niet garanderen: dat hangt ook af van factoren buiten mijn invloed.",
             "Ik ben geen arts of fysiotherapeut en stel geen medische diagnoses. Heb je klachten, een blessure of een medische aandoening, overleg dan eerst met je huisarts of behandelaar.",
           ],
         },
@@ -221,15 +221,15 @@ export function termsDoc(locale: Locale): LegalDoc {
         heading: `${siteConfig.withdrawalPeriodDays}-day cooling-off period`,
         body: [
           `Coaching purchased through this website is a distance contract, so you have ${siteConfig.withdrawalPeriodDays} days to withdraw, counted from the moment the agreement is concluded. No reason is required.`,
-          "If you want coaching to begin within that period, I will ask you to confirm that explicitly. Your right to withdraw only lapses once the service has been fully performed — which, for a programme running several weeks, never happens during the cooling-off period.",
+          "If you want coaching to begin within that period, I will ask you to confirm that explicitly. Your right to withdraw only lapses once the service has been fully performed. For a programme running several weeks, that never happens during the cooling-off period.",
           "If you withdraw during that period you pay only pro rata for what has already been delivered. The remainder is refunded within fourteen days.",
-          `Withdrawal is informal — an email to ${contact.email} is enough. The statutory model withdrawal form is available on request.`,
+          `Withdrawal is informal: an email to ${contact.email} is enough. The statutory model withdrawal form is available on request.`,
         ],
       },
       {
         heading: "What I provide, and what I don't",
         body: [
-          "I provide coaching: a training programme, feedback on your food log and periodic check-ins. I will work to help you reach your goal, but I cannot guarantee a specific outcome — that depends partly on factors outside my control.",
+          "I provide coaching: a training programme, feedback on your food log and periodic check-ins. I will work to help you reach your goal, but I cannot guarantee a specific outcome: that depends partly on factors outside my control.",
           "I am not a doctor or physiotherapist and do not make medical diagnoses. If you have pain, an injury or a medical condition, consult your GP or treating clinician first.",
         ],
       },
@@ -275,8 +275,8 @@ export function cookiePolicy(locale: Locale): LegalDoc {
         {
           heading: "Instagram-feed op verzoek",
           body: [
-            "Bij 'Ervaringen' kun je op een knop klikken om onze Instagram-feed te bekijken, geleverd door Common Ninja. Deze feed laadt niet automatisch — het script wordt pas opgehaald op het moment dat je zelf op de knop klikt.",
-            "Zodra je de feed laadt, kunnen Common Ninja en Instagram/Meta cookies of vergelijkbare technieken plaatsen waar wij geen controle over hebben. Liever niet? Bezoek onze Instagram-pagina dan rechtstreeks via de link op de site — dat laadt niets op deze pagina.",
+            "Bij 'Ervaringen' kun je op een knop klikken om onze Instagram-feed te bekijken, geleverd door Common Ninja. Deze feed laadt niet automatisch. Het script wordt pas opgehaald op het moment dat je zelf op de knop klikt.",
+            "Zodra je de feed laadt, kunnen Common Ninja en Instagram/Meta cookies of vergelijkbare technieken plaatsen waar wij geen controle over hebben. Liever niet? Bezoek onze Instagram-pagina dan rechtstreeks via de link op de site. Dat laadt niets op deze pagina.",
           ],
         },
         {
@@ -310,8 +310,8 @@ export function cookiePolicy(locale: Locale): LegalDoc {
       {
         heading: "Instagram feed, on request",
         body: [
-          "Under 'Experiences' you can click a button to view our Instagram feed, provided by Common Ninja. This feed does not load automatically — the script is only fetched the moment you click the button yourself.",
-          "Once you load the feed, Common Ninja and Instagram/Meta may set cookies or similar technology that we have no control over. Would rather not? Visit our Instagram page directly via the link on the site instead — that loads nothing on this page.",
+          "Under 'Experiences' you can click a button to view our Instagram feed, provided by Common Ninja. This feed does not load automatically. The script is only fetched the moment you click the button yourself.",
+          "Once you load the feed, Common Ninja and Instagram/Meta may set cookies or similar technology that we have no control over. Would rather not? Visit our Instagram page directly via the link on the site instead. That loads nothing on this page.",
         ],
       },
       {

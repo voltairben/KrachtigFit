@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "KrachtigFit — Personal trainer in Herten and online",
+    "title": "KrachtigFit: Personal trainer in Herten and online",
     "description": "Stronger results without upending your life. Strength training, nutrition guidance and weekly check-ins, built around the schedule you already have. Book a free intro call."
   },
 
@@ -26,14 +26,14 @@
   "about": {
     "eyebrow": "About me",
     "headline": "Hi, I'm Sander.",
-    "intro": "I'm the trainer behind KrachtigFit. No complicated schedules and no guilt over an off day — just an approach that fits a normal life with work, family, and everything in between.",
+    "intro": "I'm the trainer behind KrachtigFit. No complicated schedules and no guilt over an off day, just an approach that fits a normal life with work, family, and everything in between.",
     "videoComingSoon": "Video coming soon"
   },
 
   "hero": {
     "eyebrow": "Personal training · Herten",
     "headline": "Stronger results without upending your life.",
-    "subhead": "Strength training, nutrition guidance and weekly check-ins — built around the schedule you already have. In Herten or fully online.",
+    "subhead": "Strength training, nutrition guidance and weekly check-ins, built around the schedule you already have. In Herten or fully online.",
     "ctaPrimary": "Book your free intro call",
     "ctaSecondary": "See the method",
     "note": "Free, no obligation."
@@ -49,11 +49,11 @@
   "method": {
     "eyebrow": "The method",
     "headline": "Three things, every week, consistently.",
-    "intro": "No crash diet and no two hours a day in the gym. Three components that reinforce each other — and that hold up alongside a job and a family.",
+    "intro": "No crash diet and no two hours a day in the gym. Three components that reinforce each other and that hold up alongside a job and a family.",
     "pillars": {
       "training": {
         "title": "Strength training that respects your time",
-        "body": "Training sessions that fit your schedule. At home, at a gym, or with me — the programme is built around your situation, not the other way around."
+        "body": "Training sessions that fit your schedule. At home, at a gym, or with me: the programme is built around your situation, not the other way around."
       },
       "nutrition": {
         "title": "Food logging without the obsession",
@@ -69,10 +69,10 @@
   "programs": {
     "eyebrow": "Programs",
     "headline": "What you get, per programme.",
-    "intro": "No lengthy comparison needed. Below you'll see at a glance what each programme includes — we'll cover the rate together during your free intro call.",
+    "intro": "No lengthy comparison needed. Below you'll see at a glance what each programme includes. We'll cover the rate together during your free intro call.",
     "mostChosen": "Most chosen",
     "cta": "Book an intro call",
-    "notSure": "Not sure which programme fits? Book a free intro call and I'll tell you honestly — including if I'm not the right fit for you.",
+    "notSure": "Not sure which programme fits? Book a free intro call and I'll tell you honestly, including if I'm not the right fit for you.",
     "online": {
       "title": "Nutrition",
       "tags": ["Remote", "Weekly check-in", "Available 24/7"]
@@ -90,7 +90,7 @@
   "reviews": {
     "eyebrow": "Experiences",
     "headline": "What clients say.",
-    "empty": "There are no experiences here yet. Once clients have given permission to share their story, you'll read them here — with their name and the date attached.",
+    "empty": "There are no experiences here yet. Once clients have given permission to share their story, you'll read them here, with their name and the date attached.",
     "verifiedLabel": "Verified Google reviews",
     "viewOnGoogle": "See all reviews on Google"
   },
@@ -131,7 +131,7 @@
       },
       "notSure": {
         "q": "What if I'm still unsure?",
-        "a": "Book an intro call and decide afterwards. It's free and there's no obligation. If I'm not the right person for you, I'll say so — and point you somewhere better."
+        "a": "Book an intro call and decide afterwards. It's free and there's no obligation. If I'm not the right person for you, I'll say so, and point you somewhere better."
       }
     }
   },
@@ -225,7 +225,8 @@
     "kvk": "KvK",
     "btw": "VAT ID",
     "rights": "All rights reserved.",
-    "instagram": "Instagram"
+    "instagram": "Instagram",
+    "designedBy": "Designed by {studio}"
   },
 
   "notFound": {

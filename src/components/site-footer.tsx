@@ -159,8 +159,19 @@ export function SiteFooter() {
             </span>
           </address>
 
-          <p className="mt-6 text-caption text-on-ink-3">
-            © {new Date().getFullYear()} {name}. {t("rights")}
+          {/*
+            flex-wrap + justify-between rather than two independently
+            positioned elements: on narrow viewports the credit line wraps
+            below the copyright line instead of the two ever overlapping,
+            and on wide viewports "Designed by VoltairStudio" lands bottom
+            right as asked, without a fixed/absolute position that would
+            need its own overlap accounting against everything above it.
+          */}
+          <p className="mt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 text-caption text-on-ink-3">
+            <span>
+              © {new Date().getFullYear()} {name}. {t("rights")}
+            </span>
+            <span>{t("designedBy", { studio: "VoltairStudio" })}</span>
           </p>
         </div>
       </Container>
