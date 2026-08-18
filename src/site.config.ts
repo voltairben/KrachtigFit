@@ -191,14 +191,6 @@ export const siteConfig = {
   withdrawalPeriodDays: 14,
 
   /**
-   * Capacity-based scarcity may only be shown when it is literally true and
-   * enforced. The prototype hardcoded "4 spots remaining for September", which
-   * never changed — the textbook ACM violation. Null disables the UI entirely;
-   * wire it to real calendar capacity or leave it off.
-   */
-  capacity: null as { spotsRemaining: number; forPeriod: string } | null,
-
-  /**
    * Reviews must be verifiable. Either pull from Google with a visible
    * "geverifieerde Google-reviews" label linking to source, or publish own
    * testimonials with full name, date and a stated collection method.
