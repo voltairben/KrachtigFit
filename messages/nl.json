@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "KrachtigFit — Personal trainer in Herten en online",
+    "title": "KrachtigFit: personal trainer in Herten en online",
     "description": "Krachtiger resultaat zonder je leven om te gooien. Krachttraining, voedingsbegeleiding en wekelijkse check-ins, ingepast in de agenda die je al hebt. Plan een gratis kennismaking."
   },
 
@@ -26,14 +26,14 @@
   "about": {
     "eyebrow": "Over mij",
     "headline": "Hoi, ik ben Sander.",
-    "intro": "Ik ben de trainer achter KrachtigFit. Geen ingewikkelde schema's en geen schuldgevoel over een mindere dag — wel een aanpak die past bij een normaal leven met werk, gezin en alles daartussenin.",
+    "intro": "Ik ben de trainer achter KrachtigFit. Geen ingewikkelde schema's en geen schuldgevoel over een mindere dag, maar een aanpak die past bij een normaal leven met werk, gezin en alles daartussenin.",
     "videoComingSoon": "Video volgt binnenkort"
   },
 
   "hero": {
     "eyebrow": "Personal training · Herten",
     "headline": "Krachtiger resultaat zonder je leven om te gooien.",
-    "subhead": "Krachttraining, voedingsbegeleiding en wekelijkse check-ins — ingepast in de agenda die je al hebt. In Herten of volledig online.",
+    "subhead": "Krachttraining, voedingsbegeleiding en wekelijkse check-ins, ingepast in de agenda die je al hebt. In Herten of volledig online.",
     "ctaPrimary": "Plan je gratis kennismaking",
     "ctaSecondary": "Bekijk de aanpak",
     "note": "Gratis, vrijblijvend."
@@ -49,11 +49,11 @@
   "method": {
     "eyebrow": "De aanpak",
     "headline": "Drie dingen, elke week, consequent.",
-    "intro": "Geen crashdieet en geen twee uur per dag in de sportschool. De aanpak bestaat uit drie onderdelen die elkaar versterken — en die je vol kunt houden naast werk en gezin.",
+    "intro": "Geen crashdieet en geen twee uur per dag in de sportschool. De aanpak bestaat uit drie onderdelen die elkaar versterken en die je vol kunt houden naast werk en gezin.",
     "pillars": {
       "training": {
         "title": "Krachttraining die je tijd respecteert",
-        "body": "Trainingen die passen bij jouw tijdschema. Thuis, in de sportschool of bij mij — we bouwen het programma om jouw situatie heen, niet andersom."
+        "body": "Trainingen die passen bij jouw tijdschema. Thuis, in de sportschool of bij mij: we bouwen het programma om jouw situatie heen, niet andersom."
       },
       "nutrition": {
         "title": "Voeding loggen zonder obsessie",
@@ -69,10 +69,10 @@
   "programs": {
     "eyebrow": "Programma's",
     "headline": "Wat je krijgt, per programma.",
-    "intro": "Geen lange vergelijking nodig. Hieronder zie je in één oogopslag wat elk programma inhoudt — het tarief bespreken we samen tijdens de gratis kennismaking.",
+    "intro": "Geen lange vergelijking nodig. Hieronder zie je in één oogopslag wat elk programma inhoudt. Het tarief bespreken we samen tijdens de gratis kennismaking.",
     "mostChosen": "Meest gekozen",
     "cta": "Plan een kennismaking",
-    "notSure": "Weet je niet welk programma past? Plan een gratis kennismaking — dan zeg ik het je eerlijk, ook als dat betekent dat je bij mij niet op je plek bent.",
+    "notSure": "Weet je niet welk programma past? Plan een gratis kennismaking, dan zeg ik het je eerlijk, ook als dat betekent dat je bij mij niet op je plek bent.",
     "online": {
       "title": "Voeding",
       "tags": ["Op afstand", "Wekelijkse check-in", "24/7 bereikbaar"]
@@ -90,7 +90,7 @@
   "reviews": {
     "eyebrow": "Ervaringen",
     "headline": "Wat klanten zeggen.",
-    "empty": "Er staan hier nog geen ervaringen. Zodra klanten toestemming hebben gegeven om hun verhaal te delen, lees je ze hier — met naam en datum erbij.",
+    "empty": "Er staan hier nog geen ervaringen. Zodra klanten toestemming hebben gegeven om hun verhaal te delen, lees je ze hier, met naam en datum erbij.",
     "verifiedLabel": "Geverifieerde Google-reviews",
     "viewOnGoogle": "Bekijk alle reviews op Google"
   },
@@ -111,7 +111,7 @@
     "items": {
       "gym": {
         "q": "Heb ik een sportschoolabonnement nodig?",
-        "a": "Dat hangt af van je doel. Een sportschoolabonnement kan zeker helpen — het versnelt je vooruitgang en geeft toegang tot meer materiaal — maar veel resultaat is ook te behalen met slimme thuisworkouts of training met je eigen lichaamsgewicht. We stemmen de aanpak af op wat voor jou het beste werkt."
+        "a": "Dat hangt af van je doel. Een sportschoolabonnement kan zeker helpen (het versnelt je vooruitgang en geeft toegang tot meer materiaal), maar veel resultaat is ook te behalen met slimme thuisworkouts of training met je eigen lichaamsgewicht. We stemmen de aanpak af op wat voor jou het beste werkt."
       },
       "firstWeek": {
         "q": "Wat gebeurt er in de eerste week?",
@@ -131,7 +131,7 @@
       },
       "notSure": {
         "q": "Wat als ik nog twijfel?",
-        "a": "Dan plan je een kennismaking en beslis je daarna. Die is gratis en vrijblijvend. Blijkt dat ik niet de juiste persoon voor je ben, dan zeg ik dat — en wijs ik je door."
+        "a": "Dan plan je een kennismaking en beslis je daarna. Die is gratis en vrijblijvend. Blijkt dat ik niet de juiste persoon voor je ben, dan zeg ik dat, en wijs ik je door."
       }
     }
   },
@@ -225,7 +225,8 @@
     "kvk": "KvK",
     "btw": "BTW-ID",
     "rights": "Alle rechten voorbehouden.",
-    "instagram": "Instagram"
+    "instagram": "Instagram",
+    "designedBy": "Ontworpen door {studio}"
   },
 
   "notFound": {
