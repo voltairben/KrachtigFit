@@ -5,74 +5,24 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
-import { MaskedHeading } from "@/components/effects/masked-heading";
+import { SplitText } from "@/components/motion/split-text";
 import { Link } from "@/i18n/routing";
 
 /**
- * Type used to be the only visual here — no photography existed, and the
- * bold-graphic direction was chosen precisely so the page didn't depend on
- * it. That changed once real footage of the gym (Dumbbell_rack.mp4,
- * Putkamp 4) became available: the headline now renders as MaskedHeading
- * (components/effects/masked-heading.tsx), which clips that footage into
- * the letterforms instead of a flat colour. The rest of the hero — eyebrow,
- * subhead, CTAs — is still type-only.
+ * Type is the primary visual, same word-reveal treatment (SplitText) every
+ * other section heading on the site uses. This headline briefly shipped as
+ * MaskedHeading instead — real gym footage clipped into the letterforms —
+ * and was reverted: it read as too busy, and broke down worst of all on
+ * mobile, where the smaller glyph boxes left too little of the footage
+ * visible per letter to register as anything but noise. The component
+ * (components/effects/masked-heading.tsx) was removed along with it, since
+ * nothing else in the codebase used it.
  *
- * `trigger="immediate"` rather than the component's own "view" default:
- * this section is always above the fold, and the rest of the hero
- * deliberately never waits on an IntersectionObserver for that reason (see
- * the note on Reveal below) — no upside to doing it differently just for
- * the headline, and it removes a failure mode where the hero's biggest
- * element renders blank until a callback fires.
- *
- * `max-w-[18ch]` is gone from the heading on purpose, not an oversight:
- * MaskedHeading sizes its own font from the element's rendered width
- * (`clientWidth * textScale`), so a `ch`-based max-width would make that
- * width depend on the font-size the component is about to calculate FROM
- * that same width — a circular layout that visibly jumps on first paint.
- * Letting it size against the Container's fixed width avoids that; line
- * wrapping is handled by the component's own fit-to-width behaviour instead.
- *
- * The `style={{ paddingBottom: "0.25em" }}` below is load-bearing, not
- * decorative spacing — and it MUST be a `style` prop, not a `pb-*`
- * className. MaskedHeading's video layer is sized to exactly match the
- * heading's own box (height driven by `lineHeight={0.92}`, tight on
- * purpose to match this site's display type). Descenders — the tails on
- * g/j/y — extend below that box on the last line, and the video has no
- * pixels to reveal past its own edge there, so without extra room they
- * render visibly flat-cut instead of tapering into the glyph the way the
- * video does everywhere else.
- *
- * `marginTop: "0.5em"` is inline for the same reason, not `mt-*`: every
- * other section uses a fixed `mt-6` (24px) between its eyebrow and heading,
- * which reads fine against `text-display-lg` (32–56px). This heading isn't
- * on that scale — MaskedHeading sets its own font-size from the element's
- * rendered width (`clientWidth * textScale`, see `sync()` in
- * masked-heading.tsx), clamped 20–200px, and on real viewports lands well
- * above display-lg's ceiling. A flat 24px next to that reads as barely any
- * gap at all, which is what "too close to the headline" was — the eyebrow
- * and heading were never given mismatched spacing on purpose, the fixed
- * value just stopped scaling once one side of it got this large. `em`
- * ties the gap back to whatever size the heading actually renders at, at
- * roughly the same eyebrow-to-heading ratio the rest of the site reads at.
- *
- * A Tailwind utility class (`pb-[0.25em]`) was tried first and silently
- * did nothing: Tailwind v4 wraps every utility in `@layer utilities`
- * (confirmed in the compiled output — `.pb-\[0\.25em\]` sits inside
- * `@layer utilities{...}`), while masked-heading.css's own
- * `.masked-heading{padding:0}` is plain, unlayered CSS. Per the CSS
- * Cascade Layers spec, unlayered rules always beat layered ones regardless
- * of specificity or source order — that comparison is resolved before
- * source order is even considered, so the utility class could never have
- * won this fight no matter which file loaded first. Confirmed empirically
- * too: getComputedStyle(h1).paddingBottom read "0px" with the className
- * version, despite the class being present in h1.classList. An inline
- * style sidesteps cascade layers entirely rather than fighting them.
- *
- * The `em` unit matters as much as the mechanism: font-size here is
- * computed from container width at runtime (see the `max-w-[18ch]` note
- * above), so a fixed px padding would be either too little or too much
- * depending on viewport — `em` tracks whatever font-size the heading
- * actually lands on.
+ * In its place: a quiet ambient shine (the `hero-shine` class below) drifts
+ * across the headline every ~9s once SplitText's own entrance has settled.
+ * See the "Hero headline shine" section in globals.css for the mechanism
+ * and why it's a second, aria-hidden text element rather than styling the
+ * h1 itself.
  *
  * `min-h-[100svh]` rather than `100vh`: the prototype used `100vh`, which on
  * mobile Safari is measured against the viewport WITHOUT the address bar, so
@@ -105,14 +55,6 @@ import { Link } from "@/i18n/routing";
  * safely past where they appear (they end around x≈122) but before the
  * mirror's own right edge, so it keeps Sander's own reflection and the
  * equipment without the two other people.
- *
- * The text column's width is untouched by any of this — no wrapper div or
- * max-w constraint added around MaskedHeading. It measures and positions
- * its glyphs from its own box post-mount, and narrowing that box after
- * mount already caused a visible collision between lines once, addressed
- * in the max-w-[18ch] note above; this stays clear of that entirely by
- * living in an absolutely-positioned sibling instead of sharing the
- * heading's own box.
  */
 export function Hero() {
   const t = useTranslations("hero");
@@ -226,25 +168,40 @@ export function Hero() {
           prototype set text-transform: uppercase on every heading level, so
           its h1 was a 79-character all-caps sentence, measurably slower to
           read and worse again for dyslexic and low-vision readers.
+
+          The wrapper carries mt-6/max-w-[18ch] rather than the h1 itself so
+          the shine <p> below (position: absolute; inset: 0) wraps against
+          the exact same width and lands on the exact same line breaks — see
+          the "Hero headline shine" note in globals.css for why it exists as
+          a second element instead of styling the h1's own SplitText spans.
+
+          The wrapper also repeats font-expanded/text-display-2xl/
+          font-extrabold, not just max-w-[18ch] — not redundant. `ch` is
+          defined against the element's OWN computed font-size, and
+          text-display-2xl's is a clamp() with a vw term, so max-w-[18ch] on
+          a wrapper that hadn't inherited that font-size first was resolving
+          against inherited body text (~1rem) instead — an 18-character cap
+          around 9px tall glyphs, collapsing the box to a sliver both
+          children then overflowed out of, each on its own unbreakable-word
+          line, which is what "reverted, looks broken" would have shipped as
+          without catching it here first.
         */}
-        <MaskedHeading
-          tag="h1"
-          id="hero-heading"
-          className="font-expanded"
-          style={{ marginTop: "0.5em", paddingBottom: "0.25em" }}
-          text={t("headline")}
-          mediaType="video"
-          src="/videos/dumbbell-rack.mp4"
-          poster="/videos/dumbbell-rack-poster.jpg"
-          fillScale={1.3}
-          parallax={34}
-          reveal="wipe"
-          trigger="immediate"
-          weight={800}
-          lineHeight={0.92}
-          align="left"
-          textScale={0.085}
-        />
+        <div className="relative mt-6 max-w-[18ch] font-expanded text-display-2xl font-extrabold text-balance">
+          <h1
+            id="hero-heading"
+            className="font-expanded text-display-2xl font-extrabold text-balance"
+          >
+            <SplitText immediate delay={0.1}>
+              {t("headline")}
+            </SplitText>
+          </h1>
+          <p
+            aria-hidden="true"
+            className="hero-shine font-expanded pointer-events-none absolute inset-0 text-display-2xl font-extrabold text-balance select-none"
+          >
+            {t("headline")}
+          </p>
+        </div>
 
         <Reveal immediate delay={0.35}>
           <p className="mt-8 max-w-[52ch] text-body-lg text-on-ink-2">

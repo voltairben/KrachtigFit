@@ -362,6 +362,97 @@
 }
 
 /* ==========================================================================
+   Hero headline shine (components/sections/hero.tsx)
+
+   Replaces the video-clipped-into-letterforms treatment the headline briefly
+   had (MaskedHeading, removed) — that read as too busy and fell apart on
+   mobile, where the glyph boxes were too small to show enough footage to
+   register as anything but noise. This is deliberately much quieter: a
+   single soft highlight band drifts across the heading roughly once every 9
+   seconds, most of that cycle spent parked off to either side where the
+   gradient is fully transparent and nothing is visible at all.
+
+   background-clip: text on a duplicate, aria-hidden copy of the headline —
+   not mix-blend-mode on a pseudo-element over the real text, which was
+   tried first and doesn't work on this site's palette. Blend modes like
+   overlay/hard-light derive their effect from how far the destination pixel
+   sits from mid-grey, and both this site's text tokens sit deliberately
+   near the extremes (17–19:1 contrast, i.e. near-white on near-black, or
+   near-black on near-white in the light theme) — exactly where those blend
+   modes do almost nothing. It also inverts direction between themes: a
+   blend that lightens bright dark-theme text darkens light-theme text
+   further instead of highlighting it. background-clip: text sidesteps both
+   problems — the gradient paints its own colour directly into the glyph
+   shapes rather than blending with whatever is under it, so it looks
+   identical (and is actually visible) in both themes with no conditional
+   CSS. It also gets per-glyph clipping for free from the browser, unlike
+   MaskedHeading's SVG clipPath, which had to compute every word's exact
+   position by hand.
+
+   The duplicate copy exists because the real heading's text lives inside
+   SplitText's per-word <motion.span> masks (components/motion/split-text),
+   each independently transformed for the entrance reveal — not a shape a
+   single background-clip: text gradient can sweep across coherently. The
+   copy is a second, plain rendering of the same string in the same box
+   (hero.tsx pairs it with the h1 under a shared max-w-[18ch] wrapper so
+   both wrap identically), aria-hidden and pointer-events: none, doing
+   nothing but carrying the gradient. Where the gradient is transparent —
+   most of the box, most of the time — the real heading underneath shows
+   through unchanged.
+
+   animation-delay pushes the first sweep to ~1.5s, after SplitText's own
+   word-by-word entrance (last word starts at 0.1s + 7×0.045s stagger, each
+   0.65s long — settled by ~1.1s) has finished. One thing happening at a
+   time on load, then the ambient shine takes over.
+
+   The sweep itself (15%–70% of the cycle, ~5s of the 9s total) is
+   deliberately most of the cycle, not a quick flick across — an earlier
+   version spent only 35%–10%=35 percentage-points of a shorter 7s cycle on
+   the actual crossing (~2.5s), which read as the highlight darting across
+   the screen rather than drifting over it. Slower crossing, longer rest at
+   each end (15% in, 30% out) reads as ambient instead of attention-grabbing.
+
+   No JS reduced-motion check needed, same reasoning as pillar-drift below:
+   the blanket rule in "Motion preferences" above already forces this
+   animation to a single 0.01ms iteration when prefers-reduced-motion is
+   set, landing on the closest keyframe — which is the fully-transparent
+   parked state either way, so reduced-motion users see a static heading
+   with no flash. That's also why hero.tsx never needed to become a client
+   component for this.
+   ========================================================================== */
+
+@keyframes hero-shine-sweep {
+  0%,
+  15% {
+    background-position: 160% 0;
+  }
+  70%,
+  100% {
+    background-position: -60% 0;
+  }
+}
+
+@layer components {
+  .hero-shine {
+    color: transparent;
+    background-image: linear-gradient(
+      100deg,
+      transparent 42%,
+      rgb(from var(--color-accent) r g b / 0%) 46%,
+      var(--color-accent) 50%,
+      rgb(from var(--color-accent) r g b / 0%) 54%,
+      transparent 58%
+    );
+    background-size: 250% 100%;
+    background-position: 160% 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hero-shine-sweep 9s ease-in-out 1.5s infinite;
+  }
+}
+
+/* ==========================================================================
    Disclosure (FAQ)
 
    Native <details> rather than a JS accordion, for three reasons:

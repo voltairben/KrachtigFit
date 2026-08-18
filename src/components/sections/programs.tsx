@@ -58,7 +58,7 @@ export function Programs() {
           </Reveal>
         </div>
 
-        <RevealGroup className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {siteConfig.programTiers.map((tier) => {
             const tags = t.raw(`${tier.id}.tags`) as string[];
 
