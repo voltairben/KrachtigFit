@@ -147,38 +147,39 @@
     "submitting": "Versturen…",
 
     "goal": {
-      "label": "Waar wil je naartoe?",
+      "label": "Wat is je doel?",
       "options": {
         "fat": "Afvallen",
-        "strength": "Sterker worden",
-        "pain": "Van klachten af",
-        "habits": "Gewoontes die blijven"
+        "muscle": "Spieropbouw",
+        "health": "Gezondheid verbeteren",
+        "other": "Anders"
       }
     },
     "obstacle": {
       "label": "Wat houdt je nu tegen?",
       "options": {
-        "time": "Ik heb er geen tijd voor",
-        "knowledge": "Ik weet niet waar ik moet beginnen",
-        "consistency": "Ik begin wel, maar hou het niet vol",
-        "injury": "Ik heb klachten of een blessure"
+        "time": "Ik maak er geen tijd voor",
+        "knowledge": "Ik heb een gebrek aan kennis",
+        "consistency": "Ik hou het niet vol",
+        "other": "Anders"
       }
     },
     "situation": {
-      "label": "Hoe zou je willen trainen?",
+      "label": "Wat voor begeleiding heeft je voorkeur?",
       "options": {
-        "online": "Online, op mijn eigen moment",
-        "hybrid": "Deels samen, deels online",
-        "personal": "Het liefst elke week samen",
-        "unsure": "Weet ik nog niet"
+        "online": "Online",
+        "personal": "1-op-1",
+        "hybrid": "Online en Fysiek",
+        "unsure": "Nog geen idee wat bij mij past."
       }
     },
     "availability": {
-      "label": "Hoeveel tijd heb je per week realistisch?",
+      "label": "Hoeveel tijd kun je hier realistisch gezien voor vrij maken?",
       "options": {
         "low": "Minder dan 2 uur",
         "mid": "2 tot 4 uur",
-        "high": "Meer dan 4 uur"
+        "high": "Meer dan 4 uur",
+        "other": "Anders"
       }
     },
 
@@ -193,7 +194,6 @@
 
     "consent": {
       "contact": "Ik ga ermee akkoord dat KrachtigFit contact met me opneemt over deze aanvraag.",
-      "marketing": "Stuur me daarnaast af en toe trainings- en voedingstips. (Niet nodig om te reageren.)",
       "privacy": "Lees hoe ik met je gegevens omga in het privacybeleid.",
       "privacyLinkText": "privacybeleid"
     },

@@ -147,38 +147,39 @@
     "submitting": "Sending…",
 
     "goal": {
-      "label": "Where do you want to get to?",
+      "label": "What is your goal?",
       "options": {
         "fat": "Lose fat",
-        "strength": "Get stronger",
-        "pain": "Get rid of pain",
-        "habits": "Habits that stick"
+        "muscle": "Build muscle",
+        "health": "Improve health",
+        "other": "Other"
       }
     },
     "obstacle": {
       "label": "What's stopping you right now?",
       "options": {
-        "time": "I don't have time for it",
-        "knowledge": "I don't know where to start",
-        "consistency": "I start, but I don't keep it up",
-        "injury": "I have pain or an injury"
+        "time": "I don't make time for it",
+        "knowledge": "I lack the knowledge",
+        "consistency": "I don't stick with it",
+        "other": "Other"
       }
     },
     "situation": {
-      "label": "How would you want to train?",
+      "label": "What kind of guidance do you prefer?",
       "options": {
-        "online": "Online, in my own time",
-        "hybrid": "Partly together, partly online",
-        "personal": "Ideally together every week",
-        "unsure": "I'm not sure yet"
+        "online": "Online",
+        "personal": "1-on-1",
+        "hybrid": "Online and in-person",
+        "unsure": "Not sure yet what suits me."
       }
     },
     "availability": {
-      "label": "Realistically, how much time do you have per week?",
+      "label": "Realistically, how much time can you free up for this?",
       "options": {
         "low": "Under 2 hours",
         "mid": "2 to 4 hours",
-        "high": "More than 4 hours"
+        "high": "More than 4 hours",
+        "other": "Other"
       }
     },
 
@@ -193,7 +194,6 @@
 
     "consent": {
       "contact": "I agree that KrachtigFit may contact me about this enquiry.",
-      "marketing": "Also send me occasional training and nutrition tips. (Not required for a reply.)",
       "privacy": "Read how your data is handled in the privacy policy.",
       "privacyLinkText": "privacy policy"
     },

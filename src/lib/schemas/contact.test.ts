@@ -3,16 +3,15 @@ import assert from "node:assert/strict";
 import { contactSchema, STEP_FIELDS, TOTAL_STEPS } from "./contact.ts";
 
 const valid = {
-  goal: "strength",
+  goal: "muscle",
   obstacle: "time",
   situation: "hybrid",
   availability: "mid",
   name: "Sander Test",
   email: "test@example.com",
-  phone: "",
+  phone: "0612345678",
   message: "",
   contactConsent: true,
-  marketingConsent: false,
   website: "",
 };
 
@@ -27,25 +26,10 @@ test("REJECTS an unticked contact consent", () => {
   assert.equal(r.success, false);
 });
 
-test("marketing consent is independent and optional", () => {
-  // Contactable without opting into marketing — bundling the two is not
-  // freely given consent.
-  assert.equal(
-    contactSchema.safeParse({ ...valid, marketingConsent: false }).success,
-    true,
-  );
-  assert.equal(
-    contactSchema.safeParse({ ...valid, marketingConsent: true }).success,
-    true,
-  );
-});
-
-test("marketing consent defaults to false, never true", () => {
-  const { marketingConsent, ...withoutMarketing } = valid;
-  void marketingConsent;
-  const r = contactSchema.safeParse(withoutMarketing);
-  assert.equal(r.success, true);
-  if (r.success) assert.equal(r.data.marketingConsent, false);
+test("rejects a missing phone number", () => {
+  // Name and phone are both required to submit the form.
+  const r = contactSchema.safeParse({ ...valid, phone: "" });
+  assert.equal(r.success, false);
 });
 
 test("rejects malformed email", () => {
@@ -88,7 +72,7 @@ test("step field map covers every required field exactly once", () => {
   const flat = STEP_FIELDS.flat();
   assert.equal(new Set(flat).size, flat.length, "no field appears twice");
   assert.equal(STEP_FIELDS.length, TOTAL_STEPS);
-  for (const f of ["goal", "obstacle", "situation", "availability", "contactConsent"]) {
+  for (const f of ["goal", "obstacle", "situation", "availability", "name", "phone", "contactConsent"]) {
     assert.ok(flat.includes(f as never), `${f} is validated by some step`);
   }
 });

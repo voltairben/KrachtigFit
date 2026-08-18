@@ -35,7 +35,7 @@ export function privacyPolicy(locale: Locale): LegalDoc {
         {
           heading: "Welke gegevens en waarom",
           body: [
-            "Via het kennismakingsformulier verzamel ik: je naam, e-mailadres, eventueel je telefoonnummer, je antwoorden op vier vragen over je doel, je belemmering, je voorkeur en je beschikbare tijd, en een eventueel vrij bericht.",
+            "Via het kennismakingsformulier verzamel ik: je naam, e-mailadres en telefoonnummer, je antwoorden op vier vragen over je doel, je belemmering, je voorkeur en je beschikbare tijd, en een eventueel vrij bericht.",
             "Deze gegevens gebruik ik uitsluitend om contact met je op te nemen over je aanvraag en om het gesprek voor te bereiden.",
             "Bij het versturen leg ik ook het tijdstip, je IP-adres en de versie van de toestemmingstekst vast. Dat is nodig om te kunnen aantonen dat en waarvoor je toestemming hebt gegeven.",
           ],
@@ -43,7 +43,7 @@ export function privacyPolicy(locale: Locale): LegalDoc {
         {
           heading: "Grondslag",
           body: [
-            "Toestemming (artikel 6 lid 1 sub a AVG). Je geeft die door het vakje aan te vinken. Toestemming voor contact en toestemming voor tips zijn losse keuzes; de tweede is niet nodig om een reactie te krijgen.",
+            "Toestemming (artikel 6 lid 1 sub a AVG). Je geeft die door het vakje aan te vinken.",
             "Je kunt je toestemming op elk moment intrekken door te mailen naar " +
               contact.email +
               ". Dat is net zo eenvoudig als het geven ervan.",
@@ -101,7 +101,7 @@ export function privacyPolicy(locale: Locale): LegalDoc {
       {
         heading: "What is collected, and why",
         body: [
-          "Through the intro-call form I collect: your name, email address, optionally your phone number, your answers to four questions about your goal, your obstacle, your preferred format and your available time, and an optional free-text message.",
+          "Through the intro-call form I collect: your name, email address and phone number, your answers to four questions about your goal, your obstacle, your preferred format and your available time, and an optional free-text message.",
           "This is used solely to contact you about your enquiry and to prepare for the conversation.",
           "On submission I also record the timestamp, your IP address and the version of the consent text. This is necessary to demonstrate that consent was given and what it covered.",
         ],
@@ -109,7 +109,7 @@ export function privacyPolicy(locale: Locale): LegalDoc {
       {
         heading: "Legal basis",
         body: [
-          "Consent (Article 6(1)(a) GDPR), given by ticking the box. Consent to be contacted and consent to receive tips are separate choices; the second is not required to get a reply.",
+          "Consent (Article 6(1)(a) GDPR), given by ticking the box.",
           `You can withdraw consent at any time by emailing ${contact.email}. Withdrawing is as easy as giving it.`,
         ],
       },
