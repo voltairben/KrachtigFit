@@ -66,7 +66,7 @@ export function Wizard() {
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
     mode: "onTouched",
-    defaultValues: { marketingConsent: false, contactConsent: false, website: "" },
+    defaultValues: { contactConsent: false, website: "" },
   });
 
   const isLast = step === TOTAL_STEPS - 1;
@@ -401,9 +401,15 @@ function DetailsStep({
             id="phone"
             type="tel"
             autoComplete="tel"
+            aria-invalid={!!errors.phone}
             className={cn(field, "mt-2")}
             {...register("phone")}
           />
+          {errors.phone && (
+            <p role="alert" className="mt-2 text-caption text-accent-fg">
+              {t("error.required")}
+            </p>
+          )}
         </div>
 
         <div>
@@ -422,11 +428,8 @@ function DetailsStep({
         </div>
       </div>
 
-      {/*
-        Two independent, unticked consents. Delivering a service enquiry while
-        silently subscribing someone to marketing is not freely given consent,
-        so the second box is genuinely optional and says so.
-      */}
+      {/* Unticked by default — an affirmative box fails validation rather
+          than defaulting, so consent is genuinely opt-in. */}
       <div className="mt-8 grid gap-4 border-t border-border-ink pt-8">
         <label className="flex cursor-pointer items-start gap-3">
           <input
@@ -444,17 +447,6 @@ function DetailsStep({
             {t("error.consent")}
           </p>
         )}
-
-        <label className="flex cursor-pointer items-start gap-3">
-          <input
-            type="checkbox"
-            className="mt-1 size-4 shrink-0 accent-[var(--color-accent)]"
-            {...register("marketingConsent")}
-          />
-          <span className="text-body-sm text-on-ink-2">
-            {t("consent.marketing")}
-          </span>
-        </label>
 
         <p className="text-caption text-on-ink-3">
           {t("consent.privacy")}{" "}

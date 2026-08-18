@@ -111,7 +111,7 @@ export async function submitContact(
 
   /**
    * The email doubles as the consent record: timestamp, IP, consent version
-   * and both consent decisions travel with the enquiry, so what was agreed to
+   * and the consent decision travel with the enquiry, so what was agreed to
    * and when can be evidenced later.
    *
    * This is the minimum viable record. Once there is a database, persist the
@@ -125,7 +125,7 @@ export async function submitContact(
     "",
     line("Naam", data.name),
     line("E-mail", data.email),
-    line("Telefoon", data.phone || "—"),
+    line("Telefoon", data.phone),
     "",
     "Bericht:",
     data.message || "—",
@@ -136,7 +136,6 @@ export async function submitContact(
     line("IP", ip),
     line("Versie", CONSENT_VERSION),
     line("Contact", data.contactConsent ? "JA" : "NEE"),
-    line("Marketing", data.marketingConsent ? "JA" : "NEE"),
   ].join("\n");
 
   const apiKey = process.env.RESEND_API_KEY;
