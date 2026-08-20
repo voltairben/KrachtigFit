@@ -195,8 +195,20 @@ export const siteConfig = {
    * "geverifieerde Google-reviews" label linking to source, or publish own
    * testimonials with full name, date and a stated collection method.
    * Hand-written testimonials are prohibited. Empty until real ones exist.
+   *
+   * REAL — the `cid` (Google's permanent numeric place ID) for KrachtigFit's
+   * actual Google Business listing, not a copy-pasted search-results URL.
+   * What Sander sent was a Google Search results link (google.com/search?...)
+   * loaded with session-specific junk — sxsrf/ved tracking tokens, his
+   * browser's own viewport dimensions (biw/bih/dpr) — that would have broken
+   * once that search session expired. Extracted the stable `rldimm` value
+   * from it instead and confirmed it resolves to the right listing before
+   * using it: name "Krachtig Fit", Putkamp 4 6049 AK Herten, krachtigfit.nl,
+   * 06 41973164 — matches legal.address/contact.phone above exactly, so this
+   * is the correct listing, not a same-named lookalike elsewhere.
    */
-  googleBusinessProfileUrl: null as string | null,
+  googleBusinessProfileUrl:
+    "https://www.google.com/maps?cid=1403843171942592203" as string | null,
 
   /**
    * ISO date on which the privacy policy, terms and cookie policy were
