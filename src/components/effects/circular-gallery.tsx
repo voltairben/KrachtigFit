@@ -13,7 +13,7 @@ import "./circular-gallery.css";
  * the fetch tool's own fair-use refusal) — no registry JSON either, unlike
  * the reactbits components ported elsewhere in this codebase. So this is a
  * from-scratch build matching the reference's actual behaviour (images on
- * a rotating 3D cylinder, drag/scroll/keyboard to spin it) rather than a
+ * a rotating 3D cylinder, drag/buttons/keyboard to spin it) rather than a
  * line-for-line port, in this project's own conventions: CSS transforms
  * plus a couple of refs, no WebGL/OGL dependency, styled to match the
  * Reviews section's hard-edged bordered-card language instead of the
@@ -31,13 +31,19 @@ import "./circular-gallery.css";
  * without hardcoding a breakpoint table here that would drift from the
  * CSS file's own breakpoint if either one changed later.
  *
- * Drag and wheel both skip the CSS transition (instant, 1:1 with the
- * pointer/wheel delta) so the spin feels directly grabbed rather than
- * laggy; releasing either snaps to the nearest item with the transition
- * back on. The Previous/Next buttons and arrow keys are the same snap,
- * triggered without a drag ever starting — they exist because dragging
- * and scrolling are not keyboard-operable, and this is real content (a
- * client's actual result), not decoration, so it needs a non-pointer path.
+ * Drag skips the CSS transition (instant, 1:1 with the pointer delta) so
+ * the spin feels directly grabbed rather than laggy; releasing it snaps to
+ * the nearest item with the transition back on. The Previous/Next buttons
+ * and arrow keys are the same snap, triggered without a drag ever starting
+ * — they exist because dragging isn't keyboard-operable, and this is real
+ * content (a client's actual result), not decoration, so it needs a
+ * non-pointer path.
+ *
+ * Deliberately no wheel/scroll handler: an earlier version spun the
+ * carousel on wheel/trackpad input, which fought the page's own scroll the
+ * moment the cursor was over the gallery. Drag and the buttons/arrow keys
+ * are the only ways to move it now — wheel input just scrolls the page,
+ * like everywhere else on the site.
  *
  * No prefers-reduced-motion branch needed in this file: every animated
  * transform here is `transition`-driven CSS, not a JS-timed animation, and
@@ -94,9 +100,6 @@ export function CircularGallery({
 
   const draggingRef = useRef(false);
   const dragStartRef = useRef({ x: 0, rotation: 0 });
-  const wheelTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
-    undefined,
-  );
 
   const angleStep = 360 / items.length;
 
@@ -154,15 +157,6 @@ export function CircularGallery({
     snapToNearest();
   }
 
-  function onWheel(e: React.WheelEvent) {
-    e.preventDefault();
-    setSnapping(false);
-    const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-    setRotation((r) => r + delta * 0.3);
-    if (wheelTimeoutRef.current) clearTimeout(wheelTimeoutRef.current);
-    wheelTimeoutRef.current = setTimeout(() => snapToNearest(), 150);
-  }
-
   function onKeyDown(e: React.KeyboardEvent) {
     if (e.key === "ArrowLeft") {
       e.preventDefault();
@@ -185,7 +179,6 @@ export function CircularGallery({
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
-        onWheel={onWheel}
         onKeyDown={onKeyDown}
       >
         <div
