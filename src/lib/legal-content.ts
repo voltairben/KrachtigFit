@@ -275,7 +275,7 @@ export function cookiePolicy(locale: Locale): LegalDoc {
         {
           heading: "Instagram-feed op verzoek",
           body: [
-            "Bij 'Ervaringen' kun je op een knop klikken om onze Instagram-feed te bekijken, geleverd door Common Ninja. Deze feed laadt niet automatisch. Het script wordt pas opgehaald op het moment dat je zelf op de knop klikt.",
+            "Bij 'Instagram' kun je op een knop klikken om onze Instagram-feed te bekijken, geleverd door Common Ninja. Deze feed laadt niet automatisch. Het script wordt pas opgehaald op het moment dat je zelf op de knop klikt.",
             "Zodra je de feed laadt, kunnen Common Ninja en Instagram/Meta cookies of vergelijkbare technieken plaatsen waar wij geen controle over hebben. Liever niet? Bezoek onze Instagram-pagina dan rechtstreeks via de link op de site. Dat laadt niets op deze pagina.",
           ],
         },
@@ -310,7 +310,7 @@ export function cookiePolicy(locale: Locale): LegalDoc {
       {
         heading: "Instagram feed, on request",
         body: [
-          "Under 'Experiences' you can click a button to view our Instagram feed, provided by Common Ninja. This feed does not load automatically. The script is only fetched the moment you click the button yourself.",
+          "Under 'Instagram' you can click a button to view our Instagram feed, provided by Common Ninja. This feed does not load automatically. The script is only fetched the moment you click the button yourself.",
           "Once you load the feed, Common Ninja and Instagram/Meta may set cookies or similar technology that we have no control over. Would rather not? Visit our Instagram page directly via the link on the site instead. That loads nothing on this page.",
         ],
       },
