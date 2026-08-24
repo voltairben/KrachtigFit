@@ -229,15 +229,6 @@ export function CircularGallery({
                   draggable={false}
                   sizes="(min-width: 1024px) 460px, (min-width: 640px) 380px, 300px"
                   className="pointer-events-none object-cover"
-                  // 12% not 50%: object-cover's default centered crop is a
-                  // no-op for the 5 images already sized to match the card
-                  // exactly, but one source image (client-result-1) has a
-                  // different native aspect ratio, and a centered crop split
-                  // the overflow evenly top/bottom — cutting into both the
-                  // header logo (top) and the brand's gold border glow
-                  // (bottom) at once. Biasing toward the top keeps the logo
-                  // fully intact at the cost of a bit more of the glow.
-                  style={{ objectPosition: "50% 12%" }}
                 />
               </div>
             );
