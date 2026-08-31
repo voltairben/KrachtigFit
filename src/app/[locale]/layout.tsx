@@ -10,6 +10,7 @@ import { buildAlternates, buildBusinessJsonLd } from "@/lib/seo";
 import { siteConfig, isPlaceholderBuild } from "@/site.config";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { CookieNotice } from "@/components/cookie-notice";
 import { LightPillar } from "@/components/effects/light-pillar";
 import "@/styles/globals.css";
 
@@ -269,6 +270,7 @@ export default async function LocaleLayout({
           <SiteHeader locale={locale} />
           <main id="main">{children}</main>
           <SiteFooter />
+          <CookieNotice />
           <Toaster
             position="bottom-center"
             toastOptions={{

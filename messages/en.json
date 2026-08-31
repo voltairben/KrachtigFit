@@ -235,6 +235,12 @@
     "designedBy": "Designed by {studio}"
   },
 
+  "cookieNotice": {
+    "text": "This site doesn't use tracking cookies.",
+    "policyLink": "Read our cookie policy",
+    "dismiss": "Got it"
+  },
+
   "notFound": {
     "title": "This page doesn't exist.",
     "body": "The link may be out of date. Head back to the homepage.",

@@ -235,6 +235,12 @@
     "designedBy": "Ontworpen door {studio}"
   },
 
+  "cookieNotice": {
+    "text": "Deze site plaatst geen trackingcookies.",
+    "policyLink": "Lees ons cookiebeleid",
+    "dismiss": "Begrepen"
+  },
+
   "notFound": {
     "title": "Deze pagina bestaat niet.",
     "body": "Misschien is de link verouderd. Ga terug naar de homepage.",
