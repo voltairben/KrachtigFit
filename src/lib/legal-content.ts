@@ -261,7 +261,7 @@ export function cookiePolicy(locale: Locale): LegalDoc {
         {
           heading: "Geen automatische tracking",
           body: [
-            "Er draaien standaard geen analytics-, advertentie- of social-mediascripts op deze site. Er is dus ook geen cookiebanner nodig voor wat automatisch laadt, want daar valt niets te weigeren.",
+            "Er draaien standaard geen analytics-, advertentie- of social-mediascripts op deze site. Er is dus geen toestemming te vragen voor wat automatisch laadt, want daar valt niets te weigeren. De melding die je op de site kunt zien is puur ter informatie, geen verzoek om toestemming.",
           ],
         },
         {
@@ -296,7 +296,7 @@ export function cookiePolicy(locale: Locale): LegalDoc {
       {
         heading: "No automatic tracking",
         body: [
-          "No analytics, advertising or social media scripts run on this site by default. No cookie banner is needed for what loads automatically, because there is nothing to decline.",
+          "No analytics, advertising or social media scripts run on this site by default. There's no consent to ask for what loads automatically, because there is nothing to decline. The notice you may see on the site is informational only, not a request for consent.",
         ],
       },
       {
