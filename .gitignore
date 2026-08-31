@@ -35,3 +35,6 @@ screenshots/
 /*.png
 /*.jpg
 /*.jpeg
+
+.vercel
+.env*
