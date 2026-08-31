@@ -57,7 +57,10 @@ function rateLimited(ip: string): boolean {
  * development workable. In production the absence of a secret is a
  * misconfiguration, so it fails closed there.
  */
-async function verifyTurnstile(token: string | undefined): Promise<boolean> {
+async function verifyTurnstile(
+  token: string | undefined,
+  ip: string,
+): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) return process.env.NODE_ENV !== "production";
   if (!token) return false;
@@ -68,7 +71,16 @@ async function verifyTurnstile(token: string | undefined): Promise<boolean> {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret, response: token }),
+        // 10s: siteverify is normally sub-second: this is a ceiling against
+        // Cloudflare's endpoint stalling, not a realistic expected latency.
+        signal: AbortSignal.timeout(10_000),
+        body: JSON.stringify({
+          secret,
+          response: token,
+          // Optional per Cloudflare's docs, feeds into their risk scoring.
+          // "unknown" (the rate limiter's own fallback) is a valid no-op.
+          remoteip: ip,
+        }),
       },
     );
     const data = (await res.json()) as { success?: boolean };
@@ -103,7 +115,7 @@ export async function submitContact(
     "unknown";
 
   if (rateLimited(ip)) return { ok: false, error: "rate_limit" };
-  if (!(await verifyTurnstile(data.turnstileToken))) {
+  if (!(await verifyTurnstile(data.turnstileToken, ip))) {
     return { ok: false, error: "captcha" };
   }
 
