@@ -30,6 +30,18 @@ import { Link } from "@/i18n/routing";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
+/**
+ * cf-turnstile renders implicitly (Cloudflare's api.js scans the DOM for
+ * the class, no explicit turnstile.render() call here), so there's no
+ * widget ID to track — `reset()` with no argument resets every widget on
+ * the page, which is exactly the one this site has.
+ */
+declare global {
+  interface Window {
+    turnstile?: { reset: (container?: string | HTMLElement) => void };
+  }
+}
+
 /** Question steps, in order. Step 5 collects contact details. */
 const QUESTIONS = [
   { name: "goal", options: GOALS },
@@ -86,6 +98,13 @@ export function Wizard() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       toast.error(t("error.generic"));
+      // Turnstile tokens are single-use — siteverify already redeemed this
+      // one whether the send that followed succeeded or not. Without this,
+      // a retry after a transient failure (e.g. rate limit, a Resend
+      // hiccup) would resubmit the same now-dead token and fail the
+      // captcha check even though the visitor did nothing wrong.
+      window.turnstile?.reset();
+      setToken(undefined);
     }
   }
 
