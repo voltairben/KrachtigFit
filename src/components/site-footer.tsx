@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Instagram } from "lucide-react";
+import Image from "next/image";
 
 import { Container } from "@/components/ui/container";
 import { Link } from "@/i18n/routing";
@@ -171,7 +172,29 @@ export function SiteFooter() {
             <span>
               © {new Date().getFullYear()} {name}. {t("rights")}
             </span>
-            <span>{t("designedBy", { studio: "VoltairStudio" })}</span>
+            <span className="inline-flex items-center gap-1.5">
+              {/*
+                VoltairStudio's own mark (public/images/voltair-mark.png),
+                supplied as a full-colour red/orange source and recoloured
+                to --color-accent (the fixed brand gold, not the
+                theme-reactive accent-fg text color used elsewhere in this
+                footer — this studio's own mark stays one constant gold
+                regardless of light/dark theme, same as the KF mark in the
+                header does for its own brand). Decorative only: the credit
+                line right next to it already says "VoltairStudio" in
+                words, so the mark is aria-hidden with an empty alt rather
+                than repeating that in the accessibility tree.
+              */}
+              <Image
+                src="/images/voltair-mark.png"
+                alt=""
+                aria-hidden="true"
+                width={11}
+                height={16}
+                className="h-4 w-auto"
+              />
+              {t("designedBy", { studio: "VoltairStudio" })}
+            </span>
           </p>
         </div>
       </Container>
