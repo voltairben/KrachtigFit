@@ -53,8 +53,8 @@ export function privacyPolicy(locale: Locale): LegalDoc {
           heading: "Wie ontvangt je gegevens",
           body: [
             "Vercel: hosting van de website. Verwerkt technische logs.",
-            "Resend: verzending van het formulierbericht naar mijn mailbox, met dataverwerking in de EU.",
-            "Cloudflare Turnstile: spamcontrole op het formulier. Turnstile plaatst geen cookies en profileert je niet.",
+            "Resend: verzending van het formulierbericht naar mijn mailbox, verwerkt in de Verenigde Staten met de waarborgen die Resend daarvoor hanteert.",
+            "Cloudflare Turnstile: spamcontrole op het formulier, via een eigen strikt noodzakelijke cookie voor die controle. Geen profilering, geen tracking over andere websites.",
             "Common Ninja en Instagram/Meta: alleen als je zelf op de knop klikt om de Instagram-feed op de site te laden. Zonder die klik wordt er niets van je gegevens naar deze partijen gestuurd.",
             "Verder deel ik je gegevens niet met derden, en verkoop ik ze nooit.",
           ],
@@ -117,8 +117,8 @@ export function privacyPolicy(locale: Locale): LegalDoc {
         heading: "Who receives your data",
         body: [
           "Vercel: website hosting. Processes technical logs.",
-          "Resend: delivers the form submission to my mailbox, with EU data processing.",
-          "Cloudflare Turnstile: spam protection on the form. Turnstile sets no cookies and does not profile you.",
+          "Resend: delivers the form submission to my mailbox, processed in the United States with the safeguards Resend applies for that transfer.",
+          "Cloudflare Turnstile: spam protection on the form, via its own strictly necessary cookie for that check. No profiling, no tracking across other websites.",
           "Common Ninja and Instagram/Meta: only if you click the button to load the Instagram feed on the site. Without that click, nothing is sent to these parties.",
           "Your data is not shared with anyone else, and never sold.",
         ],
@@ -256,7 +256,7 @@ export function cookiePolicy(locale: Locale): LegalDoc {
     return {
       title: "Cookiebeleid",
       intro:
-        "Kort: deze website plaatst geen cookies zonder dat je daar zelf voor kiest.",
+        "Kort: deze website plaatst geen cookies voor tracking, advertenties of profilering, en niets laadt zonder dat jij daarvoor kiest. De enige uitzondering: de spamcontrole op het contactformulier gebruikt een eigen, strikt noodzakelijke cookie waarvoor geen toestemming nodig is.",
       sections: [
         {
           heading: "Geen automatische tracking",
@@ -268,7 +268,7 @@ export function cookiePolicy(locale: Locale): LegalDoc {
           heading: "Wat er wel gebeurt",
           body: [
             "Lettertypen worden vanaf deze website zelf geserveerd. Er gaat geen verzoek naar een externe lettertypeserver.",
-            "Het contactformulier gebruikt Cloudflare Turnstile tegen spam. Turnstile plaatst geen cookies en volgt je niet over websites heen.",
+            "Het contactformulier gebruikt Cloudflare Turnstile tegen spam. Turnstile plaatst daarvoor een eigen, strikt noodzakelijke cookie voor de beveiligingscontrole zelf; die cookie volgt je niet over andere websites en wordt niet gebruikt om je te profileren.",
             "De hostingprovider houdt technische serverlogs bij voor beveiliging en foutopsporing. Die logs zijn niet gekoppeld aan een profiel.",
           ],
         },
@@ -291,7 +291,8 @@ export function cookiePolicy(locale: Locale): LegalDoc {
 
   return {
     title: "Cookie policy",
-    intro: "In short: this website sets no cookies without you choosing to.",
+    intro:
+      "In short: this website sets no cookies for tracking, advertising or profiling, and nothing loads without you choosing to. The one exception: the contact form's spam check uses its own strictly necessary cookie, which needs no consent.",
     sections: [
       {
         heading: "No automatic tracking",
@@ -303,7 +304,7 @@ export function cookiePolicy(locale: Locale): LegalDoc {
         heading: "What does happen",
         body: [
           "Fonts are served from this website itself. No request goes to an external font server.",
-          "The contact form uses Cloudflare Turnstile for spam protection. Turnstile sets no cookies and does not track you across sites.",
+          "The contact form uses Cloudflare Turnstile for spam protection. Turnstile sets its own strictly necessary cookie for that check; it does not track you across other sites and is not used to profile you.",
           "The hosting provider keeps technical server logs for security and debugging. Those logs are not linked to a profile.",
         ],
       },

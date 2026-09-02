@@ -18,7 +18,7 @@ export const AVAILABILITY = ["low", "mid", "high", "other"] as const;
  * old consent record can be tied back to the exact text that was agreed to —
  * the burden of demonstrating consent sits with the controller.
  */
-export const CONSENT_VERSION = "2026-08-18";
+export const CONSENT_VERSION = "2026-09-02";
 
 const optionalText = (max: number) =>
   z.string().trim().max(max).optional().or(z.literal(""));
