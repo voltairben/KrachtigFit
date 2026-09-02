@@ -342,22 +342,12 @@
     position: relative;
   }
 
-  /* auto-rotate: spins continuously. */
+  /* Only mode this component ever renders — spins continuously. The
+     other two modes the original snippet supported (rotate-on-hover,
+     stop-rotate-on-hover) were removed with the component's unused
+     animationMode prop; nothing selected them. */
   .gradient-border-auto {
-    animation: gradient-rotate var(--animation-duration, 5s) linear infinite;
-  }
-
-  /* rotate-on-hover: static until hovered, then spins. */
-  .gradient-border-hover:hover {
-    animation: gradient-rotate var(--animation-duration, 5s) linear infinite;
-  }
-
-  /* stop-rotate-on-hover: spins by default, pauses on hover. */
-  .gradient-border-stop-hover {
-    animation: gradient-rotate var(--animation-duration, 5s) linear infinite;
-  }
-  .gradient-border-stop-hover:hover {
-    animation-play-state: paused;
+    animation: gradient-rotate 5s linear infinite;
   }
 }
 

@@ -92,7 +92,7 @@ export function About() {
 
           <Reveal delay={0.3} className="lg:col-span-7">
             {videoUrl ? (
-              <BorderRotate className="aspect-video w-full" borderWidth={2}>
+              <BorderRotate className="aspect-video w-full">
                 <video
                   src={videoUrl}
                   poster="/videos/sander-intro-poster.jpg"

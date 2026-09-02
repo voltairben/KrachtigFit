@@ -24,11 +24,29 @@ import {
   contactSchema,
   type ContactInput,
 } from "@/lib/schemas/contact";
-import { whatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/routing";
+import { siteConfig } from "@/site.config";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+/**
+ * Click-to-chat link with a prefilled message.
+ *
+ * wa.me is a redirector, not an embed — no script runs on our page and no
+ * cookie is set, so it needs no consent gate. That matters: a consent banner
+ * sitting between a visitor and the primary contact route is a measurable
+ * conversion cost.
+ *
+ * Was its own module (src/lib/whatsapp.ts) — moved in as a local helper
+ * since this file is the only place that ever called it (both here and in
+ * the success-state fallback below), so a separate file bought nothing but
+ * an extra import.
+ */
+function whatsappUrl(prefill?: string): string {
+  const base = `https://wa.me/${siteConfig.contact.whatsapp}`;
+  return prefill ? `${base}?text=${encodeURIComponent(prefill)}` : base;
+}
 
 /**
  * cf-turnstile renders implicitly (Cloudflare's api.js scans the DOM for
