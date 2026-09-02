@@ -200,7 +200,7 @@ export function termsDoc(locale: Locale): LegalDoc {
           heading: "Klachten en toepasselijk recht",
           body: [
             `Heb je een klacht, laat het me eerst zelf weten via ${contact.email}. Ik reageer binnen veertien dagen.`,
-            "Op deze overeenkomst is Nederlands recht van toepassing. Je kunt een geschil ook voorleggen aan het Europese ODR-platform.",
+            "Op deze overeenkomst is Nederlands recht van toepassing. Komen we er samen niet uit, dan kun je een geschil voorleggen aan de bevoegde Nederlandse rechter.",
           ],
         },
       ],
@@ -244,7 +244,7 @@ export function termsDoc(locale: Locale): LegalDoc {
         heading: "Complaints and governing law",
         body: [
           `If you have a complaint, please raise it with me first at ${contact.email}. I respond within fourteen days.`,
-          "Dutch law applies to this agreement. You may also refer a dispute to the European ODR platform.",
+          "Dutch law applies to this agreement. If we can't resolve a dispute between us, it can be brought before the competent Dutch court.",
         ],
       },
     ],
