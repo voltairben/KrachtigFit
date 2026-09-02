@@ -161,7 +161,16 @@ export function Wizard() {
       {SITE_KEY && (
         <Script
           src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-          strategy="lazyOnload"
+          // Not lazyOnload: that strategy waits for full browser idle time,
+          // which on this page means waiting on the LightPillar WebGL
+          // effect running continuously in the background — confirmed live
+          // that window.turnstile took 15+ seconds to exist under
+          // lazyOnload. A visitor reaching the final step and submitting
+          // before that finishes gets no token through no fault of their
+          // own. afterInteractive loads it as soon as the page is
+          // interactive instead, independent of whether the main thread
+          // ever reports idle.
+          strategy="afterInteractive"
         />
       )}
 
@@ -251,12 +260,21 @@ export function Wizard() {
             className="cf-turnstile mt-8"
             data-sitekey={SITE_KEY}
             data-callback="onTurnstileSuccess"
+            data-error-callback="onTurnstileError"
             ref={(el) => {
               if (!el) return;
-              // Cloudflare invokes a global by name; bridge it into state.
-              (window as unknown as Record<string, unknown>)[
-                "onTurnstileSuccess"
-              ] = (tk: string) => setToken(tk);
+              // Cloudflare invokes these globals by name; bridge them into
+              // state/console. error-callback added specifically because a
+              // failed render (e.g. a domain not on the widget's allowed
+              // list) was otherwise completely silent — no console output,
+              // no visible error, just an empty div and every submission
+              // failing the captcha check with no clue why. This makes
+              // Cloudflare's own error code visible instead of guessing.
+              const w = window as unknown as Record<string, unknown>;
+              w["onTurnstileSuccess"] = (tk: string) => setToken(tk);
+              w["onTurnstileError"] = (code: string) => {
+                console.error("[turnstile] render/execution error:", code);
+              };
             }}
           />
         )}
