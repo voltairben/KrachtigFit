@@ -114,8 +114,22 @@ export async function submitContact(
     h.get("x-real-ip") ??
     "unknown";
 
-  if (rateLimited(ip)) return { ok: false, error: "rate_limit" };
+  if (rateLimited(ip)) {
+    console.warn(`[contact] rate limited: ip=${ip}`);
+    return { ok: false, error: "rate_limit" };
+  }
   if (!(await verifyTurnstile(data.turnstileToken, ip))) {
+    // Deliberately a warning, not an error: a rejected/missing token is an
+    // expected outcome of the security gate doing its job (an expired
+    // token on retry, a bot, or — the failure mode that motivated adding
+    // this log — the widget never rendering at all on a hostname that
+    // isn't yet on the site key's allowed-domains list in Cloudflare's
+    // dashboard, which looks identical to "no token" from here). Logging
+    // presence/absence, not the token itself — it's single-use and
+    // already spent either way, nothing gained by keeping it.
+    console.warn(
+      `[contact] captcha check failed: ip=${ip} tokenPresent=${Boolean(data.turnstileToken)}`,
+    );
     return { ok: false, error: "captcha" };
   }
 

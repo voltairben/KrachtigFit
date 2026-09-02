@@ -38,7 +38,11 @@ const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
  */
 declare global {
   interface Window {
-    turnstile?: { reset: (container?: string | HTMLElement) => void };
+    // reset() rejects (not throws) when nothing is currently rendered to
+    // reset — the return type reflects that rather than pretending it's void.
+    turnstile?: {
+      reset: (container?: string | HTMLElement) => Promise<void> | void;
+    };
   }
 }
 
@@ -103,7 +107,20 @@ export function Wizard() {
       // a retry after a transient failure (e.g. rate limit, a Resend
       // hiccup) would resubmit the same now-dead token and fail the
       // captcha check even though the visitor did nothing wrong.
-      window.turnstile?.reset();
+      //
+      // Guarded, not a bare call: confirmed live (2026-09-02) that
+      // Cloudflare's reset() throws "Nothing to reset found for provided
+      // container" — as an unhandled promise rejection, not a catchable
+      // sync throw — when no widget actually rendered in the first place
+      // (e.g. this hostname isn't on the site key's allowed-domains list
+      // in Cloudflare's dashboard yet). That's a real, separate problem
+      // worth fixing at the source, but this call still shouldn't crash
+      // the retry path over it either way.
+      try {
+        void window.turnstile?.reset()?.catch?.(() => {});
+      } catch {
+        // No active widget to reset — nothing to do.
+      }
       setToken(undefined);
     }
   }
