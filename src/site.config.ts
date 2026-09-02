@@ -219,9 +219,11 @@ export const siteConfig = {
    * Set to a date only once that review has happened. Until then the
    * production build fails, exactly as it does for a missing KvK number.
    *
-   * REAL — confirmed by Sander Fermont, 2026-08-18.
+   * REAL — confirmed by Sander Fermont, 2026-08-18. Bumped 2026-09-02 for a
+   * factual correction (Resend/Turnstile wording) — not re-reviewed by
+   * Sander himself, so treat that review as still pending a fresh look.
    */
-  legalReviewedAt: "2026-08-18",
+  legalReviewedAt: "2026-09-02",
 } as const;
 
 export type ProgramTier = (typeof siteConfig.programTiers)[number];
