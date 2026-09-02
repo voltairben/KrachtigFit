@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import Script from "next/script";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
@@ -49,17 +49,34 @@ function whatsappUrl(prefill?: string): string {
 }
 
 /**
- * cf-turnstile renders implicitly (Cloudflare's api.js scans the DOM for
- * the class, no explicit turnstile.render() call here), so there's no
- * widget ID to track — `reset()` with no argument resets every widget on
- * the page, which is exactly the one this site has.
+ * Explicit rendering, not implicit (a `.cf-turnstile` + `data-sitekey` div
+ * that Cloudflare's script auto-scans the DOM for). Tried implicit first —
+ * confirmed live, repeatedly, that it never worked: the widget div here
+ * only mounts once the visitor reaches the wizard's final step, well after
+ * page load, and neither the success callback nor an error-callback ever
+ * fired (checked — see git history on this file). Implicit rendering scans
+ * the DOM once at script-load time; a container that doesn't exist yet
+ * isn't there to find. Explicit `render()`, called from the effect below
+ * exactly when the container mounts AND the script is confirmed loaded,
+ * removes that race entirely — no more depending on Cloudflare's own
+ * timing assumptions matching this page's.
  */
 declare global {
   interface Window {
-    // reset() rejects (not throws) when nothing is currently rendered to
-    // reset — the return type reflects that rather than pretending it's void.
     turnstile?: {
-      reset: (container?: string | HTMLElement) => Promise<void> | void;
+      render: (
+        container: HTMLElement,
+        options: {
+          sitekey: string;
+          callback?: (token: string) => void;
+          "error-callback"?: (errorCode: string) => void;
+        },
+      ) => string;
+      // reset()/remove() reject (not throw) when the given ID has nothing
+      // currently rendered — callers already guard on this, not left as
+      // an unhandled promise rejection.
+      reset: (widgetId?: string) => Promise<void> | void;
+      remove: (widgetId: string) => void;
     };
   }
 }
@@ -90,6 +107,9 @@ export function Wizard() {
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [token, setToken] = useState<string>();
+  const [turnstileReady, setTurnstileReady] = useState(false);
+  const turnstileContainerRef = useRef<HTMLDivElement>(null);
+  const turnstileWidgetIdRef = useRef<string | undefined>(undefined);
 
   const {
     register,
@@ -105,6 +125,35 @@ export function Wizard() {
 
   const isLast = step === TOTAL_STEPS - 1;
   const progress = ((step + 1) / TOTAL_STEPS) * 100;
+
+  // Explicit render, tied to the container actually existing (only true on
+  // the final step) and the script actually being loaded (onLoad on the
+  // <Script> below, not "some time has probably passed"). Cleanup removes
+  // the widget whenever either goes false again — stepping back off the
+  // final step unmounts the container, and a stale widget ID pointing at a
+  // container Cloudflare no longer has would make the next render() a no-op
+  // or worse. Re-running the effect on the way back to the final step
+  // renders a fresh widget into the fresh container instead.
+  useEffect(() => {
+    if (!SITE_KEY || !isLast || !turnstileReady) return;
+    const container = turnstileContainerRef.current;
+    const turnstile = window.turnstile;
+    if (!container || !turnstile) return;
+
+    turnstileWidgetIdRef.current = turnstile.render(container, {
+      sitekey: SITE_KEY,
+      callback: (tk) => setToken(tk),
+      "error-callback": (code) => {
+        console.error("[turnstile] render/execution error:", code);
+      },
+    });
+
+    return () => {
+      const id = turnstileWidgetIdRef.current;
+      if (id) turnstile.remove(id);
+      turnstileWidgetIdRef.current = undefined;
+    };
+  }, [isLast, turnstileReady]);
 
   async function next() {
     const fields = STEP_FIELDS[step];
@@ -124,18 +173,13 @@ export function Wizard() {
       // one whether the send that followed succeeded or not. Without this,
       // a retry after a transient failure (e.g. rate limit, a Resend
       // hiccup) would resubmit the same now-dead token and fail the
-      // captcha check even though the visitor did nothing wrong.
-      //
-      // Guarded, not a bare call: confirmed live (2026-09-02) that
-      // Cloudflare's reset() throws "Nothing to reset found for provided
-      // container" — as an unhandled promise rejection, not a catchable
-      // sync throw — when no widget actually rendered in the first place
-      // (e.g. this hostname isn't on the site key's allowed-domains list
-      // in Cloudflare's dashboard yet). That's a real, separate problem
-      // worth fixing at the source, but this call still shouldn't crash
-      // the retry path over it either way.
+      // captcha check even though the visitor did nothing wrong. Targets
+      // this specific widget's ID (from explicit render, above) rather
+      // than a no-arg reset-everything call — precise, and still guarded
+      // in case render() never actually produced a widget to reset.
       try {
-        void window.turnstile?.reset()?.catch?.(() => {});
+        const id = turnstileWidgetIdRef.current;
+        if (id) void window.turnstile?.reset(id)?.catch?.(() => {});
       } catch {
         // No active widget to reset — nothing to do.
       }
@@ -189,6 +233,13 @@ export function Wizard() {
           // interactive instead, independent of whether the main thread
           // ever reports idle.
           strategy="afterInteractive"
+          // Drives the explicit-render effect above — onLoad fires once
+          // window.turnstile genuinely exists, rather than the effect
+          // guessing at a delay. If the visitor is already on the final
+          // step by the time this fires, the effect (already mounted,
+          // now re-running because turnstileReady flipped) renders
+          // immediately; otherwise it renders the moment they arrive.
+          onLoad={() => setTurnstileReady(true)}
         />
       )}
 
@@ -273,28 +324,13 @@ export function Wizard() {
           </motion.div>
         </AnimatePresence>
 
+        {/*
+          No data-sitekey/data-callback here on purpose — this is filled
+          in by turnstile.render() in the effect above, not Cloudflare's
+          implicit DOM scan. Plain ref target, nothing else.
+        */}
         {SITE_KEY && isLast && (
-          <div
-            className="cf-turnstile mt-8"
-            data-sitekey={SITE_KEY}
-            data-callback="onTurnstileSuccess"
-            data-error-callback="onTurnstileError"
-            ref={(el) => {
-              if (!el) return;
-              // Cloudflare invokes these globals by name; bridge them into
-              // state/console. error-callback added specifically because a
-              // failed render (e.g. a domain not on the widget's allowed
-              // list) was otherwise completely silent — no console output,
-              // no visible error, just an empty div and every submission
-              // failing the captcha check with no clue why. This makes
-              // Cloudflare's own error code visible instead of guessing.
-              const w = window as unknown as Record<string, unknown>;
-              w["onTurnstileSuccess"] = (tk: string) => setToken(tk);
-              w["onTurnstileError"] = (code: string) => {
-                console.error("[turnstile] render/execution error:", code);
-              };
-            }}
-          />
+          <div className="mt-8" ref={turnstileContainerRef} />
         )}
 
         <div className="mt-12 flex items-center gap-4">
